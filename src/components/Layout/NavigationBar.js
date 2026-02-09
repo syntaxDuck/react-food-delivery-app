@@ -66,7 +66,9 @@ const NavigationBar = (props) => {
     <header className={classes["nav-bar"]}>
       <span className={classes.title}>
         chrono delivery
-        <span className="material-icons md-36">rocket_launch</span>
+        <span className="material-icons md-36" aria-hidden="true">
+          rocket_launch
+        </span>
       </span>
       <div className={classes["button-container"]}>
         {Buttons}

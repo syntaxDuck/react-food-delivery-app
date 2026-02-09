@@ -25,6 +25,7 @@ const CartItemAmount = ({ amountInCart, onUpdateCart }) => {
         type="button"
         onClick={incrementCountHandler}
         disabled={amount === 99}
+        aria-label="Increase quantity"
       >
         +
       </button>
@@ -33,6 +34,7 @@ const CartItemAmount = ({ amountInCart, onUpdateCart }) => {
         type="button"
         onClick={decrementCountHandler}
         disabled={amount === 0}
+        aria-label="Decrease quantity"
       >
         -
       </button>

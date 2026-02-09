@@ -56,7 +56,9 @@ const Cart = () => {
     cartContent = (
       <div className={classes["empty-cart"]}>
         <h3>Cart is empty</h3>
-        <span className="material-icons md-114">sentiment_dissatisfied</span>
+        <span className="material-icons md-114" aria-hidden="true">
+          sentiment_dissatisfied
+        </span>
       </div>
     );
   } else {
@@ -103,7 +105,6 @@ const Cart = () => {
       <div
         className={classes["modal-background"]}
         onClick={crtCtx.toggleCart}
-        role="modal"
       />
       <Modal className={classes["cart-modal"]}>{cartContent}</Modal>
     </div>,

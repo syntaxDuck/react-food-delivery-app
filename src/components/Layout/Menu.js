@@ -92,8 +92,7 @@ const Menu = () => {
   }
 
   return (
-    <Card className={classes["menu-card"]}>
-      <a id="menu" className={classes["menu-anchor"]} />
+    <Card id="menu" className={classes["menu-card"]}>
       <form onSubmit={updateCartHandler}>
         {menuContent}
         <Button className={classes["menu-submit"]} label="Add to Cart" />

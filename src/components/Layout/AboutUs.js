@@ -11,9 +11,8 @@ import classes from "./AboutUs.module.css";
 
 const AboutUs = () => {
   return (
-    <div className={classes["about-us-wrapper"]}>
+    <div id="about-us" className={classes["about-us-wrapper"]}>
       <Card className={classes["about-us-card"]}>
-        <a id="about-us" />
         <h3>Welcome to Chrono Delivery!</h3>
         <p>
           We have everything for your daily delivery needs! Please keep an eye
