@@ -17,6 +17,7 @@ const MenuItemAmount = ({ amount, onAddToPreCart }) => {
         type="button"
         onClick={incrementCountHandler}
         disabled={amount === 99}
+        aria-label="Increase quantity"
       >
         +
       </button>
@@ -25,6 +26,7 @@ const MenuItemAmount = ({ amount, onAddToPreCart }) => {
         type="button"
         onClick={decrementCountHandler}
         disabled={amount === 0}
+        aria-label="Decrease quantity"
       >
         -
       </button>
