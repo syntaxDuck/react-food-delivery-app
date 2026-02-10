@@ -1,41 +1,73 @@
-# React Food Delivery App
+# React + TypeScript + Vite
 
-This project is a basic react app that implements the ability to pick from a list of menu items and add them to cart.
-Upon loading the application, a "Menu" is loaded from the backend to be displayed in a selection form, so users can add items 
-to their cart. Once the desired items are added to the cart the user can then "submit" their order like you would do on a variety of
-food order app. The order is then sent off to the backend to be stored in a database.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Motivation
+Currently, two official plugins are available:
 
-Developing this basic application was sparked by the desire to exercise the skills learned in a 
-[Udemy React Course](https://www.udemy.com/course/react-the-complete-guide-incl-redux/) in which I have been learning how 
-to develop and deploy React based applications. Many of the features/improvements that have been added or are planned 
-(Seen in the project’s issues) are a result of progressing through this course and implementing the new features and design patters 
-that are being introduced.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# Application Stack
-## FrontEnd
+## React Compiler
 
-### Available Scripts
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-In the project directory, you can run:
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-#### `npm install`
+## Expanding the ESLint configuration
 
-Installs all app dependencies described in the package.json file.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-#### `npm start`
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-## Backend
-The backend capabilities of this app are handled by a Firebase project.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-### Firebase Endpoints
-The Menu of this application is pulled from Firebase via a **GET** request from the `/Menu.json` endpoint.
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-The Orders submitted from this application are sent to Firebase via a **POST** request to the `/Orders.json` endpoint.
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
