@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 
 //Component imports
-import LoginForm from "../components/Layout/LoginForm";
+import LoginForm from "../components/layout/LoginForm";
 
 //Function imports
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { API_KEY } from "../private/PRIVATE";
 
 const API_URLS = {
@@ -12,7 +12,7 @@ const API_URLS = {
   SignIn: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
 };
 
-const LoginPage = (props) => {
+const LoginPage = (props: any) => {
   const [userAction, setUserAction] = useState("SignIn");
   let navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const LoginPage = (props) => {
 
   const [error, setError] = React.useState(null);
 
-  const userActionHandler = async (event) => {
+  const userActionHandler = async (event: any) => {
 
     if (userAction === "SignUp") {
       if (passwordRef.current.value !== confPasswordRef.current.value) {

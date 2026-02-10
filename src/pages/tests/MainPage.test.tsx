@@ -6,9 +6,9 @@ import {
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { act } from "react";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../components/layout/Layout";
 import MainPage from "../MainPage";
-import CartCtxProvider from "../../components/Cart/CartContext/CartCtxProvider";
+import CartCtxProvider from "../../components/cart/cart_context/CartCtxProvider";
 
 // Create a div with id="modal" for createPortal
 beforeAll(() => {
@@ -43,19 +43,17 @@ test("Verify: Main Page Default State", async () => {
   //verify menu component is rendered
   expect(screen.getByRole("button", { name: /add to cart/i })).toBeDefined();
   expect(screen.getByRole("button", { name: /clear/i })).toBeDefined();
-  expect(screen.getByText("Loading...")).toBeDefined();
+  expect(screen.getByRole("heading", { name: /delicious menu/i })).toBeDefined();
 
-  //verify location component is rnedered
+  //verify location component is rendered
   expect(
-    screen.getByRole("heading", { name: /Were to Find Us/i })
+    screen.getByRole("heading", { name: /find us in austin, tx/i })
   ).toBeDefined();
 
   //verify cart is not displayed
   expect(screen.queryByRole("heading", { name: /cart is empty/i })).toBeNull();
 
   //verify cart is empty
-  await act(async () => {
-    userEvent.click(screen.getByRole("button", { name: /view shopping cart/i }));
-  });
+  userEvent.click(screen.getByRole("button", { name: /view shopping cart/i }));
   expect(await screen.findByRole("heading", { name: /cart is empty/i })).toBeDefined();
 });

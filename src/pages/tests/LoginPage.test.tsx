@@ -19,24 +19,24 @@ beforeEach(() => {
 });
 
 test("Verify: Login Page Component Default State", () => {
-  expect(screen.getByRole("textbox", { name: /username/i }));
+  expect(screen.getByRole("textbox", { name: /email address/i }));
   expect(screen.getByLabelText(/password/i));
   expect(screen.getByRole("button", { name: /login/i }));
   expect(screen.getByRole("button", { name: /sign up/i }));
 });
 
 test("Verify: Switch From Login to Sign Up Functionality", async () => {
-  expect(screen.getByRole("textbox", { name: /username/i }));
+  expect(screen.getByRole("textbox", { name: /email address/i }));
   expect(screen.getByLabelText(/password/i));
   expect(screen.getByRole("button", { name: /login/i }));
   expect(screen.getByRole("button", { name: /sign up/i }));
 
   userEvent.click(screen.getByText(/sign up/i));
-  await waitForElementToBeRemoved(
-    screen.getByRole("button", { name: /sign up/i })
-  );
+  
+  // Wait for the UI to update
+  await screen.findByRole("button", { name: /sign in/i });
 
-  expect(screen.getByRole("textbox", { name: /username/i }));
+  expect(screen.getByRole("textbox", { name: /email address/i }));
   expect(screen.getByLabelText(/^password/i));
   expect(screen.getByLabelText(/^confirm password/i));
   expect(screen.getByRole("button", { name: /sign in/i }));
