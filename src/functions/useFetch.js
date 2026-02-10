@@ -27,7 +27,7 @@ const useFetch = (url, requestParams = { method: "GET" }) => {
     };
 
     sendRequest();
-  }, [url]);
+  }, [url, requestParams]);
 
   return { data, loading, error };
 };

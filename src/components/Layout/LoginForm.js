@@ -11,7 +11,7 @@ const LoginForm = (props) => {
   const [usernameValid, setUsernameValid] = React.useState(true);
   const [passwordValid, setPasswordValid] = React.useState(true);
   const [confPasswordValid, setConfPasswordValid] = React.useState(true);
-  const [inputError, setInputError] = React.useState("");
+
 
   React.useEffect(() => {
     if (props.usernameInputRef.current.value === "") setUsernameValid(true);
@@ -128,7 +128,7 @@ const LoginForm = (props) => {
               label={props.userAction === "SignIn" ? "Login" : "Submit"}
             />
           </div>
-          {inputError !== "" && <p>This is and error</p>}
+
         </form>
         <div className={classes["action-wrapper"]}>
           {props.userAction === "SignIn" && (

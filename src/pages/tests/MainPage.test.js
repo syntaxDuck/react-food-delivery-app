@@ -4,10 +4,33 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
+import { act } from "react";
+import Layout from "../../components/Layout/Layout";
 import MainPage from "../MainPage";
+import CartCtxProvider from "../../components/Cart/CartContext/CartCtxProvider";
+
+// Create a div with id="modal" for createPortal
+beforeAll(() => {
+  const modal = document.createElement('div');
+  modal.setAttribute('id', 'modal');
+  document.body.appendChild(modal);
+});
+
+afterAll(() => {
+  document.body.removeChild(document.getElementById('modal'));
+});
 
 beforeEach(() => {
-  render(<MainPage />);
+  render(
+    <BrowserRouter>
+      <CartCtxProvider>
+        <Layout loginStatus={false}>
+          <MainPage />
+        </Layout>
+      </CartCtxProvider>
+    </BrowserRouter>
+  );
 });
 
 test("Verify: Main Page Default State", async () => {
@@ -20,7 +43,7 @@ test("Verify: Main Page Default State", async () => {
   //verify menu component is rendered
   expect(screen.getByRole("button", { name: /add to cart/i })).toBeDefined();
   expect(screen.getByRole("button", { name: /clear/i })).toBeDefined();
-  expect(screen.getByRole("list", { name: "" })).toBeDefined();
+  expect(screen.getByText("Loading...")).toBeDefined();
 
   //verify location component is rnedered
   expect(
@@ -31,10 +54,8 @@ test("Verify: Main Page Default State", async () => {
   expect(screen.queryByRole("heading", { name: /cart is empty/i })).toBeNull();
 
   //verify cart is empty
-  userEvent.click(screen.getByRole("button", { name: /cart/i }));
-  await waitForElementToBeRemoved(
-    screen.getByRole("heading", { name: /cart is empty/i })
-  );
-
-  expect(screen.getByRole("heading", { name: /cart is empty/i })).toBeDefined();
+  await act(async () => {
+    userEvent.click(screen.getByRole("button", { name: /view shopping cart/i }));
+  });
+  expect(await screen.findByRole("heading", { name: /cart is empty/i })).toBeDefined();
 });
