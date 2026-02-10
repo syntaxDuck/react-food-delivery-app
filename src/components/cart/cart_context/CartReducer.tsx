@@ -1,14 +1,16 @@
-export const defaultCartState = {
+import type { CartState, CartActionUnion, CartReducerFunction, CartItem } from "../../../types/cart";
+
+export const defaultCartState: CartState = {
   items: [],
   totalAmount: 0,
   cartActive: false,
 };
 
-const CartReducer = (state, action) => {
+const CartReducer: CartReducerFunction = (state, action) => {
   if (action.type === "UPDATE_CART") {
     let updatedItems = [...state.items];
 
-    action.items.forEach((newItem) => {
+    action.items.forEach((newItem: CartItem) => {
       //Get existing item index and existing object if item exists in cart
       const existingCartItemIndex = updatedItems.findIndex(
         (item) => item.id === newItem.id

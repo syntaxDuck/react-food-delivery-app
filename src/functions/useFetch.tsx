@@ -1,24 +1,43 @@
 import React from "react";
+import type { FetchResult } from "../types";
 
-const useFetch = (url, requestParams = { method: "GET" }) => {
-  const [data, setData] = React.useState(null);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState(null);
+interface UseFetchRequestConfig extends Omit<RequestInit, 'body'> {
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+  headers?: Record<string, string>;
+  body?: unknown;
+}
+
+const useFetch = <T = unknown>(
+  url: string,
+  requestParams: UseFetchRequestConfig = { method: "GET" }
+): FetchResult<T> => {
+  const [data, setData] = React.useState<T | null>(null);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const sendRequest = async () => {
+    const sendRequest = async (): Promise<void> => {
       try {
-        const response = await fetch(url, requestParams);
-        if (response.status != 200) {
-          throw new Error(`HTTPS eror: Status => ${response.status}`);
+        // Convert requestParams to proper RequestInit
+        const fetchConfig: RequestInit = {
+          method: requestParams.method || 'GET',
+          headers: requestParams.headers,
+          body: requestParams.body ? JSON.stringify(requestParams.body) : undefined,
+        };
+
+        const response = await fetch(url, fetchConfig);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error: Status => ${response.status}`);
         }
 
-        let responseData = await response.json();
+        const responseData: T = await response.json();
 
         setData(responseData);
         setError(null);
-      } catch (err) {
-        setError(err.message);
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+        setError(errorMessage);
         setData(null);
       } finally {
         setLoading(false);

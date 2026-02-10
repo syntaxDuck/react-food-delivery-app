@@ -6,39 +6,41 @@ import LoginForm from "../components/layout/LoginForm";
 //Function imports
 import { useNavigate } from "react-router";
 import { API_KEY } from "../private/PRIVATE";
+import type { LoginPageProps, UserAction, AuthResponse } from "../types/auth";
 
-const API_URLS = {
+const API_URLS: Record<UserAction, string> = {
   SignUp: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
   SignIn: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
 };
 
-const LoginPage = (props: any) => {
+const LoginPage = ({ onLoginChange }: LoginPageProps) => {
   const [userAction, setUserAction] = useState("SignIn");
   let navigate = useNavigate();
 
-  const usernameRef = useRef(null);
-  const passwordRef = useRef(null);
-  const confPasswordRef = useRef(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confPasswordRef = useRef<HTMLInputElement>(null);
 
   document.body.style.overflow = "hidden";
 
-  const [error, setError] = React.useState(null);
+  const [error, setError] = React.useState<string | null>(null);
 
-  const userActionHandler = async (event: any) => {
+  const userActionHandler = async (event: React.FormEvent): Promise<void> => {
+    event.preventDefault();
 
     if (userAction === "SignUp") {
-      if (passwordRef.current.value !== confPasswordRef.current.value) {
+      if (passwordRef.current?.value !== confPasswordRef.current?.value) {
         return;
       }
     }
 
-    let response_data;
-    const sendRequest = async () => {
-      const apiURL = API_URLS[userAction];
+    let response_data: AuthResponse | undefined;
+    const sendRequest = async (): Promise<void> => {
+      const apiURL = API_URLS[userAction as UserAction];
 
       const requestBody = {
-        email: usernameRef.current.value,
-        password: passwordRef.current.value,
+        email: usernameRef.current?.value || "",
+        password: passwordRef.current?.value || "",
         returnSecureToken: true,
       };
 
@@ -51,23 +53,24 @@ const LoginPage = (props: any) => {
           body: JSON.stringify(requestBody),
         });
 
-        if (!response.status) {
+        if (!response.ok) {
           throw new Error(
             `This is an HTTP error: The status is ${response.status}`
           );
         }
 
-        response_data = await response.json();
+        response_data = await response.json() as AuthResponse;
 
         setError(null);
-      } catch (err) {
-        setError(err.message);
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+        setError(errorMessage);
       }
     };
 
     await sendRequest();
-    if (error === null) {
-      props.onLoginChange(response_data.email.split("@")[0]);
+    if (error === null && response_data) {
+      onLoginChange(response_data.email.split("@")[0]);
       navigate("/index");
     }
   };
