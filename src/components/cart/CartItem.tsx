@@ -1,35 +1,31 @@
 import React from "react";
 import { motion } from "framer-motion";
 import CartItemAmount from "./CartItemAmount";
+import type { CartItemProps } from "../../types/cart";
+import type { Variants } from "framer-motion";
 
-const itemVariants = {
+const itemVariants: Variants = {
   initial: { opacity: 0, y: 20 },
   animate: { 
     opacity: 1, 
     y: 0,
-    transition: { type: "spring", stiffness: 300, damping: 20 }
+    transition: { type: "spring" as const, stiffness: 300, damping: 20 }
   }
 };
 
-const CartItem = ({ id, name, price, itemAmountInCart, onUpdateCartItem }) => {
-  const calculateItemDifferential = (newAmount) => {
-    onUpdateCartItem([
-      {
-        id: id,
-        amount: newAmount - itemAmountInCart,
-      },
-    ]);
+const CartItem: React.FC<CartItemProps> = ({ 
+  item, 
+  onRemove, 
+  onUpdateAmount 
+}) => {
+  const formattedPrice = (item.price * item.amount).toFixed(2);
+  
+  const handleRemove = (): void => {
+    onRemove(item.id);
   };
 
-  const formattedPrice = (price * itemAmountInCart).toFixed(2);
-  
-  const handleRemove = () => {
-    onUpdateCartItem([
-      {
-        id: id,
-        amount: -itemAmountInCart,
-      },
-    ]);
+  const handleUpdateAmount = (newAmount: number): void => {
+    onUpdateAmount(item.id, newAmount);
   };
 
   return (
@@ -41,7 +37,7 @@ const CartItem = ({ id, name, price, itemAmountInCart, onUpdateCartItem }) => {
     >
       <div className="flex-1">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-lg font-semibold text-white">{name}</h3>
+          <h3 className="text-lg font-semibold text-white">{item.name}</h3>
           <motion.button
             className="text-white/40 hover:text-red-400 transition-colors p-1"
             onClick={handleRemove}
@@ -52,7 +48,7 @@ const CartItem = ({ id, name, price, itemAmountInCart, onUpdateCartItem }) => {
           </motion.button>
         </div>
         <div className="text-sm text-white/60">
-          {itemAmountInCart} × ${price.toFixed(2)} ={" "}
+          {item.amount} × ${item.price.toFixed(2)} ={" "}
           <span className="text-primary font-semibold text-base ml-1">
             ${formattedPrice}
           </span>
@@ -60,8 +56,9 @@ const CartItem = ({ id, name, price, itemAmountInCart, onUpdateCartItem }) => {
       </div>
       
       <CartItemAmount
-        onUpdateCart={calculateItemDifferential}
-        amountInCart={itemAmountInCart}
+        amount={item.amount}
+        onIncrease={() => handleUpdateAmount(item.amount + 1)}
+        onDecrease={() => handleUpdateAmount(Math.max(1, item.amount - 1))}
       />
     </motion.div>
   );

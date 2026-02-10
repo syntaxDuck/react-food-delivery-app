@@ -8,14 +8,16 @@ import CartItem from "./CartItem";
 import { useCart } from "./cart_context/CartCtxProvider";
 
 import { FIREBASE_ENDPOINT } from "../../App";
+import type { CartProps } from "../../types/cart";
+import type { Variants } from "framer-motion";
 
-const cartItemVariants = {
+const cartItemVariants: Variants = {
   initial: { opacity: 0, x: 50, scale: 0.8 },
   animate: {
     opacity: 1,
     x: 0,
     scale: 1,
-    transition: { type: "spring", stiffness: 300, damping: 20 }
+    transition: { type: "spring" as const, stiffness: 300, damping: 20 }
   },
   exit: {
     opacity: 0,
@@ -25,13 +27,13 @@ const cartItemVariants = {
   }
 };
 
-const Cart = () => {
+const Cart: React.FC<CartProps> = ({ className }) => {
   const crtCtx = useCart();
-  const [error, setError] = React.useState(null);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const dbUrl = React.useRef(FIREBASE_ENDPOINT + "Orders.json");
+  const [error, setError] = React.useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
+  const dbUrl = React.useRef<string>(FIREBASE_ENDPOINT + "Orders.json");
 
-  const submitOrderHandler = async () => {
+  const submitOrderHandler = async (): Promise<void> => {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
@@ -41,7 +43,7 @@ const Cart = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(crtCtx.items),
+        body: JSON.stringify(crtCtx.state.items),
       });
 
       if (!response.ok) {
@@ -57,8 +59,9 @@ const Cart = () => {
         alert('Order submitted successfully! 🎉');
       }, 500);
 
-    } catch (err) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -73,8 +76,8 @@ const Cart = () => {
     console.error("Cart Error:", error);
   }
 
-  let cartContent;
-  if (crtCtx.items.length === 0) {
+  let cartContent: React.ReactElement;
+  if (crtCtx.state.items.length === 0) {
     cartContent = (
       <motion.div
         className="flex flex-col items-center justify-center h-64 text-center"
@@ -99,12 +102,12 @@ const Cart = () => {
         <div className="flex justify-between items-center p-6 border-b border-white/20">
           <motion.h2
             className="text-2xl font-bold text-white"
-            key={crtCtx.totalAmount}
+            key={crtCtx.state.totalAmount}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 400 }}
+            transition={{ type: "spring" as const, stiffness: 400 }}
           >
-            Total: ${crtCtx.totalAmount.toFixed(2)}
+            Total: ${crtCtx.state.totalAmount.toFixed(2)}
           </motion.h2>
           <div className="flex space-x-3">
             <AnimatedButton
@@ -143,7 +146,7 @@ const Cart = () => {
 
         <div className="flex-1 overflow-y-auto custom-scrollbar p-4">
           <AnimatePresence mode="popLayout">
-            {crtCtx.items.map((item) => (
+            {crtCtx.state.items.map((item) => (
               <motion.div
                 key={item.id}
                 variants={cartItemVariants}
@@ -170,7 +173,7 @@ const Cart = () => {
 
   return (
     <AnimatedModal
-      isOpen={crtCtx.cartActive}
+      isOpen={crtCtx.state.cartActive}
       onClose={crtCtx.toggleCart}
       size="lg"
       className="bg-dark-gray border-primary/30"
