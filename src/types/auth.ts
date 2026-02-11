@@ -50,11 +50,11 @@ export interface AuthError {
   error: {
     code: number;
     message: string;
-    errors: Array<{
+    errors: {
       message: string;
       domain: string;
       reason: string;
-    }>;
+    }[];
   };
 }
 
@@ -91,7 +91,7 @@ export interface LoginPageProps {
 
 // Login form props
 export interface LoginFormProps {
-  onFormSubmit: (event: React.FormEvent) => void;
+  onFormSubmit: (event: React.SyntheticEvent<HTMLFormElement>) => void;
   onChangeUserAction: (action: UserAction) => void;
   userAction: UserAction;
   usernameInputRef: React.RefObject<HTMLInputElement | null>;

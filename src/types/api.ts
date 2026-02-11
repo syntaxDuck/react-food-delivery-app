@@ -20,11 +20,11 @@ export interface FirebaseAuthError {
   error: {
     code: number;
     message: string;
-    errors: Array<{
+    errors: {
       message: string;
       domain: string;
       reason: string;
-    }>;
+    }[];
   };
 }
 

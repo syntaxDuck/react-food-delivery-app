@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { FetchResult } from "../types";
 
 interface UseFetchRequestConfig extends Omit<RequestInit, 'body'> {
@@ -20,18 +21,18 @@ const useFetch = <T = unknown>(
       try {
         // Convert requestParams to proper RequestInit
         const fetchConfig: RequestInit = {
-          method: requestParams.method || 'GET',
+          method: requestParams.method ?? "GET",
           headers: requestParams.headers,
-          body: requestParams.body ? JSON.stringify(requestParams.body) : undefined,
+          body: requestParams.body !== undefined ? JSON.stringify(requestParams.body) : undefined,
         };
 
         const response = await fetch(url, fetchConfig);
         
         if (!response.ok) {
-          throw new Error(`HTTP error: Status => ${response.status}`);
+          throw new Error(`HTTP error: Status => ${String(response.status)}`);
         }
 
-        const responseData: T = await response.json();
+        const responseData = (await response.json()) as T;
 
         setData(responseData);
         setError(null);
@@ -44,7 +45,7 @@ const useFetch = <T = unknown>(
       }
     };
 
-    sendRequest();
+    void sendRequest();
   }, [url, requestParams]);
 
   return { data, loading, error };

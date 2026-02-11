@@ -7,7 +7,7 @@ export interface BaseComponentProps {
 }
 
 // Form event handlers
-export type FormEventHandler = (event: React.FormEvent) => void;
+export type FormEventHandler = (event: React.SyntheticEvent<HTMLFormElement>) => void;
 export type ChangeEventHandler = (event: React.ChangeEvent<HTMLInputElement>) => void;
 export type ClickEventHandler = (event: React.MouseEvent) => void;
 
