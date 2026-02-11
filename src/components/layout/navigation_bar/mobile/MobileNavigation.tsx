@@ -3,12 +3,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router";
 import { compoundClasses } from "../../../../utils/compoundClasses";
 import { navigationItems } from "../NavigationItems";
-
-// Component imports
 import AnimatedButton from "../../../ui/AnimatedButton";
 import AuthButtons from "../AuthButtons";
 
-const MobileNavigation = ({ 
+interface MobileNavigationProps {
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+  loginStatus: boolean;
+}
+
+const MobileNavigation: React.FC<MobileNavigationProps> = ({ 
   mobileMenuOpen, 
   setMobileMenuOpen, 
   activeSection, 
@@ -28,7 +34,7 @@ const MobileNavigation = ({
     exit: { x: "100%", opacity: 0 }
   };
 
-  const handleNavigationClick = (menuElement) => {
+  const handleNavigationClick = (menuElement: { id: string; icon: string; text: string }) => {
     setActiveSection(menuElement.id);
     
     // Handle smooth scroll to section
@@ -83,6 +89,7 @@ const MobileNavigation = ({
                     key={menuElement.id}
                     variants={navItemVariants}
                     whileHover="hover"
+                    transition={{ delay: 0.05 }}
                   >
                     <Link 
                       to={menuElement.id === "about-us" ? "/index" : "/index"}
@@ -106,8 +113,8 @@ const MobileNavigation = ({
               <div className="border-t border-white/20 pt-6">
                 <AuthButtons 
                   loginStatus={loginStatus} 
-                  className="w-full"
                   variant="mobile"
+                  className="w-full"
                 />
               </div>
             </div>
