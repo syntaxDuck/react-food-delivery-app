@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
 //Component imports
-import AnimatedCard from "../ui/AnimatedCard";
-import AnimatedButton from "../ui/AnimatedButton";
+import AnimatedCard from "../UI/AnimatedCard";
+import AnimatedButton from "../UI/AnimatedButton";
 
 //Styles imports
 import type { LoginFormProps, ValidationResult } from "../../types/auth";

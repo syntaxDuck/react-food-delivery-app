@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import AnimatedCard from "../ui/AnimatedCard";
-import AnimatedButton from "../ui/AnimatedButton";
+import AnimatedCard from "../UI/AnimatedCard";
+import AnimatedButton from "../UI/AnimatedButton";
 import Section from "./Section";
 import { compoundClasses } from "../../utils/compoundClasses";
 

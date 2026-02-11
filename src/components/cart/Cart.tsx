@@ -2,8 +2,8 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 //Component Imports
-import AnimatedModal from "../ui/AnimatedModal";
-import AnimatedButton from "../ui/AnimatedButton";
+import AnimatedModal from "../UI/AnimatedModal";
+import AnimatedButton from "../UI/AnimatedButton";
 import CartItem from "./CartItem";
 import { useCart } from "./cart_context/CartCtxProvider";
 

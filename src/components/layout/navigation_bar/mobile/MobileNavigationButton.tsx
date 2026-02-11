@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { compoundClasses } from "../../../../utils/compoundClasses";
 // useNavigation not available since NavigationContext.js doesn't exist
 // Using props instead
-import AnimatedButton from "../../../ui/AnimatedButton";
+import AnimatedButton from "../../../UI/AnimatedButton";
 
 interface MobileNavigationButtonProps {
   mobileMenuOpen: boolean;

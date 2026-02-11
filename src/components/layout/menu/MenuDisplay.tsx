@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Card from "../../ui/Card";
+import Card from "../../UI/Card";
 import MenuActions from "./MenuActions";
 import LoadingState from "./LoadingState";
 import ErrorState from "./ErrorState";

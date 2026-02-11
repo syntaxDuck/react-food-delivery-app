@@ -10,7 +10,7 @@ import Location from "../components/layout/Location";
 import { useCart } from "../components/cart/cart_context/CartCtxProvider";
 
 //Styles
-import MotionContainer from "../components/ui/MotionContainer";
+import MotionContainer from "../components/UI/MotionContainer";
 
 const HomePage = () => {
   const cartActive = useCart().state.cartActive;

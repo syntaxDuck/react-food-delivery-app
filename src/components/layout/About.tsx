@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import AnimatedCard from "../ui/AnimatedCard";
+import AnimatedCard from "../UI/AnimatedCard";
 import Section from "./Section";
 import { compoundClasses } from "../../utils/compoundClasses";
 import image from "../../assets/drone.jpg";
