@@ -4,10 +4,10 @@ import React from "react";
 import AnimatedButton from "../../ui/AnimatedButton";
 import type { MenuActionsProps } from "./types";
 
-const MenuActions: React.FC<MenuActionsProps> = ({ 
-  itemCount, 
-  onAddToCart, 
-  onClearCart 
+const MenuActions: React.FC<MenuActionsProps> = ({
+  itemCount,
+  onAddToCart,
+  onClearCart
 }) => {
   return (
     <div className={`flex flex-col sm:flex-row justify-center items-center space-y-4 

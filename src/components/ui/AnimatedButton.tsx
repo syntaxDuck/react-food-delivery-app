@@ -39,7 +39,7 @@ type VariantClassTypes = keyof typeof VariantClasses;
 interface AnimatedButtonProps {
   href?: string;
   className?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement | HTMLFormElement>;
   disabled?: boolean;
   label?: string;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
