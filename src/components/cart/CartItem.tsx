@@ -1,8 +1,9 @@
-import React from "react";
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
+import React from "react";
+
 import CartItemAmount from "./CartItemAmount";
 import type { CartItemType } from "./CartTypes";
-import type { Variants } from "framer-motion";
 
 const itemVariants: Variants = {
   initial: { opacity: 0, y: 20 },
@@ -65,8 +66,12 @@ const CartItem: React.FC<CartItemProps> = ({
 
       <CartItemAmount
         amountInCart={item.amount}
-        onIncrease={() => handleUpdateAmount(item.amount + 1)}
-        onDecrease={() => handleUpdateAmount(Math.max(1, item.amount - 1))}
+        onIncrease={() => {
+          handleUpdateAmount(item.amount + 1);
+        }}
+        onDecrease={() => {
+          handleUpdateAmount(Math.max(1, item.amount - 1));
+        }}
       />
     </motion.div>
   );

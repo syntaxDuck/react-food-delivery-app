@@ -1,14 +1,13 @@
+import type { Variants } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-//Component Imports
-import AnimatedModal from "../ui/AnimatedModal";
-import AnimatedButton from "../ui/AnimatedButton";
-import CartItem from "./CartItem";
-import { useCart } from "./cart-context/CartCtxProvider";
 
 import { FIREBASE_ENDPOINT } from "../../App";
-import type { Variants } from "framer-motion";
+import AnimatedButton from "../ui/AnimatedButton";
+//Component Imports
+import AnimatedModal from "../ui/AnimatedModal";
+import { useCart } from "./cart-context/CartCtxProvider";
+import CartItem from "./CartItem";
 import type { CartItemType } from "./CartTypes";
 
 const cartItemVariants: Variants = {
@@ -31,7 +30,7 @@ const Cart: React.FC = () => {
   const crtCtx = useCart();
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
-  const dbUrl = React.useRef<string>(FIREBASE_ENDPOINT + "Orders.json");
+  const dbUrl = React.useRef<string>(`${FIREBASE_ENDPOINT}Orders.json`);
 
   const submitOrderHandler = async (): Promise<void> => {
     if (isSubmitting) return;
@@ -47,7 +46,7 @@ const Cart: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error: Status ${response.status}`);
+        throw new Error(`HTTP error: Status ${String(response.status)}`);
       }
 
       setError(null);
@@ -67,14 +66,14 @@ const Cart: React.FC = () => {
     }
   };
 
-  const handleUpdateAmount = (updatedItem: CartItemType) => {
+  const handleUpdateAmount = (updatedItem: CartItemType): void => {
     const updatedCartItems: CartItemType[] = [...crtCtx.state.items];
     const itemIndex = updatedCartItems.findIndex((item) => item.id == updatedItem.id)
     updatedCartItems[itemIndex] = updatedItem;
-    crtCtx.updateCart(updatedCartItems)
-  }
+    crtCtx.updateCart(updatedCartItems);
+  };
 
-  const clearCartHandler = () => {
+  const clearCartHandler = (): void => {
     crtCtx.clearCart();
     crtCtx.toggleCart();
   };
@@ -127,7 +126,9 @@ const Cart: React.FC = () => {
             <AnimatedButton
               variant="default"
               size="sm"
-              onClick={submitOrderHandler}
+              onClick={() => {
+                void submitOrderHandler();
+              }}
               disabled={isSubmitting}
               href={""}
               label={""}
@@ -168,7 +169,9 @@ const Cart: React.FC = () => {
                 <CartItem
                   item={item}
                   onUpdateAmount={handleUpdateAmount}
-                  onRemove={crtCtx.toggleCart}
+                  onRemove={() => {
+                    crtCtx.toggleCart();
+                  }}
                 />
               </motion.div>
             ))}

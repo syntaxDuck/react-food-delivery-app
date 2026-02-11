@@ -1,12 +1,13 @@
 import React from "react";
-import CartReducer, { clearCart, updateCart, defaultCartState, toggleCart } from "./CartReducer";
+
 import { type CartContextValue, type CartItemType } from "../CartTypes";
+import CartReducer, { clearCart, defaultCartState, toggleCart, updateCart } from "./CartReducer";
 
 const CartContext = React.createContext<CartContextValue>({
   state: defaultCartState,
-  updateCart: () => { },
-  clearCart: () => { },
-  toggleCart: () => { },
+  updateCart: () => undefined,
+  clearCart: () => undefined,
+  toggleCart: () => undefined,
 });
 
 export const useCart = (): CartContextValue => React.useContext(CartContext);

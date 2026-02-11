@@ -1,4 +1,4 @@
-import { type CartState, type CartItemType } from "../CartTypes";
+import { type CartItemType,type CartState } from "../CartTypes";
 
 export const defaultCartState: CartState = {
   items: [],
@@ -33,16 +33,15 @@ type CartActionUnion =
 export type CartReducerFunction = (state: CartState, action: CartActionUnion) => CartState;
 
 
-const handleUpdateCart = (state: CartState, items: CartItemType[]) => {
-  let updatedItems = [...state.items];
+const handleUpdateCart = (state: CartState, items: CartItemType[]): CartState => {
+  const updatedItems = [...state.items];
 
   items.forEach((newItem: CartItemType) => {
     const existingCartItemIndex = updatedItems.findIndex(
       (item) => item.id === newItem.id
     );
-    const existingCartItem = updatedItems[existingCartItemIndex];
-
-    if (existingCartItem) {
+    if (existingCartItemIndex !== -1) {
+      const existingCartItem = updatedItems[existingCartItemIndex];
       // Replace existing item with new amount, don't accumulate
       const updatedItem = {
         ...existingCartItem,
@@ -58,17 +57,17 @@ const handleUpdateCart = (state: CartState, items: CartItemType[]) => {
     return total + item.amount * item.price;
   }, 0);
 
-  return { ...state, items: updatedItems, totalAmount: totalAmount };
-}
+  return { ...state, items: updatedItems, totalAmount };
+};
 
-const handleToggleCart = (state: CartState) => {
-  const toggleCart = !state.cartActive;
-  return { ...state, cartActive: toggleCart };
-}
+const handleToggleCart = (state: CartState): CartState => {
+  const nextActive = !state.cartActive;
+  return { ...state, cartActive: nextActive };
+};
 
-const handleClearCart = (state: CartState) => {
-  return { ...state, items: [] };
-}
+const handleClearCart = (state: CartState): CartState => {
+  return { ...state, items: [], totalAmount: 0 };
+};
 
 const CartReducer: CartReducerFunction = (state, action) => {
   switch (action.type) {

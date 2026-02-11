@@ -1,6 +1,7 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
+
 import { useCart } from "./cart-context/CartCtxProvider";
 
 const buttonVariants: Variants = {
@@ -28,14 +29,14 @@ const badgeVariants: Variants = {
 };
 
 interface CartButtonProps {
-  onCartStateChange: CallableFunction
+  onCartStateChange: () => void;
 }
 
 const CartButton: React.FC<CartButtonProps> = ({ onCartStateChange }) => {
   const { items } = useCart().state;
   const [isBouncing, setIsBouncing] = React.useState(false);
 
-  let itemTotal = 0
+  let itemTotal = 0;
   if (items.length > 0) {
     itemTotal = items.reduce((total, item) => total + item.amount, 0);
   }
@@ -43,11 +44,13 @@ const CartButton: React.FC<CartButtonProps> = ({ onCartStateChange }) => {
   React.useEffect(() => {
     if (itemTotal > 0 && !isBouncing) {
       setIsBouncing(true);
-      setTimeout(() => setIsBouncing(false), 500);
+      setTimeout(() => {
+        setIsBouncing(false);
+      }, 500);
     }
   }, [itemTotal, isBouncing]);
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     onCartStateChange();
   };
 
