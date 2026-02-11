@@ -1,9 +1,10 @@
-import React from "react";
 import { motion } from "framer-motion";
-import AnimatedCard from "../ui/AnimatedCard";
-import AnimatedButton from "../ui/AnimatedButton";
-import Section from "./Section";
+import React from "react";
+
 import { compoundClasses } from "../../utils/compoundClasses";
+import AnimatedButton from "../ui/AnimatedButton";
+import AnimatedCard from "../ui/AnimatedCard";
+import Section from "./Section";
 
 const Location = () => {
 

@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
+
 import { useCart } from "../../../cart/cart-context/CartCtxProvider";
 import type { CartItemType } from "../../../cart/CartTypes";
 
@@ -33,7 +34,7 @@ export const usePreCart = () => {
     });
   }, []);
 
-  const updateCartHandler = useCallback<React.FormEventHandler>((event) => {
+  const updateCartHandler = useCallback<React.EventHandler<React.SyntheticEvent<HTMLFormElement>>>((event) => {
     event.preventDefault();
     if (preCart.length !== 0) {
       setPreCart([]);

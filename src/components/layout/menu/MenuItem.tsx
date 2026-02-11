@@ -1,5 +1,6 @@
-import React, { useMemo } from "react";
 import { motion, type Variants } from "framer-motion";
+import React, { useMemo } from "react";
+
 import MenuItemAmount from "./MenuItemAmount";
 
 // Move static objects outside component to prevent recreation
@@ -23,13 +24,13 @@ const itemVariants: Variants = {
 };
 
 interface MenuItemProps {
-  id: string,
-  name: string,
-  price: number,
-  description: string,
-  amount: number,
-  onAddToPreCart: CallableFunction,
-  delay: number
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  amount: number;
+  onAddToPreCart: (item: { id: string; name: string; price: number; amount: number }) => void;
+  delay?: number;
 }
 
 const MenuItem: React.FC<MenuItemProps> = React.memo(({
@@ -43,7 +44,7 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
 }) => {
   const formattedPrice = useMemo(() => `$${price.toFixed(2)}`, [price]);
 
-  const addToPreCartHandler = (itemQuantity: number) => {
+  const addToPreCartHandler = (itemQuantity: number): void => {
     onAddToPreCart({
       id: id,
       name: name,

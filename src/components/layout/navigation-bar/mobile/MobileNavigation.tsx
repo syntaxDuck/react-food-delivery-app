@@ -1,10 +1,11 @@
+import { AnimatePresence,motion } from "framer-motion";
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router";
+
 import { compoundClasses } from "../../../../utils/compoundClasses";
-import { navigationItems } from "../NavigationItems";
 import AnimatedButton from "../../../ui/AnimatedButton";
 import AuthButtons from "../AuthButtons";
+import { navigationItems } from "../NavigationItems";
 
 interface MobileNavigationProps {
   mobileMenuOpen: boolean;
@@ -57,7 +58,9 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              setMobileMenuOpen(false);
+            }}
           />
           
           {/* Mobile Menu Panel - Slide-in from Right */}
@@ -76,7 +79,9 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 <AnimatedButton 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                  }}
                 >
                   <span className="material-icons md-24">close</span>
                 </AnimatedButton>
@@ -100,7 +105,9 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                           : 'text-white/70 hover:text-white hover:bg-white/5 border border-transparent'
                         }
                       `}
-                      onClick={() => handleNavigationClick(menuElement)}
+                      onClick={() => {
+                        handleNavigationClick(menuElement);
+                      }}
                     >
                       <span className="material-icons md-20 mr-3">{menuElement.icon}</span>
                       <span className="font-medium">{menuElement.text}</span>

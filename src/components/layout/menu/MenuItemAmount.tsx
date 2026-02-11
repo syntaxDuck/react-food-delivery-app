@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from "react";
 import { motion, type Variants } from "framer-motion";
+import React, { useCallback, useMemo } from "react";
 
 // Move static objects outside component to prevent recreation
 const buttonVariants: Variants = {
@@ -23,8 +23,8 @@ const cartButton = (amount: number) => `
   }`;
 
 interface MenuItemAmountProps {
-  amount: number,
-  onAddToPreCart: CallableFunction
+  amount: number;
+  onAddToPreCart: (amount: number) => void;
 }
 
 const MenuItemAmount: React.FC<MenuItemAmountProps> = React.memo(({ amount, onAddToPreCart }) => {

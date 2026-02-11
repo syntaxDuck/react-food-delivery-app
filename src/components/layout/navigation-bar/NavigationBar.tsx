@@ -1,16 +1,15 @@
+import { motion, type Variants } from "framer-motion";
 import { memo, useState } from "react";
 import { Link } from "react-router";
-import { motion, type Variants } from "framer-motion";
-import { compoundClasses } from "../../../utils/compoundClasses";
 
+import { compoundClasses } from "../../../utils/compoundClasses";
+//Functional Imports
+import { useCart } from "../../cart/cart-context/CartCtxProvider";
 //Component Imports
 import CartButton from "../../cart/CartButton";
 import DesktopNavigation from "./DesktopNavigation";
-import MobileNavigationButton from "./mobile/MobileNavigationButton";
 import MobileNavigation from "./mobile/MobileNavigation";
-
-//Functional Imports
-import { useCart } from "../../cart/cart-context/CartCtxProvider";
+import MobileNavigationButton from "./mobile/MobileNavigationButton";
 
 interface NavigationBarProps {
   loginStatus: boolean

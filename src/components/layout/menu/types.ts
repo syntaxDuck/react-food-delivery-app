@@ -1,30 +1,32 @@
-export type MenuItemType = {
-  id: string,
-  name: string,
-  price: number
-  description: string,
+import type { CartItemType } from "../../cart/CartTypes";
+
+export interface MenuItemType {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
 }
 
-export type MenuData = { [key: string]: MenuItemType };
+export type MenuData = Record<string, MenuItemType>;
 
 export interface MenuDisplayProps {
   menuItems: MenuData | null;
   loading: boolean;
   error: string | null;
   itemAmountsMap: Map<string, number>;
-  addToPreCartHandler: (item: any) => void;
-  updateCartHandler: React.FormEventHandler;
+  addToPreCartHandler: (item: CartItemType) => void;
+  updateCartHandler: React.EventHandler<React.SyntheticEvent<HTMLFormElement>>;
   clearPreCart: () => void;
 }
 
 export interface MenuGridProps {
   menuItems: MenuData | null;
   itemAmountsMap: Map<string, number>;
-  addToPreCartHandler: (item: any) => void;
+  addToPreCartHandler: (item: CartItemType) => void;
 }
 
 export interface MenuActionsProps {
   itemCount: number;
-  onAddToCart: React.FormEventHandler;
+  onAddToCart: React.EventHandler<React.SyntheticEvent<HTMLFormElement>>;
   onClearCart: () => void;
 }

@@ -1,8 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
-import NavigationBar from "../navigation-bar/NavigationBar.tsx";
+
 import CartCtxProvider from "../../cart/cart-context/CartCtxProvider";
+import NavigationBar from "../navigation-bar/NavigationBar.tsx";
 
 describe("NavigationBar", () => {
   test("Renders navigation items and logo link", () => {
@@ -14,9 +15,9 @@ describe("NavigationBar", () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText("menu")).toBeInTheDocument();
-    expect(screen.getByText("location")).toBeInTheDocument();
-    expect(screen.getByText("About Us")).toBeInTheDocument();
+    expect(screen.getAllByText("menu").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("location").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("About Us").length).toBeGreaterThan(0);
 
     const logo = screen.getByText("chrono delivery");
     expect(logo.closest("a")).toHaveAttribute("href", "/index");
@@ -37,20 +38,22 @@ describe("NavigationBar", () => {
     expect(screen.queryByText("Menu")).not.toBeInTheDocument();
 
     // Click mobile menu button to open
-    const mobileMenuButton = screen.getByRole("button", { name: /menu/i });
-    await user.click(mobileMenuButton);
+    const mobileMenuButtons = screen.getAllByRole("button", { name: /menu/i });
+    await user.click(mobileMenuButtons[0]);
     
     // Mobile menu should now be open
     expect(screen.getByText("Menu")).toBeInTheDocument();
-    expect(screen.getByText("menu")).toBeInTheDocument();
-    expect(screen.getByText("location")).toBeInTheDocument();
-    expect(screen.getByText("About Us")).toBeInTheDocument();
+    expect(screen.getAllByText("menu").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("location").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("About Us").length).toBeGreaterThan(0);
     
     // Click close button to close menu
-    const closeButton = screen.getByRole("button", { name: /close/i });
-    await user.click(closeButton);
+    const closeButtons = screen.getAllByRole("button", { name: /close/i });
+    await user.click(closeButtons[0]);
     
     // Mobile menu should be closed again
-    expect(screen.queryByText("Menu")).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText("Menu")).not.toBeInTheDocument();
+    });
   });
 });

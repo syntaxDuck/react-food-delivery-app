@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+
 import { compoundClasses } from "../../../../utils/compoundClasses";
 // useNavigation not available since NavigationContext.js doesn't exist
 // Using props instead
@@ -16,7 +17,9 @@ const MobileNavigationButton = ({ mobileMenuOpen, setMobileMenuOpen }: MobileNav
       <AnimatedButton
         variant="ghost"
         size="sm"
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        onClick={() => {
+          setMobileMenuOpen(!mobileMenuOpen);
+        }}
         className="p-2"
       >
         <motion.span

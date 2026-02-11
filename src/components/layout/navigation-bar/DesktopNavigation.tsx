@@ -1,9 +1,10 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router";
-import { motion } from "framer-motion";
+
 import { compoundClasses } from "../../../utils/compoundClasses";
-import { navigationItems } from "./NavigationItems";
 import AuthButtons from "./AuthButtons";
+import { navigationItems } from "./NavigationItems";
 
 interface DesktopNavigationProps {
   loginStatus: boolean;

@@ -1,13 +1,12 @@
-import React from "react";
-import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-
-//Component imports
-import AnimatedCard from "../ui/AnimatedCard";
-import AnimatedButton from "../ui/AnimatedButton";
+import { motion } from "framer-motion";
+import React from "react";
 
 //Styles imports
 import type { LoginFormProps, ValidationResult } from "../../types/auth";
+import AnimatedButton from "../ui/AnimatedButton";
+//Component imports
+import AnimatedCard from "../ui/AnimatedCard";
 
 const formVariants: Variants = {
   initial: { opacity: 0, y: 20 },
@@ -38,10 +37,9 @@ const LoginForm = (props: LoginFormProps) => {
   React.useEffect(() => {
     if (props.usernameInputRef.current?.value === "") setUsernameValid(true);
     if (props.passwordInputRef.current?.value === "") setPasswordValid(true);
-    try {
-      if (props.confpasswordInputRef?.current?.value === "")
-        setConfPasswordValid(true);
-    } catch { }
+    if (props.confpasswordInputRef?.current?.value === "") {
+      setConfPasswordValid(true);
+    }
   }, [
     props.userAction,
     props.usernameInputRef,
@@ -89,16 +87,12 @@ const LoginForm = (props: LoginFormProps) => {
     return { isValid: true, errors: [] };
   };
 
-  const formSubmitHandler = (event: React.FormEvent): void => {
+  const formSubmitHandler = (event: React.SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    const username = props.usernameInputRef.current?.value || "";
-    const password = props.passwordInputRef.current?.value || "";
-    let confirmPassword = "";
-
-    try {
-      confirmPassword = props.confpasswordInputRef?.current?.value || "";
-    } catch { }
+    const username = props.usernameInputRef.current?.value ?? "";
+    const password = props.passwordInputRef.current?.value ?? "";
+    const confirmPassword = props.confpasswordInputRef?.current?.value ?? "";
 
     const usernameChecked = checkUsername(username);
     const passwordChecked = checkPassword(password);
@@ -227,7 +221,9 @@ const LoginForm = (props: LoginFormProps) => {
               <AnimatedButton
                 variant="outline"
                 size="sm"
-                onClick={() => props.onChangeUserAction("SignUp")}
+                onClick={() => {
+                  props.onChangeUserAction("SignUp");
+                }}
                 className="ml-2"
               >
                 Sign Up
@@ -239,7 +235,9 @@ const LoginForm = (props: LoginFormProps) => {
               <AnimatedButton
                 variant="outline"
                 size="sm"
-                onClick={() => props.onChangeUserAction("SignIn")}
+                onClick={() => {
+                  props.onChangeUserAction("SignIn");
+                }}
                 className="ml-2"
               >
                 Sign In

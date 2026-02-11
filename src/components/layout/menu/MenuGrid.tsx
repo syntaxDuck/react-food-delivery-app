@@ -1,7 +1,8 @@
-import React from "react";
 import { motion } from "framer-motion";
-import MenuItem from "./MenuItem";
+import React from "react";
+
 import { menuVariants } from "./animations";
+import MenuItem from "./MenuItem";
 import type { MenuGridProps } from "./types";
 
 const MenuGrid: React.FC<MenuGridProps> = ({ 
@@ -20,7 +21,7 @@ const MenuGrid: React.FC<MenuGridProps> = ({
     >
       {Object.keys(menuItems).map((itemName, index) => {
         const menuItem = menuItems[itemName];
-        const itemAmount = itemAmountsMap.get(menuItem.id) || 0;
+        const itemAmount = itemAmountsMap.get(menuItem.id) ?? 0;
 
         return (
           <MenuItem

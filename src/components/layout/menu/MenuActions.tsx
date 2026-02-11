@@ -1,5 +1,6 @@
-import React from "react";
 import { motion } from "framer-motion";
+import React from "react";
+
 import AnimatedButton from "../../ui/AnimatedButton";
 import type { MenuActionsProps } from "./types";
 

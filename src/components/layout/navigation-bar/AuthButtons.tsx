@@ -1,6 +1,6 @@
 
-import { Link } from "react-router";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 // Inline variants since NavigationVariants.js doesn't exist
 const navVariants = {
   navItem: {
@@ -40,7 +40,9 @@ const AuthButtons = ({ loginStatus, className = "", variant = "desktop" }: AuthB
           variant="outline"
           size={variant === "mobile" ? "lg" : "sm"}
           className={variant === "mobile" ? "w-full" : "ml-2"}
-          onClick={() => window.location.reload()}
+          onClick={() => {
+            window.location.reload();
+          }}
         >
           <span className="material-icons md-18 mr-2">logout</span>
           Logout

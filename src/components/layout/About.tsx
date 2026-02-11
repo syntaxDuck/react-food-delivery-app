@@ -1,9 +1,10 @@
-import React from "react";
 import { motion } from "framer-motion";
+import React from "react";
+
+import image from "../../assets/drone.jpg";
+import { compoundClasses } from "../../utils/compoundClasses";
 import AnimatedCard from "../ui/AnimatedCard";
 import Section from "./Section";
-import { compoundClasses } from "../../utils/compoundClasses";
-import image from "../../assets/drone.jpg";
 
 const AboutUs = () => {
   // Subtle hero variants

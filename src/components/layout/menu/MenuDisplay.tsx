@@ -1,11 +1,12 @@
-import React from "react";
 import { motion } from "framer-motion";
+import React from "react";
+
 import Card from "../../ui/Card";
-import MenuActions from "./MenuActions";
-import LoadingState from "./LoadingState";
-import ErrorState from "./ErrorState";
-import MenuGrid from "./MenuGrid";
 import { menuVariants } from "./animations";
+import ErrorState from "./ErrorState";
+import LoadingState from "./LoadingState";
+import MenuActions from "./MenuActions";
+import MenuGrid from "./MenuGrid";
 import type { MenuDisplayProps } from "./types";
 
 const MenuDisplay: React.FC<MenuDisplayProps> = ({

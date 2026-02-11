@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
+
 import Section from "../Section";
-import MenuDisplay from "./MenuDisplay";
 import { useMenuData } from "./hooks/useMenuData";
 import { usePreCart } from "./hooks/usePreCart";
+import MenuDisplay from "./MenuDisplay";
 
 const Menu = () => {
   const { menuItems, loading, error } = useMenuData();

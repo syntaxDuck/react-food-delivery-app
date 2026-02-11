@@ -1,17 +1,17 @@
-import React from "react";
 import { motion } from "framer-motion";
+import React from "react";
+
 import { useReducedMotion } from "../../functions/useReducedMotion";
 import { compoundClasses } from "../../utils/compoundClasses";
 
 interface SectionProps {
-  id: string,
-  className: string,
-  background: string,
-  padding: string,    // NEW DEFAULT
-  spacing: string,         // NEW PROP
-  container: boolean            // NEW PROP
-  children: React.ReactNode
-
+  id: string;
+  className?: string;
+  background?: string;
+  padding?: string;    // NEW DEFAULT
+  spacing?: string;         // NEW PROP
+  container?: boolean;            // NEW PROP
+  children: React.ReactNode;
 }
 
 const Section: React.FC<SectionProps> = ({

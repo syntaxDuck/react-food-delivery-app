@@ -1,8 +1,8 @@
 import React from "react";
 
-import NavigationBar from "./navigation-bar/NavigationBar";
-import CartCtxProvider from "../cart/cart-context/CartCtxProvider";
 import image from "../../assets/sushi.jpg";
+import CartCtxProvider from "../cart/cart-context/CartCtxProvider";
+import NavigationBar from "./navigation-bar/NavigationBar";
 
 interface LayoutProps {
   isLoggedIn: boolean,
