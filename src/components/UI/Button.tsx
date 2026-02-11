@@ -20,7 +20,8 @@ const Button = ({ href, className, onClick, disabled = false, label, type, child
   const baseClasses = "inline-flex items-center justify-center px-4 py-2 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-gray";
   const defaultClasses = "bg-transparent border border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary";
   
-  const finalClasses = className || `${baseClasses} ${defaultClasses}`;
+  const finalClasses =
+    className && className.length > 0 ? className : `${baseClasses} ${defaultClasses}`;
 
   const buttonContent = (
     <>
@@ -45,11 +46,11 @@ const Button = ({ href, className, onClick, disabled = false, label, type, child
   }
 
   return (
-      <motion.button
-        className={finalClasses}
-        type={type || "button"}
-        onClick={onClick}
-        disabled={disabled}
+    <motion.button
+      className={finalClasses}
+      type={type ?? "button"}
+      onClick={onClick}
+      disabled={disabled}
       variants={buttonVariants}
       whileHover={!disabled ? "hover" : undefined}
       whileTap={!disabled ? "tap" : undefined}

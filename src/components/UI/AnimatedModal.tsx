@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import type { MouseEvent, ReactNode } from "react";
 
 const modalVariants: Variants = {
@@ -70,7 +70,9 @@ const AnimatedModal = ({
           <motion.div
             className={`${sizeClasses[size]} ${className} bg-dark-gray border border-primary/30 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar`}
             variants={modalVariants}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             {children}
           </motion.div>

@@ -1,5 +1,5 @@
-import React from "react";
 import { motion, type Variants } from "framer-motion";
+import React from "react";
 
 const cardVariants: Variants = {
   initial: { opacity: 0, y: 20 },
@@ -24,7 +24,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ className, children, id, hover = true }) => {
   const baseClasses = "bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 shadow-xl";
-  const classes = `${baseClasses} ${className || ""}`;
+  const classes = `${baseClasses} ${className ?? ""}`;
 
   return (
     <motion.div

@@ -39,6 +39,8 @@ const LoadingSpinner = ({ size = "md", color = "primary" }: LoadingSpinnerProps)
   return (
     <motion.div
       className="flex items-center justify-center space-x-2"
+      role="status"
+      aria-label="Loading"
       variants={containerVariants}
       animate="animate"
     >

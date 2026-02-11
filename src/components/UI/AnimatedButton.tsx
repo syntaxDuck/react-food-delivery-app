@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
 
@@ -43,8 +43,8 @@ interface AnimatedButtonProps {
   disabled?: boolean;
   label?: string;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-  variant: VariantClassTypes;
-  size: SizeClassTypes;
+  variant?: VariantClassTypes;
+  size?: SizeClassTypes;
   children?: ReactNode;
 }
 
@@ -84,7 +84,7 @@ const AnimatedButton = ({
         whileHover="hover"
         whileTap="tap"
       >
-        {children || buttonContent}
+        {children ?? buttonContent}
       </motion.a>
     );
   }
@@ -100,7 +100,7 @@ const AnimatedButton = ({
       whileTap={!disabled ? "tap" : undefined}
       animate={disabled ? "disabled" : undefined}
     >
-      {children || buttonContent}
+      {children ?? buttonContent}
     </motion.button>
   );
 };
