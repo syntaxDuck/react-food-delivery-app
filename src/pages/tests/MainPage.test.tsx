@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
+
 import Layout from "../../components/layout/Layout";
-import MainPage from "../MainPage";
-import CartCtxProvider from "../../components/cart/cart-context/CartCtxProvider";
+import HomePage from "../HomePage";
 
 // Create a div with id="modal" for createPortal
 beforeAll(() => {
@@ -22,16 +22,14 @@ afterAll(() => {
 beforeEach(() => {
   render(
     <BrowserRouter>
-      <CartCtxProvider>
-        <Layout isLoggedIn={false}>
-          <MainPage />
-        </Layout>
-      </CartCtxProvider>
+      <Layout isLoggedIn={false}>
+        <HomePage />
+      </Layout>
     </BrowserRouter>
   );
 });
 
-test("Verify: Main Page Default State", async () => {
+test("Verify: Home Page Default State", async () => {
   const user = userEvent.setup();
 
   //verify about us component is rendered

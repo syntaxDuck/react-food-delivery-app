@@ -1,12 +1,11 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+//Function imports
+import { useNavigate } from "react-router";
 
 //Component imports
 import LoginForm from "../components/layout/LoginForm";
-
-//Function imports
-import { useNavigate } from "react-router";
 import { API_KEY } from "../private/PRIVATE";
-import type { LoginPageProps, UserAction, AuthResponse } from "../types/auth";
+import type { AuthResponse,LoginPageProps, UserAction } from "../types/auth";
 
 const API_URLS: Record<UserAction, string> = {
   SignUp: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
@@ -21,11 +20,18 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const confPasswordRef = useRef<HTMLInputElement | null>(null);
 
-  document.body.style.overflow = "hidden";
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
-  const [error, setError] = useState<string | null>(null);
+  const [_error, setError] = useState<string | null>(null);
 
-  const userActionHandler = async (event: React.FormEvent): Promise<void> => {
+  const userActionHandler = async (
+    event: React.SyntheticEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
 
     if (userAction === "SignUp") {
@@ -34,13 +40,13 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
       }
     }
 
-    let response_data: AuthResponse | undefined;
-    const sendRequest = async (): Promise<void> => {
+    let responseData: AuthResponse | undefined;
+    const sendRequest = async (): Promise<AuthResponse | undefined> => {
       const apiURL = API_URLS[userAction];
 
       const requestBody = {
-        email: usernameRef.current?.value || "",
-        password: passwordRef.current?.value || "",
+        email: usernameRef.current?.value ?? "",
+        password: passwordRef.current?.value ?? "",
         returnSecureToken: true,
       };
 
@@ -55,30 +61,34 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
 
         if (!response.ok) {
           throw new Error(
-            `This is an HTTP error: The status is ${response.status}`
+            `This is an HTTP error: The status is ${String(response.status)}`
           );
         }
 
-        response_data = await response.json() as AuthResponse;
+        responseData = await response.json() as AuthResponse;
 
         setError(null);
+        return responseData;
       } catch (err: unknown) {
         const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
         setError(errorMessage);
+        return undefined;
       }
     };
 
-    await sendRequest();
-    if (error === null && response_data) {
-      onLoginChange(response_data.email.split("@")[0]);
-      navigate("/index");
+    const result = await sendRequest();
+    if (result) {
+      onLoginChange(result.email.split("@")[0]);
+      void navigate("/index");
     }
   };
 
   return (
     <Fragment>
       <LoginForm
-        onFormSubmit={userActionHandler}
+        onFormSubmit={(event) => {
+          void userActionHandler(event);
+        }}
         onChangeUserAction={setUserAction}
         userAction={userAction}
         usernameInputRef={usernameRef}

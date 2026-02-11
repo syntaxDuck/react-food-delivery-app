@@ -1,15 +1,13 @@
 import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 
-import Layout from "./components/layout/Layout"
-
-import { PROJECT_ID } from "./private/PRIVATE";
-
+import Layout from "./components/layout/Layout";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
+import { PROJECT_ID } from "./private/PRIVATE";
 
-export const FIREBASE_ENDPOINT = "https://" + [PROJECT_ID] + ".firebaseio.com/";
+export const FIREBASE_ENDPOINT = `https://${PROJECT_ID}.firebaseio.com/`;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
