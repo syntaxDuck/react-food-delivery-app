@@ -43,9 +43,10 @@ const handleUpdateCart = (state: CartState, items: CartItemType[]) => {
     const existingCartItem = updatedItems[existingCartItemIndex];
 
     if (existingCartItem) {
+      // Replace existing item with new amount, don't accumulate
       const updatedItem = {
         ...existingCartItem,
-        amount: existingCartItem.amount + newItem.amount,
+        amount: newItem.amount,
       };
       updatedItems[existingCartItemIndex] = updatedItem;
     } else {

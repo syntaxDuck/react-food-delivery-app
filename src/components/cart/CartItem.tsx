@@ -24,7 +24,6 @@ const CartItem: React.FC<CartItemProps> = ({
   onRemove,
   onUpdateAmount
 }) => {
-  console.log(item.amount)
   const formattedPrice = (item.price * item.amount).toFixed(2);
 
   const handleRemove = (): void => {
@@ -32,8 +31,9 @@ const CartItem: React.FC<CartItemProps> = ({
   };
 
   const handleUpdateAmount = (newAmount: number): void => {
-    item.amount = newAmount
-    onUpdateAmount(item);
+    // Create new object instead of mutating the prop
+    const updatedItem = { ...item, amount: newAmount };
+    onUpdateAmount(updatedItem);
   };
 
   return (
