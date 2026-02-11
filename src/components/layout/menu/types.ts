@@ -27,6 +27,6 @@ export interface MenuGridProps {
 
 export interface MenuActionsProps {
   itemCount: number;
-  onAddToCart: React.EventHandler<React.SyntheticEvent<HTMLFormElement>>;
+  onAddToCart: React.MouseEventHandler<HTMLButtonElement>;
   onClearCart: () => void;
 }

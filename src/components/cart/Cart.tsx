@@ -1,5 +1,4 @@
-import type { Variants } from "framer-motion";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import React from "react";
 
 import { FIREBASE_ENDPOINT } from "../../App";
