@@ -1,37 +1,56 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useCallback, useMemo } from "react";
+import { motion, type Variants } from "framer-motion";
 import MenuItemAmount from "./MenuItemAmount";
 
-const itemVariants = {
+// Move static objects outside component to prevent recreation
+const itemVariants: Variants = {
   initial: { opacity: 0, scale: 0.8, y: 20 },
-  animate: { 
-    opacity: 1, 
-    scale: 1, 
+  animate: {
+    opacity: 1,
+    scale: 1,
     y: 0,
-    transition: { 
-      type: "spring", 
-      stiffness: 300, 
-      damping: 20 
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20
     }
   },
-  hover: { 
+  hover: {
     scale: 1.03,
     boxShadow: "0 20px 25px -5px rgba(214, 110, 110, 0.3), 0 10px 10px -5px rgba(214, 110, 110, 0.2)",
     transition: { type: "spring", stiffness: 400, damping: 15 }
   }
 };
 
-const MenuItem = ({ id, name, price, description, amount, onAddToPreCart, delay = 0 }) => {
-  const formattedPrice = `$${price.toFixed(2)}`;
+interface MenuItemProps {
+  id: string,
+  name: string,
+  price: number,
+  description: string,
+  amount: number,
+  onAddToPreCart: CallableFunction,
+  delay: number
+}
 
-  const addToPreCartHandler = (itemQuantity) => {
+const MenuItem: React.FC<MenuItemProps> = React.memo(({ 
+  id, 
+  name, 
+  price, 
+  description, 
+  amount, 
+  onAddToPreCart, 
+  delay = 0 
+}) => {
+  const formattedPrice = useMemo(() => `$${price.toFixed(2)}`, [price]);
+
+  const addToPreCartHandler = useCallback((itemQuantity: number) => {
     onAddToPreCart({
       id: id,
       name: name,
       price: price,
       amount: itemQuantity,
     });
-  };
+  }, [id, name, price, onAddToPreCart]);
 
   return (
     <motion.div
@@ -62,14 +81,14 @@ const MenuItem = ({ id, name, price, description, amount, onAddToPreCart, delay 
             </div>
           </div>
         </div>
-        
-        <MenuItemAmount 
-          amount={amount} 
-          onAddToPreCart={addToPreCartHandler} 
+
+        <MenuItemAmount
+          amount={amount}
+          onAddToPreCart={addToPreCartHandler}
         />
       </div>
     </motion.div>
   );
-};
+});
 
-export default React.memo(MenuItem);
+export default MenuItem;
