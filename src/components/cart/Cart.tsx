@@ -28,13 +28,22 @@ const cartItemVariants: Variants = {
 const Cart: React.FC = () => {
   const crtCtx = useCart();
   const [error, setError] = React.useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
   const dbUrl = React.useRef<string>(`${FIREBASE_ENDPOINT}Orders.json`);
+
+  React.useEffect(() => {
+    if (!crtCtx.state.cartActive) {
+      setError(null);
+      setSuccessMessage(null);
+    }
+  }, [crtCtx.state.cartActive]);
 
   const submitOrderHandler = async (): Promise<void> => {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
+    setSuccessMessage(null);
     try {
       const response = await fetch(dbUrl.current, {
         method: "POST",
@@ -50,16 +59,12 @@ const Cart: React.FC = () => {
 
       setError(null);
       crtCtx.clearCart();
-      crtCtx.toggleCart();
-
-      // Show success feedback
-      setTimeout(() => {
-        alert('Order submitted successfully! 🎉');
-      }, 500);
+      setSuccessMessage("Order submitted successfully! We'll get your delivery on the way.");
 
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
       setError(errorMessage);
+      setSuccessMessage(null);
     } finally {
       setIsSubmitting(false);
     }
@@ -76,10 +81,6 @@ const Cart: React.FC = () => {
     crtCtx.clearCart();
     crtCtx.toggleCart();
   };
-
-  if (error) {
-    console.error("Cart Error:", error);
-  }
 
   let cartContent: React.ReactElement;
   if (crtCtx.state.items.length === 0) {
@@ -187,7 +188,22 @@ const Cart: React.FC = () => {
       size="lg"
       className="bg-dark-gray border-primary/30"
     >
-      {cartContent}
+      <div className="space-y-4">
+        {error && (
+          <div
+            className="rounded-lg border border-red-400/60 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+            role="alert"
+          >
+            {error}
+          </div>
+        )}
+        {successMessage && (
+          <div className="rounded-lg border border-green-300/60 bg-green-500/10 px-4 py-3 text-sm text-green-100">
+            {successMessage}
+          </div>
+        )}
+        {cartContent}
+      </div>
     </AnimatedModal>
   );
 };

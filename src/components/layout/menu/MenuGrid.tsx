@@ -14,7 +14,7 @@ const MenuGrid: React.FC<MenuGridProps> = ({
 
   return (
     <motion.div
-      className="grid grid-cols-1 gap-4 md:gap-6"
+      className="grid grid-cols-1 gap-4 md:gap-6 items-stretch"
       variants={menuVariants}
       initial="initial"
       animate="animate"

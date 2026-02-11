@@ -7,9 +7,9 @@ import { compoundClasses } from "../../../utils/compoundClasses";
 import { useCart } from "../../cart/cart-context/CartCtxProvider";
 //Component Imports
 import CartButton from "../../cart/CartButton";
+import AuthButtons from "./AuthButtons";
 import DesktopNavigation from "./DesktopNavigation";
 import MobileNavigation from "./mobile/MobileNavigation";
-import MobileNavigationButton from "./mobile/MobileNavigationButton";
 
 interface NavigationBarProps {
   loginStatus: boolean
@@ -52,11 +52,11 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
-              <div className="flex flex-col leading-tight">
-                <span className="text-2xl md:text-3xl font-bold text-primary group-hover:text-primary/80 transition-colors duration-300">
+              <div className="flex flex-col leading-none">
+                <span className="text-xl md:text-2xl font-bold text-primary group-hover:text-primary/80 transition-colors duration-300 whitespace-nowrap">
                   chrono delivery
                 </span>
-                <span className="text-[11px] md:text-xs uppercase tracking-[0.2em] text-white/60">
+                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/60 whitespace-nowrap">
                   time to taste
                 </span>
               </div>
@@ -86,16 +86,11 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
             />
           </div>
 
-          {/* Mobile Menu Button - Hidden on Desktop */}
-          <div className="flex md:hidden">
-            <MobileNavigationButton
-              mobileMenuOpen={mobileMenuOpen}
-              setMobileMenuOpen={setMobileMenuOpen}
-            />
-          </div>
-
           {/* Cart Button */}
           <CartButton onCartStateChange={toggleCart} />
+          <div className="hidden md:flex">
+            <AuthButtons loginStatus={loginStatus} />
+          </div>
         </div>
 
         {/* Mobile Navigation Menu - Slide-in from Right */}

@@ -17,7 +17,10 @@ describe("NavigationBar", () => {
 
     expect(screen.getAllByText("menu").length).toBeGreaterThan(0);
     expect(screen.getAllByText("location").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("About Us").length).toBeGreaterThan(0);
+    const aboutUsLabels = screen.getAllByText("About Us");
+    expect(aboutUsLabels.length).toBeGreaterThan(0);
+    expect(aboutUsLabels[0]).toHaveClass("whitespace-nowrap");
+    expect(screen.getByRole("button", { name: /login/i })).toBeInTheDocument();
 
     const logo = screen.getByText("chrono delivery");
     expect(logo.closest("a")).toHaveAttribute("href", "/index");
@@ -37,9 +40,9 @@ describe("NavigationBar", () => {
     // Initially mobile menu should be closed
     expect(screen.queryByText("Menu")).not.toBeInTheDocument();
 
-    // Click mobile menu button to open
-    const mobileMenuButtons = screen.getAllByRole("button", { name: /menu/i });
-    await user.click(mobileMenuButtons[0]);
+    // Click slide handle to open
+    const openButton = screen.getByRole("button", { name: /open menu/i });
+    await user.click(openButton);
     
     // Mobile menu should now be open
     expect(screen.getByText("Menu")).toBeInTheDocument();
@@ -48,8 +51,8 @@ describe("NavigationBar", () => {
     expect(screen.getAllByText("About Us").length).toBeGreaterThan(0);
     
     // Click close button to close menu
-    const closeButtons = screen.getAllByRole("button", { name: /close/i });
-    await user.click(closeButtons[0]);
+    const closeButton = screen.getByRole("button", { name: /close menu/i });
+    await user.click(closeButton);
     
     // Mobile menu should be closed again
     await waitFor(() => {

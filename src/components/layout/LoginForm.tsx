@@ -130,6 +130,17 @@ const LoginForm = (props: LoginFormProps) => {
           {props.userAction === "SignIn" ? "Welcome Back" : "Create Account"}
         </motion.h1>
 
+        {props.errorMessage && (
+          <motion.div
+            className="mb-6 rounded-lg border border-red-400/60 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            role="alert"
+          >
+            {props.errorMessage}
+          </motion.div>
+        )}
+
         <form onSubmit={formSubmitHandler} className="space-y-6">
           <div>
             <label htmlFor="username" className="block text-white font-medium mb-2">
@@ -143,6 +154,9 @@ const LoginForm = (props: LoginFormProps) => {
               placeholder="your@email.com"
               variants={inputVariants}
               whileFocus="focus"
+              autoComplete="email"
+              required
+              aria-invalid={!usernameValid}
             />
             {!usernameValid && (
               <motion.p
@@ -168,6 +182,9 @@ const LoginForm = (props: LoginFormProps) => {
               placeholder="Enter your password"
               variants={inputVariants}
               whileFocus="focus"
+              autoComplete={props.userAction === "SignIn" ? "current-password" : "new-password"}
+              required
+              aria-invalid={!passwordValid}
             />
             {!passwordValid && (
               <motion.p
@@ -183,11 +200,18 @@ const LoginForm = (props: LoginFormProps) => {
 
           {props.userAction === "SignUp" && (
             <div className="mb-6">
+              <label htmlFor="confirm-password" className="block text-white font-medium mb-2">
+                Confirm Password
+              </label>
               <input
+                id="confirm-password"
                 className={getInputClasses(confPasswordValid)}
                 type="password"
                 placeholder="Confirm password"
                 ref={props.confpasswordInputRef}
+                autoComplete="new-password"
+                required
+                aria-invalid={!confPasswordValid}
               />
             </div>
           )}

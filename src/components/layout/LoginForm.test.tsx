@@ -6,7 +6,13 @@ import { vi } from "vitest";
 import type { UserAction } from "../../types/auth";
 import LoginForm from "./LoginForm";
 
-const LoginFormHarness = ({ onSubmit }: { onSubmit: () => void }) => {
+const LoginFormHarness = ({
+  onSubmit,
+  errorMessage
+}: {
+  onSubmit: () => void;
+  errorMessage?: string | null;
+}) => {
   const [action, setAction] = useState<UserAction>("SignIn");
   const usernameRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -23,6 +29,7 @@ const LoginFormHarness = ({ onSubmit }: { onSubmit: () => void }) => {
       usernameInputRef={usernameRef}
       passwordInputRef={passwordRef}
       confpasswordInputRef={confirmRef}
+      errorMessage={errorMessage}
     />
   );
 };
@@ -48,5 +55,10 @@ describe("LoginForm", () => {
 
     await user.click(screen.getByRole("button", { name: /sign up/i }));
     expect(screen.getByRole("button", { name: /sign in/i })).toBeInTheDocument();
+  });
+
+  test("renders error message when provided", () => {
+    render(<LoginFormHarness onSubmit={() => undefined} errorMessage="Invalid credentials" />);
+    expect(screen.getByText(/invalid credentials/i)).toBeInTheDocument();
   });
 });

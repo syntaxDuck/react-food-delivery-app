@@ -27,7 +27,7 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
     };
   }, []);
 
-  const [_error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const userActionHandler = async (
     event: React.SyntheticEvent<HTMLFormElement>
@@ -94,6 +94,7 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
         usernameInputRef={usernameRef}
         passwordInputRef={passwordRef}
         confpasswordInputRef={confPasswordRef}
+        errorMessage={error}
       />
     </Fragment>
   );

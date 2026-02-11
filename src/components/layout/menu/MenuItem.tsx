@@ -56,23 +56,23 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
   return (
     <motion.div
       id={id}
-      className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden group"
+      className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden group h-full"
       variants={itemVariants}
       initial="initial"
       animate="animate"
       whileHover="hover"
       transition={{ delay }}
     >
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-4">
+      <div className="p-6 flex flex-col h-full">
+        <div className="flex justify-between items-start mb-4 flex-1">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors truncate">
               {name}
             </h3>
             <div className="text-2xl font-bold text-primary mb-3">
               {formattedPrice}
             </div>
-            <p className="text-white/70 leading-relaxed line-clamp-2">
+            <p className="text-white/70 leading-relaxed truncate">
               {description}
             </p>
           </div>

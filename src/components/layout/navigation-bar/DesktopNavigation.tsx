@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router";
 
 import { compoundClasses } from "../../../utils/compoundClasses";
-import AuthButtons from "./AuthButtons";
 import { navigationItems } from "./NavigationItems";
 
 interface DesktopNavigationProps {
@@ -39,11 +38,10 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ loginStatus, acti
             }}
           >
             <span className="material-icons md-18 mr-3">{menuElement.icon}</span>
-            <span className="font-medium">{menuElement.text}</span>
+            <span className="font-medium whitespace-nowrap">{menuElement.text}</span>
           </Link>
         </motion.div>
       ))}
-      <AuthButtons loginStatus={loginStatus} className="hidden md:flex" />
     </nav>
   );
 };

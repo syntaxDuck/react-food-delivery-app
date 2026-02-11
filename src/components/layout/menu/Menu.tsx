@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 
 import Section from "../Section";
+import { compoundClasses } from "../../../utils/compoundClasses";
 import { useMenuData } from "./hooks/useMenuData";
 import { usePreCart } from "./hooks/usePreCart";
 import MenuDisplay from "./MenuDisplay";
@@ -24,7 +25,7 @@ const Menu = () => {
       container={true}
     >
       <motion.div
-        className="content-hero"
+        className={compoundClasses.content.hero}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.6 }}

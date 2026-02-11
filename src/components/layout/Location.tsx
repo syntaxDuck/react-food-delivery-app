@@ -9,11 +9,11 @@ import Section from "./Section";
 const Location = () => {
 
   const futureCities = [
-    { city: "Detroit", season: "Spring", year: "2023", delay: 0.1 },
-    { city: "Los Angeles", season: "Summer", year: "2023", delay: 0.2 },
-    { city: "Boston", season: "Winter", year: "2023", delay: 0.3 },
-    { city: "Chicago", season: "Spring", year: "2024", delay: 0.4 },
-    { city: "Las Vegas", season: "Summer", year: "2024", delay: 0.5 }
+    { city: "Detroit", season: "Spring", year: "2026", delay: 0.1 },
+    { city: "Los Angeles", season: "Summer", year: "2026", delay: 0.2 },
+    { city: "Boston", season: "Winter", year: "2026", delay: 0.3 },
+    { city: "Chicago", season: "Spring", year: "2027", delay: 0.4 },
+    { city: "Las Vegas", season: "Summer", year: "2027", delay: 0.5 }
   ];
 
   // More subtle city variants

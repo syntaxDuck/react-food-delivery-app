@@ -97,6 +97,7 @@ export interface LoginFormProps {
   usernameInputRef: React.RefObject<HTMLInputElement | null>;
   passwordInputRef: React.RefObject<HTMLInputElement | null>;
   confpasswordInputRef?: React.RefObject<HTMLInputElement | null>;
+  errorMessage?: string | null;
 }
 
 // Input validation functions
