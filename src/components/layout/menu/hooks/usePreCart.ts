@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
-import { useCart } from "../../../cart/cart_context/CartCtxProvider";
+import { useCart } from "../../../cart/cart-context/CartCtxProvider";
 import type { CartItemType } from "../../../cart/CartTypes";
 
 export const usePreCart = () => {

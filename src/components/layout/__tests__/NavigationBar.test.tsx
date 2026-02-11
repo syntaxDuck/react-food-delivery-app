@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
-import NavigationBar from "../navigation_bar/NavigationBar.tsx";
-import CartCtxProvider from "../../cart/cart_context/CartCtxProvider";
+import NavigationBar from "../navigation-bar/NavigationBar.tsx";
+import CartCtxProvider from "../../cart/cart-context/CartCtxProvider";
 
 describe("NavigationBar", () => {
   test("Renders navigation items and logo link", () => {

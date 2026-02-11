@@ -13,7 +13,7 @@ interface DesktopNavigationProps {
 
 const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ loginStatus, activeSection, setActiveSection }) => {
   return (
-    <nav className={compoundClasses.navigation.header}>
+    <nav className={compoundClasses.navigation.desktop}>
       {navigationItems.map((menuElement, index) => (
         <motion.div
           key={menuElement.id}

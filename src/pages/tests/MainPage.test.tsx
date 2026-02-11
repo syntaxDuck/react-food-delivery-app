@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import MainPage from "../MainPage";
-import CartCtxProvider from "../../components/cart/cart_context/CartCtxProvider";
+import CartCtxProvider from "../../components/cart/cart-context/CartCtxProvider";
 
 // Create a div with id="modal" for createPortal
 beforeAll(() => {

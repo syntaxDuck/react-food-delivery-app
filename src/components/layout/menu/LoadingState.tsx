@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingSpinner from "../../UI/LoadingSpinner";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 
 const LoadingState: React.FC = () => {
   return (

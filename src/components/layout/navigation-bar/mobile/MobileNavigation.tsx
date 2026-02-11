@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router";
 import { compoundClasses } from "../../../../utils/compoundClasses";
 import { navigationItems } from "../NavigationItems";
-import AnimatedButton from "../../../UI/AnimatedButton";
+import AnimatedButton from "../../../ui/AnimatedButton";
 import AuthButtons from "../AuthButtons";
 
 interface MobileNavigationProps {

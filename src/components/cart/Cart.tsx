@@ -2,10 +2,10 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 //Component Imports
-import AnimatedModal from "../UI/AnimatedModal";
-import AnimatedButton from "../UI/AnimatedButton";
+import AnimatedModal from "../ui/AnimatedModal";
+import AnimatedButton from "../ui/AnimatedButton";
 import CartItem from "./CartItem";
-import { useCart } from "./cart_context/CartCtxProvider";
+import { useCart } from "./cart-context/CartCtxProvider";
 
 import { FIREBASE_ENDPOINT } from "../../App";
 import type { Variants } from "framer-motion";

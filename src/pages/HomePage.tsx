@@ -7,10 +7,10 @@ import AboutUs from "../components/layout/About";
 import Location from "../components/layout/Location";
 
 //Functional Imports
-import { useCart } from "../components/cart/cart_context/CartCtxProvider";
+import { useCart } from "../components/cart/cart-context/CartCtxProvider";
 
 //Styles
-import MotionContainer from "../components/UI/MotionContainer";
+import MotionContainer from "../components/ui/MotionContainer";
 
 const HomePage = () => {
   const cartActive = useCart().state.cartActive;

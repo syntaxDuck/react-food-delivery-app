@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import AnimatedButton from "../../UI/AnimatedButton";
+import AnimatedButton from "../../ui/AnimatedButton";
 import type { MenuActionsProps } from "./types";
 
 const MenuActions: React.FC<MenuActionsProps> = ({ 

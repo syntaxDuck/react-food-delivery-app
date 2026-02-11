@@ -12,7 +12,7 @@ const navVariants = {
 };
 
 // Component imports
-import AnimatedButton from "../../UI/AnimatedButton";
+import AnimatedButton from "../../ui/AnimatedButton";
 
 interface AuthButtonsProps {
   loginStatus: boolean;

@@ -10,7 +10,7 @@ import MobileNavigationButton from "./mobile/MobileNavigationButton";
 import MobileNavigation from "./mobile/MobileNavigation";
 
 //Functional Imports
-import { useCart } from "../../cart/cart_context/CartCtxProvider";
+import { useCart } from "../../cart/cart-context/CartCtxProvider";
 
 interface NavigationBarProps {
   loginStatus: boolean
@@ -23,7 +23,7 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
 
   const navVariants: Variants = {
     initial: { y: -100, opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: {} },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.35, ease: "easeOut" } },
     hover: { scale: 1.01 }  // Very subtle
   };
 
@@ -35,8 +35,16 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
       animate="animate"
       whileHover="hover"
     >
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
+      />
       <div className={compoundClasses.navigation.container}>
-        <div className="flex flex-row items-center justify-evenly">
+        <div className="flex flex-row items-center justify-between gap-4">
           {/* Enhanced Logo - Clickable to navigate home */}
           <Link to="/index">
             <motion.div
@@ -45,9 +53,14 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
+              <div className="flex flex-col leading-tight">
                 <span className="text-2xl md:text-3xl font-bold text-primary group-hover:text-primary/80 transition-colors duration-300">
-                chrono delivery
-              </span>
+                  chrono delivery
+                </span>
+                <span className="text-[11px] md:text-xs uppercase tracking-[0.2em] text-white/60">
+                  time to taste
+                </span>
+              </div>
               <motion.span
                 className="material-icons md-36 md:md-40 text-primary"
                 animate={{

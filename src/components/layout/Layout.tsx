@@ -1,7 +1,7 @@
 import React from "react";
 
-import NavigationBar from "./navigation_bar/NavigationBar";
-import CartCtxProvider from "../cart/cart_context/CartCtxProvider";
+import NavigationBar from "./navigation-bar/NavigationBar";
+import CartCtxProvider from "../cart/cart-context/CartCtxProvider";
 import image from "../../assets/sushi.jpg";
 
 interface LayoutProps {

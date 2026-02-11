@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { useCart } from "./cart_context/CartCtxProvider";
+import { useCart } from "./cart-context/CartCtxProvider";
 
 const buttonVariants: Variants = {
   initial: { scale: 0 },
