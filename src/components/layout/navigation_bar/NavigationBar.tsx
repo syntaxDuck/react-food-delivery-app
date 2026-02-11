@@ -65,13 +65,15 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ loginStatus }) => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
-              <span className="text-2xl md:text-3xl font-bold text-primary group-hover:text-primary/80 transition-colors duration-300">
+                <span className="text-2xl md:text-3xl font-bold text-primary group-hover:text-primary/80 transition-colors duration-300">
                 chrono delivery
               </span>
               <motion.span
                 className="material-icons md-36 md:md-40 text-primary"
-                initial={{ rotate: -2 }}
-                animate={{ rotate: [0, 8, -2, 0] }}
+                animate={{
+                  rotate: [0, 8, -2, 0],
+                  scale: [1, 1.05, 1.02, 1]
+                }}
                 transition={{ 
                   duration: 4, 
                   ease: "easeInOut",

@@ -25,9 +25,9 @@ export const compoundClasses = {
     logo: 'flex items-center space-x-3 group cursor-pointer',
     desktop: 'flex flex-col items-center space-x-3',
     mobile: 'md:hidden',
-    item: 'px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200',
-    // Enhanced mobile classes with fixed positioning
-    mobileMenu: 'fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-dark-gray/95 to-dark-gray/90 backdrop-blur-glass border-l border-white/20 shadow-glass-lg z-mobile-menu md:hidden',
+    item: 'px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center',
+    // Enhanced mobile classes with fixed positioning and glass effects
+    mobileMenu: 'fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-dark-gray to-dark-gray backdrop-blur-glass border-l border-white shadow-glass-lg z-mobile-menu md:hidden',
     mobileBackdrop: 'fixed inset-0 bg-black/50 backdrop-blur-sm z-mobile-backdrop md:hidden',
     // Enhanced z-index utilities
     zIndex: {
@@ -45,6 +45,16 @@ export const compoundClasses = {
     grid: {
       responsive: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
       spaced: 'gap-6 sm:gap-8 lg:gap-10',
+    },
+    // Enhanced chrono brand sections
+    chrono: {
+      hero: 'text-center mb-16 sm:mb-20',
+      section: 'mb-12 sm:mb-16',
+      card: 'p-6 sm:p-8 space-y-4',
+      grid: {
+        responsive: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+        spaced: 'gap-6 sm:gap-8 lg:gap-10',
+      },
     }
   },
 
