@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { compoundClasses } from "../../../utils/compoundClasses";
 
 //Component Imports
@@ -29,7 +28,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ loginStatus }) => {
     { id: "about-us", text: "About Us", icon: "info" },
   ];
 
-  // Subtle navigation variants
   const navVariants: Variants = {
     initial: { y: -100, opacity: 0 },
     animate: { y: 0, opacity: 1, transition: {} },
@@ -42,7 +40,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ loginStatus }) => {
     exit: { x: "100%", opacity: 0 }
   };
 
-  const navItemVariants = {
+  const navItemVariants: Variants = {
     initial: { opacity: 0, x: -10 },
     animate: { opacity: 1, x: 0 },
     hover: { scale: 1.02, x: 2 },  // Very subtle

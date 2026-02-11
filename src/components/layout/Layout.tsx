@@ -1,9 +1,15 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import NavigationBar from "./navigation_bar/NavigationBar";
+import CartCtxProvider from "../cart/cart_context/CartCtxProvider";
 import image from "../../assets/sushi.jpg";
 
-const Layout = (props: any) => {
+interface LayoutProps {
+  isLoggedIn: boolean,
+  children: React.ReactNode
+}
+
+const Layout: React.FC<LayoutProps> = ({ isLoggedIn, children }) => {
   const backgroundStyle: React.CSSProperties = {
     backgroundImage: `url(${image})`,
     backgroundSize: 'cover',
@@ -26,15 +32,15 @@ const Layout = (props: any) => {
   };
 
   return (
-    <Fragment>
-      <NavigationBar loginStatus={props.loginStatus} />
+    <CartCtxProvider>
+      <NavigationBar loginStatus={isLoggedIn} />
       <div style={backgroundStyle}>
         <div style={overlayStyle} />
-        <main>
-          {props.children}
-        </main>
       </div>
-    </Fragment>
+      <main>
+        {children}
+      </main>
+    </CartCtxProvider>
   );
 };
 

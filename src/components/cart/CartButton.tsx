@@ -1,22 +1,23 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useCart } from "./cart_context/CartCtxProvider";
 
-const buttonVariants = {
+const buttonVariants: Variants = {
   initial: { scale: 0 },
   animate: { scale: 1 },
   hover: {
-    scale: 1.05,  // Reduced from 1.1
-    rotate: [0, -3, 3, 0],  // Reduced rotation
+    scale: 1.05,
+    rotate: [0, -3, 3, 0],
     transition: {
-      scale: { type: "spring", stiffness: 300, damping: 15 },  // Softer
-      rotate: { duration: 0.4, repeat: 1 }  // Shorter
+      scale: { type: "spring", stiffness: 300, damping: 15 },
+      rotate: { duration: 0.4, repeat: 1 }
     }
   },
-  tap: { scale: 0.95 }  // Reduced from 0.9
+  tap: { scale: 0.95 }
 };
 
-const badgeVariants = {
+const badgeVariants: Variants = {
   initial: { scale: 0, opacity: 0 },
   animate: { scale: 1, opacity: 1 },
   pop: {
@@ -26,11 +27,18 @@ const badgeVariants = {
   }
 };
 
-const CartButton = ({ onCartStateChange }) => {
-  const { items } = useCart();
+interface CartButtonProps {
+  onCartStateChange: CallableFunction
+}
+
+const CartButton: React.FC<CartButtonProps> = ({ onCartStateChange }) => {
+  const { items } = useCart().state;
   const [isBouncing, setIsBouncing] = React.useState(false);
 
-  const itemTotal = items.reduce((total, item) => total + item.amount, 0);
+  let itemTotal = 0
+  if (items.length > 0) {
+    itemTotal = items.reduce((total, item) => total + item.amount, 0);
+  }
 
   React.useEffect(() => {
     if (itemTotal > 0 && !isBouncing) {
@@ -45,7 +53,7 @@ const CartButton = ({ onCartStateChange }) => {
 
   return (
     <motion.button
-      className="relative p-3 bg-primary rounded-full shadow-lg hover:shadow-primary/30 transition-all duration-300 group"
+      className="relative p-3 bg-primary rounded-full shadow-lg hover:shadow-primary/30 group"
       onClick={handleClick}
       variants={buttonVariants}
       initial="initial"

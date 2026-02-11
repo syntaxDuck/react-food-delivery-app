@@ -1,8 +1,7 @@
-import React, { Fragment } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 //Component Imports
-import Cart from "../components/cart/Cart";
+import Cart from "../components/cart/Cart.tsx";
 import Menu from "../components/layout/menu/Menu";
 import AboutUs from "../components/layout/About";
 import Location from "../components/layout/Location";
@@ -14,13 +13,11 @@ import { useCart } from "../components/cart/cart_context/CartCtxProvider";
 import MotionContainer from "../components/ui/MotionContainer";
 
 const HomePage = () => {
-  const cartActive = useCart().cartActive;
-
-
+  const cartActive = useCart().state.cartActive;
 
   return (
     <MotionContainer>
-      <Fragment>
+      <>
         <AnimatePresence>
           {cartActive && <Cart />}
         </AnimatePresence>
@@ -40,7 +37,7 @@ const HomePage = () => {
           <Menu />
           <Location />
         </motion.div>
-      </Fragment>
+      </>
     </MotionContainer>
   );
 };

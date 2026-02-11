@@ -1,26 +1,28 @@
 import React from "react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 //Component imports
 import AnimatedCard from "../ui/AnimatedCard";
 import AnimatedButton from "../ui/AnimatedButton";
 
 //Styles imports
+import type { LoginFormProps, ValidationResult } from "../../types/auth";
 
-const formVariants = {
+const formVariants: Variants = {
   initial: { opacity: 0, y: 20 },
   animate: {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 100,
       damping: 15
     }
   }
 };
 
-const inputVariants = {
+const inputVariants: Variants = {
   focus: {
     scale: 1.02,
     borderColor: "#d66e6e",
@@ -28,7 +30,7 @@ const inputVariants = {
   }
 };
 
-const LoginForm = (props) => {
+const LoginForm = (props: LoginFormProps) => {
   const [usernameValid, setUsernameValid] = React.useState(true);
   const [passwordValid, setPasswordValid] = React.useState(true);
   const [confPasswordValid, setConfPasswordValid] = React.useState(true);
@@ -37,31 +39,30 @@ const LoginForm = (props) => {
     if (props.usernameInputRef.current?.value === "") setUsernameValid(true);
     if (props.passwordInputRef.current?.value === "") setPasswordValid(true);
     try {
-      if (props.confPasswordInputRef.current?.value === "")
+      if (props.confpasswordInputRef?.current?.value === "")
         setConfPasswordValid(true);
     } catch { }
   }, [
     props.userAction,
     props.usernameInputRef,
     props.passwordInputRef,
-    props.confPasswordInputRef,
+    props.confpasswordInputRef,
   ]);
 
-  const checkUsername = (username) => {
+  const checkUsername = (username: string): ValidationResult => {
     const acceptableDomains = [".com", ".org", ".net"];
     const properDomain = acceptableDomains.some((domain) => {
       return username.endsWith(domain);
     });
     if (properDomain && username.includes("@")) {
-      console.log("Username verified");
       setUsernameValid(true);
-      return true;
+      return { isValid: true, errors: [] };
     }
     setUsernameValid(false);
-    return false;
+    return { isValid: false, errors: ["Invalid email format"] };
   };
 
-  const checkPassword = (password) => {
+  const checkPassword = (password: string): ValidationResult => {
     const specialCharacters = [
       "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=",
     ];
@@ -70,40 +71,45 @@ const LoginForm = (props) => {
     });
     if (password.length > 6 && includesSpecialCharacter) {
       setPasswordValid(true);
-      return true;
+      return { isValid: true, errors: [] };
     }
     setPasswordValid(false);
-    return false;
+    return { isValid: false, errors: ["Password must be >6 chars with special character"] };
   };
 
-  const checkConfirmPassword = (password, confirmPassword) => {
+  const checkConfirmPassword = (password: string, confirmPassword: string): ValidationResult => {
     if (props.userAction === "SignUp") {
-      return password === confirmPassword;
+      if (password === confirmPassword) {
+        setConfPasswordValid(true);
+        return { isValid: true, errors: [] };
+      }
+      setConfPasswordValid(false);
+      return { isValid: false, errors: ["Passwords do not match"] };
     }
-    return true;
+    return { isValid: true, errors: [] };
   };
 
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = (event: React.FormEvent): void => {
     event.preventDefault();
 
-    const username = props.usernameInputRef.current.value;
-    const password = props.passwordInputRef.current;
+    const username = props.usernameInputRef.current?.value || "";
+    const password = props.passwordInputRef.current?.value || "";
     let confirmPassword = "";
 
     try {
-      confirmPassword = props.confPasswordInputRef.current.value;
+      confirmPassword = props.confpasswordInputRef?.current?.value || "";
     } catch { }
 
     const usernameChecked = checkUsername(username);
     const passwordChecked = checkPassword(password);
     const passwordsMatch = checkConfirmPassword(password, confirmPassword);
 
-    if (usernameChecked && passwordChecked && passwordsMatch) {
-      props.onFormSubmit();
+    if (usernameChecked.isValid && passwordChecked.isValid && passwordsMatch.isValid) {
+      props.onFormSubmit(event);
     }
   };
 
-  const getInputClasses = (isValid) => `
+  const getInputClasses = (isValid: boolean): string => `
     w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-white/50
     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-gray
     transition-all duration-200
@@ -182,34 +188,14 @@ const LoginForm = (props) => {
           </div>
 
           {props.userAction === "SignUp" && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <label htmlFor="confPassword" className="block text-white font-medium mb-2">
-                Confirm Password
-              </label>
-              <motion.input
-                id="confPassword"
+            <div className="mb-6">
+              <input
                 className={getInputClasses(confPasswordValid)}
                 type="password"
-                ref={props.confPasswordInputRef}
-                placeholder="Confirm your password"
-                variants={inputVariants}
-                whileFocus="focus"
+                placeholder="Confirm password"
+                ref={props.confpasswordInputRef}
               />
-              {!confPasswordValid && (
-                <motion.p
-                  className="text-red-400 text-sm mt-2"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  Passwords do not match
-                </motion.p>
-              )}
-            </motion.div>
+            </div>
           )}
 
           <motion.div

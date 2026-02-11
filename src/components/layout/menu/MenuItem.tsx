@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { motion, type Variants } from "framer-motion";
 import MenuItemAmount from "./MenuItemAmount";
 
@@ -32,25 +32,25 @@ interface MenuItemProps {
   delay: number
 }
 
-const MenuItem: React.FC<MenuItemProps> = React.memo(({ 
-  id, 
-  name, 
-  price, 
-  description, 
-  amount, 
-  onAddToPreCart, 
-  delay = 0 
+const MenuItem: React.FC<MenuItemProps> = React.memo(({
+  id,
+  name,
+  price,
+  description,
+  amount,
+  onAddToPreCart,
+  delay = 0
 }) => {
   const formattedPrice = useMemo(() => `$${price.toFixed(2)}`, [price]);
 
-  const addToPreCartHandler = useCallback((itemQuantity: number) => {
+  const addToPreCartHandler = (itemQuantity: number) => {
     onAddToPreCart({
       id: id,
       name: name,
       price: price,
       amount: itemQuantity,
     });
-  }, [id, name, price, onAddToPreCart]);
+  };
 
   return (
     <motion.div

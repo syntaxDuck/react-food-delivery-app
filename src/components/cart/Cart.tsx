@@ -8,8 +8,8 @@ import CartItem from "./CartItem";
 import { useCart } from "./cart_context/CartCtxProvider";
 
 import { FIREBASE_ENDPOINT } from "../../App";
-import type { CartProps } from "../../types/cart";
 import type { Variants } from "framer-motion";
+import type { CartItemType } from "./CartTypes";
 
 const cartItemVariants: Variants = {
   initial: { opacity: 0, x: 50, scale: 0.8 },
@@ -27,7 +27,7 @@ const cartItemVariants: Variants = {
   }
 };
 
-const Cart: React.FC<CartProps> = ({ className }) => {
+const Cart: React.FC = () => {
   const crtCtx = useCart();
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
@@ -66,6 +66,13 @@ const Cart: React.FC<CartProps> = ({ className }) => {
       setIsSubmitting(false);
     }
   };
+
+  const handleUpdateAmount = (updatedItem: CartItemType) => {
+    const updatedCartItems: CartItemType[] = [...crtCtx.state.items];
+    const itemIndex = updatedCartItems.findIndex((item) => item.id == updatedItem.id)
+    updatedCartItems[itemIndex] = updatedItem;
+    crtCtx.updateCart(updatedCartItems)
+  }
 
   const clearCartHandler = () => {
     crtCtx.clearCart();
@@ -122,6 +129,8 @@ const Cart: React.FC<CartProps> = ({ className }) => {
               size="sm"
               onClick={submitOrderHandler}
               disabled={isSubmitting}
+              href={""}
+              label={""}
             >
               {isSubmitting ? (
                 <span className="flex items-center">
@@ -157,11 +166,9 @@ const Cart: React.FC<CartProps> = ({ className }) => {
                 className="mb-4 last:mb-0"
               >
                 <CartItem
-                  id={item.id}
-                  name={item.name}
-                  price={item.price}
-                  itemAmountInCart={item.amount}
-                  onUpdateCartItem={crtCtx.updateCart}
+                  item={item}
+                  onUpdateAmount={handleUpdateAmount}
+                  onRemove={crtCtx.toggleCart}
                 />
               </motion.div>
             ))}

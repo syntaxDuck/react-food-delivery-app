@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React from "react";
 import { motion, type Variants } from "framer-motion";
 
 // Move static objects outside component to prevent recreation
@@ -15,12 +15,12 @@ const stepButton = `w-10 h-10 bg-white/20 text-dark-gray rounded-full flex items
 const counter = `w-16 h-12 bg-white/20 rounded-lg flex items-center justify-center font-bold 
   text-white text-lg border border-white/30 min-w-[4rem]`;
 
-const cartButton = (amount: number) => `
-  px-4 py-2 rounded-full font-medium cursor-pointer
-  ${amount > 0
-    ? 'bg-white/20 text-white hover:bg-primary/90 shadow-lg'
-    : 'bg-white/10 text-white/50 border border-white/20'
-  }`;
+// const cartButton = (amount: number) => `
+//   px-4 py-2 rounded-full font-medium cursor-pointer
+//   ${amount > 0
+//     ? 'bg-white/20 text-white hover:bg-primary/90 shadow-lg'
+//     : 'bg-white/10 text-white/50 border border-white/20'
+//   }`;
 
 interface MenuItemAmountProps {
   amount: number,
@@ -28,25 +28,23 @@ interface MenuItemAmountProps {
 }
 
 const MenuItemAmount: React.FC<MenuItemAmountProps> = React.memo(({ amount, onAddToPreCart }) => {
-  const incrementCountHandler = useCallback(() => {
+  const incrementCountHandler = () => {
     if (amount >= 99) return;
     onAddToPreCart(amount + 1);
-  }, [amount, onAddToPreCart]);
+  };
 
-  const decrementCountHandler = useCallback(() => {
+  const decrementCountHandler = () => {
     if (amount <= 0) return;
     onAddToPreCart(amount - 1);
-  }, [amount, onAddToPreCart]);
+  };
 
-  const handleAddToCart = useCallback(() => {
-    if (amount > 0) {
-      onAddToPreCart(amount);
-    }
-  }, [amount, onAddToPreCart]);
-
-  // Memoize dynamic styles
-  const currentCartButton = useMemo(() => cartButton(amount), [amount]);
-
+  // const handleAddToCart = () => {
+  //   if (amount > 0) {
+  //     onAddToPreCart(amount);
+  //   }
+  // };
+  //
+  // const currentCartButton = cartButton(amount)
 
   return (
     <div className="flex items-center justify-between space-x-3">
@@ -88,22 +86,22 @@ const MenuItemAmount: React.FC<MenuItemAmountProps> = React.memo(({ amount, onAd
         </motion.button>
       </div>
 
-        <motion.button
-          className={currentCartButton}
-          type="button"
-          onClick={handleAddToCart}
-          disabled={amount <= 0}
-          aria-label="Add to cart"
-          variants={buttonVariants}
-          whileHover={amount > 0 ? "hover" : undefined}
-          whileTap={amount > 0 ? "tap" : undefined}
-          animate={amount <= 0 ? "disabled" : undefined}
-        >
-        <span className="material-icons md-18 mr-2">shopping_cart</span>
-        Add
-      </motion.button>
+      {/* <motion.button */}
+      {/*   className={currentCartButton} */}
+      {/*   type="button" */}
+      {/*   onClick={handleAddToCart} */}
+      {/*   disabled={amount <= 0} */}
+      {/*   aria-label="Add to cart" */}
+      {/*   variants={buttonVariants} */}
+      {/*   whileHover={amount > 0 ? "hover" : undefined} */}
+      {/*   whileTap={amount > 0 ? "tap" : undefined} */}
+      {/*   animate={amount <= 0 ? "disabled" : undefined} */}
+      {/* > */}
+      {/*   <span className="material-icons md-18 mr-2">shopping_cart</span> */}
+      {/*   Add */}
+      {/* </motion.button> */}
     </div>
   );
-};
+});
 
-export default React.memo(MenuItemAmount);
+export default MenuItemAmount;

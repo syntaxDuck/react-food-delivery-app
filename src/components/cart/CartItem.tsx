@@ -1,31 +1,39 @@
 import React from "react";
 import { motion } from "framer-motion";
 import CartItemAmount from "./CartItemAmount";
-import type { CartItemProps } from "../../types/cart";
+import type { CartItemType } from "./CartTypes";
 import type { Variants } from "framer-motion";
 
 const itemVariants: Variants = {
   initial: { opacity: 0, y: 20 },
-  animate: { 
-    opacity: 1, 
+  animate: {
+    opacity: 1,
     y: 0,
     transition: { type: "spring" as const, stiffness: 300, damping: 20 }
   }
 };
 
-const CartItem: React.FC<CartItemProps> = ({ 
-  item, 
-  onRemove, 
-  onUpdateAmount 
+interface CartItemProps {
+  item: CartItemType;
+  onRemove: (itemId: string) => void;
+  onUpdateAmount: (item: CartItemType) => void;
+}
+
+const CartItem: React.FC<CartItemProps> = ({
+  item,
+  onRemove,
+  onUpdateAmount
 }) => {
+  console.log(item.amount)
   const formattedPrice = (item.price * item.amount).toFixed(2);
-  
+
   const handleRemove = (): void => {
     onRemove(item.id);
   };
 
   const handleUpdateAmount = (newAmount: number): void => {
-    onUpdateAmount(item.id, newAmount);
+    item.amount = newAmount
+    onUpdateAmount(item);
   };
 
   return (
@@ -54,9 +62,9 @@ const CartItem: React.FC<CartItemProps> = ({
           </span>
         </div>
       </div>
-      
+
       <CartItemAmount
-        amount={item.amount}
+        amountInCart={item.amount}
         onIncrease={() => handleUpdateAmount(item.amount + 1)}
         onDecrease={() => handleUpdateAmount(Math.max(1, item.amount - 1))}
       />

@@ -17,11 +17,11 @@ import type { CartItemType } from "../../cart/cart_types";
 
 type MenuItemType = {
   id: string,
+  name: string,
   price: number
   description: string,
 }
 
-// Move static objects outside component to prevent recreation
 const menuVariants: Variants = {
   initial: { opacity: 0, y: 30 },
   animate: {
@@ -37,19 +37,19 @@ const menuVariants: Variants = {
   }
 };
 
+
 const cartInteractionStyles = `flex flex-col sm:flex-row justify-center items-center space-y-4 
   sm:space-y-0 sm:space-x-6 p-8 border-t border-white/20 mt-8`;
 
+//TODO: When you click on menu item the full description opens up
 const Menu = () => {
   const updateCart = useCart().updateCart;
   const [preCart, setPreCart] = React.useState<CartItemType[]>([]);
-
-  const dbUrl = React.useRef(FIREBASE_ENDPOINT + "Menu.json");
+  const dbUrl = React.useRef<string>(FIREBASE_ENDPOINT + "Menu.json");
 
   const { data, error, loading } = useFetch(dbUrl.current);
   const menuItems = data as { [key: string]: MenuItemType; };
 
-  // Memoize cart item lookup for O(1) performance
   const itemAmountsMap = useMemo(() => {
     const map = new Map<string, number>();
     preCart.forEach(item => {
@@ -85,10 +85,9 @@ const Menu = () => {
     }
   }, [preCart, updateCart]);
 
-  // Memoize menu items to prevent recreation
   const menuItemsElements = useMemo(() => {
     if (!menuItems) return [];
-    
+
     return Object.keys(menuItems).map((itemName, index) => {
       const menuItem: MenuItemType = menuItems[itemName];
       const itemAmount = itemAmountsMap.get(menuItem.id) || 0;
@@ -108,10 +107,6 @@ const Menu = () => {
     });
   }, [menuItems, itemAmountsMap, addToPreCartHandler]);
 
-  if (error) {
-    console.error("Menu Error:", error);
-  }
-
   let menuContent;
   if (loading) {
     menuContent = (
@@ -122,7 +117,7 @@ const Menu = () => {
   } else if (data) {
     menuContent = (
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+        className="grid grid-cols-1 gap-4 md:gap-6"
         variants={menuVariants}
         initial="initial"
         animate="animate"
@@ -219,4 +214,4 @@ const Menu = () => {
   );
 };
 
-export default React.memo(Menu);
+export default Menu;
