@@ -79,7 +79,7 @@ export interface ApiEndpoints {
 }
 
 // Generic fetch hook parameters
-export interface UseFetchParams<T = unknown> extends RequestConfig {
+export interface UseFetchParams extends RequestConfig {
   url: string;
   enabled?: boolean; // For conditional fetching
 }

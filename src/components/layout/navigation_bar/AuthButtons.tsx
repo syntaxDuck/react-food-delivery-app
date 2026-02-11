@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 // Inline variants since NavigationVariants.js doesn't exist
@@ -14,8 +14,14 @@ const navVariants = {
 // Component imports
 import AnimatedButton from "../../ui/AnimatedButton";
 
+interface AuthButtonsProps {
+  loginStatus: boolean;
+  className?: string;
+  variant?: "desktop" | "mobile";
+}
+
 // Clean auth buttons component - works on both desktop and mobile
-const AuthButtons = ({ loginStatus, className = "", variant = "desktop" }) => {
+const AuthButtons = ({ loginStatus, className = "", variant = "desktop" }: AuthButtonsProps) => {
   return (
     <motion.div variants={navVariants.navItem} transition={{ delay: 0.2 }} className={className}>
       {!loginStatus ? (
@@ -34,7 +40,7 @@ const AuthButtons = ({ loginStatus, className = "", variant = "desktop" }) => {
           variant="outline"
           size={variant === "mobile" ? "lg" : "sm"}
           className={variant === "mobile" ? "w-full" : "ml-2"}
-          onClick={() => window.location.reload(false)}
+          onClick={() => window.location.reload()}
         >
           <span className="material-icons md-18 mr-2">logout</span>
           Logout

@@ -23,7 +23,14 @@ const Location = () => {
   };
 
   return (
-    <Section id="location" padding="spacious" spacing="relaxed" background="gradient">
+    <Section 
+      id="location" 
+      className="" 
+      background="gradient" 
+      padding="spacious" 
+      spacing="relaxed" 
+      container={true}
+    >
       <motion.div
         className={compoundClasses.content.section}
         initial={{ opacity: 0 }}

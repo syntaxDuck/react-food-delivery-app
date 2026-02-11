@@ -56,7 +56,7 @@ const Section: React.FC<SectionProps> = ({
       opacity: 1,
       y: 0,
       transition: {
-        type: prefersReducedMotion ? "tween" : "spring",
+        type: prefersReducedMotion ? "tween" as const : "spring" as const,
         stiffness: prefersReducedMotion ? 50 : 80,  // Softer spring
         damping: prefersReducedMotion ? 25 : 20,   // More damping
         duration: prefersReducedMotion ? 0.3 : 0.6  // Shorter duration
@@ -70,9 +70,9 @@ const Section: React.FC<SectionProps> = ({
     <motion.section
       id={id}
       className={`
-        ${paddingClasses[padding]} 
-        ${spacingClasses[spacing]} 
-        ${backgroundClasses[background]} 
+        ${paddingClasses[padding as keyof typeof paddingClasses]} 
+        ${spacingClasses[spacing as keyof typeof spacingClasses]} 
+        ${backgroundClasses[background as keyof typeof backgroundClasses]} 
         ${className}
       `}
       variants={sectionVariants}

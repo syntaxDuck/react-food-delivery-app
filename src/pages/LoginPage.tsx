@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 
 //Component imports
 import LoginForm from "../components/layout/LoginForm";
@@ -14,16 +14,16 @@ const API_URLS: Record<UserAction, string> = {
 };
 
 const LoginPage = ({ onLoginChange }: LoginPageProps) => {
-  const [userAction, setUserAction] = useState("SignIn");
-  let navigate = useNavigate();
+  const [userAction, setUserAction] = useState<UserAction>("SignIn");
+  const navigate = useNavigate();
 
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const confPasswordRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const confPasswordRef = useRef<HTMLInputElement | null>(null);
 
   document.body.style.overflow = "hidden";
 
-  const [error, setError] = React.useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const userActionHandler = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
@@ -36,7 +36,7 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
 
     let response_data: AuthResponse | undefined;
     const sendRequest = async (): Promise<void> => {
-      const apiURL = API_URLS[userAction as UserAction];
+      const apiURL = API_URLS[userAction];
 
       const requestBody = {
         email: usernameRef.current?.value || "",
@@ -76,7 +76,7 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <LoginForm
         onFormSubmit={userActionHandler}
         onChangeUserAction={setUserAction}
@@ -85,7 +85,7 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
         passwordInputRef={passwordRef}
         confpasswordInputRef={confPasswordRef}
       />
-    </React.Fragment>
+    </Fragment>
   );
 };
 

@@ -1,7 +1,7 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import type { ReactNode } from "react";
 
-const pageVariants = {
+const pageVariants: Variants = {
   initial: { opacity: 0, y: 20 },
   in: { 
     opacity: 1, 
@@ -23,12 +23,17 @@ const pageVariants = {
   }
 };
 
+interface MotionContainerProps {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}
+
 const MotionContainer = ({ 
   children, 
   className = "",
-  animationType = "slide",
   delay = 0
-}) => {
+}: MotionContainerProps) => {
   const containerClasses = `w-full min-h-screen ${className}`;
 
   return (
@@ -45,7 +50,12 @@ const MotionContainer = ({
   );
 };
 
-export const PageTransition = ({ children, location }) => {
+interface PageTransitionProps {
+  children: ReactNode;
+  location: string;
+}
+
+export const PageTransition = ({ children, location }: PageTransitionProps) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div

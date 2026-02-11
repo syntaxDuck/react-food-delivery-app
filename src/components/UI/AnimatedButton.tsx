@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import type { MouseEventHandler } from "react";
+import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
 
 const buttonVariants: Variants = {
@@ -37,18 +37,18 @@ const VariantClasses = {
 type VariantClassTypes = keyof typeof VariantClasses;
 
 interface AnimatedButtonProps {
-  href?: string,
-  className?: string,
-  onClick?: MouseEventHandler,
-  disabled?: boolean,
-  label?: string,
-  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"],
-  variant: VariantClassTypes,
-  size: SizeClassTypes,
-  children: React.ReactNode
+  href?: string;
+  className?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  disabled?: boolean;
+  label?: string;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  variant: VariantClassTypes;
+  size: SizeClassTypes;
+  children?: ReactNode;
 }
 
-const AnimatedButton: React.FC<AnimatedButtonProps> = ({
+const AnimatedButton = ({
   href,
   className = "",
   onClick,
@@ -58,7 +58,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   variant = "default",
   size = "md",
   children
-}) => {
+}: AnimatedButtonProps) => {
   const baseClasses = "inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-gray";
 
   const classes = `${baseClasses} ${VariantClasses[variant]} ${SizeClasses[size]} ${className}`;

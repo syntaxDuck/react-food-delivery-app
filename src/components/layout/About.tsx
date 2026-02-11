@@ -26,7 +26,7 @@ const AboutUs = () => {
     },
     hover: {
       y: -3,  // Less movement
-      transition: { type: "spring", stiffness: 200, damping: 25 }  // Softer
+      transition: { type: "spring" as const, stiffness: 200, damping: 25 }  // Softer
     }
   };
 
@@ -49,7 +49,14 @@ const AboutUs = () => {
   ];
 
   return (
-    <Section id="about-us" padding="spacious" spacing="relaxed">
+    <Section 
+      id="about-us" 
+      className="" 
+      background="transparent" 
+      padding="spacious" 
+      spacing="relaxed" 
+      container={true}
+    >
       <motion.div variants={heroVariants} className={compoundClasses.content.hero}>
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8">
           Welcome to{" "}

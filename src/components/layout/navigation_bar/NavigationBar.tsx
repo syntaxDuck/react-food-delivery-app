@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router";
+import { memo, useState } from "react";
+import { Link } from "react-router";
 import { motion, type Variants } from "framer-motion";
 import { compoundClasses } from "../../../utils/compoundClasses";
 
@@ -16,35 +16,15 @@ interface NavigationBarProps {
   loginStatus: boolean
 }
 
-const NavigationBar: React.FC<NavigationBarProps> = ({ loginStatus }) => {
-  const location = useLocation();
+const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about-us');
   const toggleCart = useCart().toggleCart;
-
-  const menuElements = [
-    { id: "menu", text: "menu", icon: "restaurant_menu" },
-    { id: "location", text: "location", icon: "location_on" },
-    { id: "about-us", text: "About Us", icon: "info" },
-  ];
 
   const navVariants: Variants = {
     initial: { y: -100, opacity: 0 },
     animate: { y: 0, opacity: 1, transition: {} },
     hover: { scale: 1.01 }  // Very subtle
-  };
-
-  const mobileMenuVariants: Variants = {
-    initial: { x: "100%", opacity: 0 },
-    animate: { x: 0, opacity: 1 },
-    exit: { x: "100%", opacity: 0 }
-  };
-
-  const navItemVariants: Variants = {
-    initial: { opacity: 0, x: -10 },
-    animate: { opacity: 1, x: 0 },
-    hover: { scale: 1.02, x: 2 },  // Very subtle
-    active: { scale: 1.02 }         // Very subtle
   };
 
   return (
@@ -119,4 +99,4 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ loginStatus }) => {
   );
 };
 
-export default React.memo(NavigationBar);
+export default memo(NavigationBar);

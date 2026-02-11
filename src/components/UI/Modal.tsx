@@ -1,8 +1,8 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import type { ReactNode } from "react";
 import Card from "./Card";
 
-const modalVariants = {
+const modalVariants: Variants = {
   initial: { 
     opacity: 0, 
     scale: 0.9, 
@@ -20,10 +20,15 @@ const modalVariants = {
   }
 };
 
-const Modal = ({ className, children }) => {
+interface ModalProps {
+  className?: string;
+  children: ReactNode;
+}
+
+const Modal = ({ className = "", children }: ModalProps) => {
   return (
     <motion.div
-      className={`${className}`}
+      className={className}
       variants={modalVariants}
       initial="initial"
       animate="animate"

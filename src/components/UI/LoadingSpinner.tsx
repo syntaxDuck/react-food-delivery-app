@@ -1,13 +1,12 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
-const dotVariants = {
+const dotVariants: Variants = {
   initial: { scale: 0 },
   animate: { scale: 1 },
   exit: { scale: 0 }
 };
 
-const containerVariants = {
+const containerVariants: Variants = {
   animate: {
     transition: {
       staggerChildren: 0.2
@@ -15,18 +14,27 @@ const containerVariants = {
   }
 };
 
-const LoadingSpinner = ({ size = "md", color = "primary" }) => {
-  const sizeClasses = {
-    sm: "w-2 h-2",
-    md: "w-3 h-3",
-    lg: "w-4 h-4"
-  };
+const sizeClasses = {
+  sm: "w-2 h-2",
+  md: "w-3 h-3",
+  lg: "w-4 h-4"
+} as const;
 
-  const colorClasses = {
-    primary: "bg-primary",
-    secondary: "bg-secondary",
-    white: "bg-white"
-  };
+const colorClasses = {
+  primary: "bg-primary",
+  secondary: "bg-secondary",
+  white: "bg-white"
+} as const;
+
+type SpinnerSize = keyof typeof sizeClasses;
+type SpinnerColor = keyof typeof colorClasses;
+
+interface LoadingSpinnerProps {
+  size?: SpinnerSize;
+  color?: SpinnerColor;
+}
+
+const LoadingSpinner = ({ size = "md", color = "primary" }: LoadingSpinnerProps) => {
 
   return (
     <motion.div

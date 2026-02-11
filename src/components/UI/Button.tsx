@@ -1,12 +1,22 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
-const buttonVariants = {
+const buttonVariants: Variants = {
   hover: { scale: 1.02 },
   tap: { scale: 0.98 }
 };
 
-const Button = ({ href, className, onClick, disabled, label, type }) => {
+interface ButtonProps {
+  href?: string;
+  className?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  disabled?: boolean;
+  label?: string;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  children?: ReactNode;
+}
+
+const Button = ({ href, className, onClick, disabled = false, label, type, children }: ButtonProps) => {
   const baseClasses = "inline-flex items-center justify-center px-4 py-2 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-gray";
   const defaultClasses = "bg-transparent border border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary";
   
@@ -15,6 +25,7 @@ const Button = ({ href, className, onClick, disabled, label, type }) => {
   const buttonContent = (
     <>
       {label && <span>{label}</span>}
+      {children}
     </>
   );
 
@@ -34,11 +45,11 @@ const Button = ({ href, className, onClick, disabled, label, type }) => {
   }
 
   return (
-    <motion.button
-      className={finalClasses}
-      type={type || "button"}
-      onClick={onClick}
-      disabled={disabled}
+      <motion.button
+        className={finalClasses}
+        type={type || "button"}
+        onClick={onClick}
+        disabled={disabled}
       variants={buttonVariants}
       whileHover={!disabled ? "hover" : undefined}
       whileTap={!disabled ? "tap" : undefined}

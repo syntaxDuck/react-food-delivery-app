@@ -1,7 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants, type HTMLMotionProps } from "framer-motion";
+import type { ReactNode } from "react";
 
-const cardVariants = {
+const cardVariants: Variants = {
   initial: { opacity: 0, y: 15 },  // Reduced from 20
   animate: { 
     opacity: 1, 
@@ -21,6 +21,14 @@ const cardVariants = {
   }
 };
 
+interface AnimatedCardProps extends HTMLMotionProps<"div"> {
+  children: ReactNode;
+  className?: string;
+  hover?: boolean;
+  initial?: boolean;
+  delay?: number;
+}
+
 const AnimatedCard = ({ 
   children, 
   className = "", 
@@ -28,7 +36,7 @@ const AnimatedCard = ({
   initial = true,
   delay = 0,
   ...props 
-}) => {
+}: AnimatedCardProps) => {
   // Enhanced base classes with better padding
   const baseClasses = "bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 sm:p-8 shadow-xl transition-all duration-300";
   const classes = `${baseClasses} ${className}`;

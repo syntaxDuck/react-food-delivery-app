@@ -27,7 +27,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ loginStatus, acti
             to={menuElement.id === "about-us" ? "/index" : "/index"}
             className={`
               ${compoundClasses.navigation.item}
-              ${activeSection === menuElement.id ? compoundClasses.chrono?.activeGlow : ''}
+              ${activeSection === menuElement.id ? 'glow-effect' : ''}
             `}
             onClick={() => {
               setActiveSection(menuElement.id);

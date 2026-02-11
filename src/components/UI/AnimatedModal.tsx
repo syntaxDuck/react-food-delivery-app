@@ -1,7 +1,7 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import type { MouseEvent, ReactNode } from "react";
 
-const modalVariants = {
+const modalVariants: Variants = {
   initial: { 
     opacity: 0, 
     scale: 0.75, 
@@ -19,11 +19,28 @@ const modalVariants = {
   }
 };
 
-const backdropVariants = {
+const backdropVariants: Variants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.2 } },
   exit: { opacity: 0, transition: { duration: 0.2 } }
 };
+
+const sizeClasses = {
+  sm: "max-w-sm w-11/12 md:w-96",
+  md: "max-w-2xl w-11/12 md:w-3/4 lg:w-2/3",
+  lg: "max-w-6xl w-11/12 md:w-5/6 lg:w-4/5"
+} as const;
+
+type ModalSize = keyof typeof sizeClasses;
+
+interface AnimatedModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+  className?: string;
+  size?: ModalSize;
+  closeOnBackdrop?: boolean;
+}
 
 const AnimatedModal = ({ 
   isOpen, 
@@ -32,14 +49,8 @@ const AnimatedModal = ({
   className = "",
   size = "md",
   closeOnBackdrop = true
-}) => {
-  const sizeClasses = {
-    sm: "max-w-sm w-11/12 md:w-96",
-    md: "max-w-2xl w-11/12 md:w-3/4 lg:w-2/3",
-    lg: "max-w-6xl w-11/12 md:w-5/6 lg:w-4/5"
-  };
-
-  const handleBackdropClick = (e) => {
+}: AnimatedModalProps) => {
+  const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget && closeOnBackdrop) {
       onClose();
     }

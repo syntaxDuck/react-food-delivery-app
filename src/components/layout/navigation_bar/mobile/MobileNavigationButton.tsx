@@ -1,11 +1,15 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { compoundClasses } from "../../../../utils/compoundClasses";
 // useNavigation not available since NavigationContext.js doesn't exist
 // Using props instead
 import AnimatedButton from "../../../ui/AnimatedButton";
 
-const MobileNavigationButton = ({ mobileMenuOpen, setMobileMenuOpen }) => {
+interface MobileNavigationButtonProps {
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
+}
+
+const MobileNavigationButton = ({ mobileMenuOpen, setMobileMenuOpen }: MobileNavigationButtonProps) => {
 
   return (
     <div className={compoundClasses.navigation.mobile}>

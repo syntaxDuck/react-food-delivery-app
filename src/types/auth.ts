@@ -79,9 +79,9 @@ export interface ValidationResult {
 
 // Form input refs
 export interface FormInputRefs {
-  usernameRef: React.RefObject<HTMLInputElement>;
-  passwordRef: React.RefObject<HTMLInputElement>;
-  confpasswordInputRef?: React.RefObject<HTMLInputElement>;
+  usernameRef: React.RefObject<HTMLInputElement | null>;
+  passwordRef: React.RefObject<HTMLInputElement | null>;
+  confpasswordInputRef?: React.RefObject<HTMLInputElement | null>;
 }
 
 // Login page props
@@ -94,9 +94,9 @@ export interface LoginFormProps {
   onFormSubmit: (event: React.FormEvent) => void;
   onChangeUserAction: (action: UserAction) => void;
   userAction: UserAction;
-  usernameInputRef: React.RefObject<HTMLInputElement>;
-  passwordInputRef: React.RefObject<HTMLInputElement>;
-  confpasswordInputRef?: React.RefObject<HTMLInputElement>;
+  usernameInputRef: React.RefObject<HTMLInputElement | null>;
+  passwordInputRef: React.RefObject<HTMLInputElement | null>;
+  confpasswordInputRef?: React.RefObject<HTMLInputElement | null>;
 }
 
 // Input validation functions
