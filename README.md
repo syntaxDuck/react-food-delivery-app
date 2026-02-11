@@ -1,73 +1,124 @@
-# React + TypeScript + Vite
+# Chrono Delivery (React Food Delivery App)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript food delivery frontend with Firebase-backed menu/order data, Firebase email/password auth, animated UI components, and a cart flow.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- TypeScript
+- Vite 7
+- Tailwind CSS 4
+- Framer Motion
+- React Router 7
+- Vitest + Testing Library
+- Firebase Realtime Database + Firebase Identity Toolkit API
 
-## React Compiler
+## Current Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Responsive landing experience with:
+1. About section
+2. Menu section (fetched from Firebase)
+3. Location section
+- Animated desktop/mobile navigation and UI interactions with Framer Motion
+- Cart system with global context and reducer
+- Add, update, clear, and submit cart orders
+- Firebase-backed authentication flow:
+1. Sign in
+2. Sign up
+- Route handling:
+1. `/` redirects to `/index`
+2. `/index` home page
+3. `/Login` login/signup page
+4. `*` fallback not-found page
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+  assets/                         # Static images
+  components/
+    cart/                         # Cart UI + cart context/reducer
+    layout/                       # Layout, navbar, sections, menu domain components
+    ui/                           # Shared reusable UI primitives
+  functions/                      # Shared hooks (e.g. useFetch, reduced motion)
+  pages/                          # Route-level pages
+  private/PRIVATE.tsx             # Reads Firebase values from env
+  tests/                          # Test setup
+  types/                          # Shared TypeScript types
+  utils/                          # Shared utilities
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create `.env.local` in the project root:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
 ```
+
+You can copy `.env.example` as a starting point.
+
+## Firebase Expectations
+
+This app expects Firebase Realtime Database paths:
+
+- `Menu.json` for menu items
+- `Orders.json` for submitted orders
+
+Menu item shape:
+
+```json
+{
+  "id": "item-1",
+  "name": "Sushi Roll",
+  "price": 12.99,
+  "description": "Fresh salmon and avocado"
+}
+```
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+Default dev URL is typically `http://localhost:5173`.
+
+## Available Scripts
+
+- `npm run dev` start Vite dev server
+- `npm run build` type-check and build production bundle
+- `npm run preview` preview production build
+- `npm run lint` run ESLint
+- `npm run test` run Vitest in watch mode
+- `npm run test:run` run tests once
+- `npm run test:coverage` run tests with coverage
+- `npm run test:ui` run Vitest UI
+
+## Testing
+
+This repo includes unit/component tests across cart, UI components, hooks, pages, and layout/navigation flows.
+
+Run once:
+
+```bash
+npm run test:run
+```
+
+Run coverage:
+
+```bash
+npm run test:coverage
+```
+
+## Notes About Current State
+
+- Authentication state is currently stored in-memory (`App.tsx`) and is not persisted across refresh.
+- Menu and order submission rely on valid Firebase env config.
+- The project is frontend-only in this repository.
+
+## Screenshots
+
+![Chrono Delivery app demo](./artifacts/demo.gif)
