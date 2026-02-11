@@ -18,7 +18,6 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, children }) => {
     backgroundAttachment: 'fixed',
     minHeight: '100vh',
     position: 'relative',
-    zIndex: -10
   };
 
   const overlayStyle: React.CSSProperties = {
@@ -28,8 +27,15 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, children }) => {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    zIndex: -1
   };
+
+  const mainStyle: React.CSSProperties = {
+    position: "absolute",
+    top: 0,
+    height: "100vh",
+    width: "100vw",
+    overflow: "scroll"
+  }
 
   return (
     <CartCtxProvider>
@@ -37,7 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, children }) => {
       <div style={backgroundStyle}>
         <div style={overlayStyle} />
       </div>
-      <main>
+      <main style={mainStyle}>
         {children}
       </main>
     </CartCtxProvider>

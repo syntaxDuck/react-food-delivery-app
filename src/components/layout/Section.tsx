@@ -3,17 +3,28 @@ import { motion } from "framer-motion";
 import { useReducedMotion } from "../../functions/useReducedMotion";
 import { compoundClasses } from "../../utils/compoundClasses";
 
-const Section = ({ 
-  children, 
-  id, 
-  className = "", 
+interface SectionProps {
+  id: string,
+  className: string,
+  background: string,
+  padding: string,    // NEW DEFAULT
+  spacing: string,         // NEW PROP
+  container: boolean            // NEW PROP
+  children: React.ReactNode
+
+}
+
+const Section: React.FC<SectionProps> = ({
+  id,
+  className = "",
   background = "transparent",
-  padding = "comfortable",    // NEW DEFAULT
-  spacing = "normal",         // NEW PROP
-  container = true            // NEW PROP
+  padding = "comfortable",
+  spacing = "normal",
+  container = true,
+  children
 }) => {
   const prefersReducedMotion = useReducedMotion();
-  
+
   // Updated padding classes with py-20 as default
   const paddingClasses = {
     cozy: 'py-16',
@@ -41,11 +52,11 @@ const Section = ({
   // Subtle animation variants
   const sectionVariants = {
     initial: { opacity: 0, y: 20 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       y: 0,
-      transition: { 
-        type: prefersReducedMotion ? "tween" : "spring", 
+      transition: {
+        type: prefersReducedMotion ? "tween" : "spring",
         stiffness: prefersReducedMotion ? 50 : 80,  // Softer spring
         damping: prefersReducedMotion ? 25 : 20,   // More damping
         duration: prefersReducedMotion ? 0.3 : 0.6  // Shorter duration
@@ -56,8 +67,8 @@ const Section = ({
   const containerClass = container ? compoundClasses.section.container : '';
 
   return (
-    <motion.section 
-      id={id} 
+    <motion.section
+      id={id}
       className={`
         ${paddingClasses[padding]} 
         ${spacingClasses[spacing]} 
