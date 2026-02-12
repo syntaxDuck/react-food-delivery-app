@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  // @ts-expect-error - vitest types are not being picked up by tsc for UserConfig
+  // @ts-expect-error - Vitest 2.x and Vite 7 conflict
   test: {
     environment: "jsdom",
     globals: true,

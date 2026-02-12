@@ -8,22 +8,30 @@ interface UseFetchRequestConfig extends Omit<RequestInit, 'body'> {
   body?: unknown;
 }
 
+const DEFAULT_CONFIG: UseFetchRequestConfig = { method: "GET" };
+
 const useFetch = <T = unknown>(
   url: string,
-  requestParams: UseFetchRequestConfig = { method: "GET" }
+  requestParams: UseFetchRequestConfig = DEFAULT_CONFIG
 ): FetchResult<T> => {
   const [data, setData] = React.useState<T | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string | null>(null);
 
+  // Deconstruct for stable dependency tracking
+  const { method = "GET", headers, body } = requestParams;
+  const headersStr = JSON.stringify(headers);
+  const bodyStr = JSON.stringify(body);
+
   React.useEffect(() => {
     const sendRequest = async (): Promise<void> => {
+      setLoading(true);
       try {
         // Convert requestParams to proper RequestInit
         const fetchConfig: RequestInit = {
-          method: requestParams.method ?? "GET",
-          headers: requestParams.headers,
-          body: requestParams.body !== undefined ? JSON.stringify(requestParams.body) : undefined,
+          method,
+          headers,
+          body: body !== undefined ? JSON.stringify(body) : undefined,
         };
 
         const response = await fetch(url, fetchConfig);
@@ -46,7 +54,7 @@ const useFetch = <T = unknown>(
     };
 
     void sendRequest();
-  }, [url, requestParams]);
+  }, [url, method, headersStr, bodyStr]);
 
   return { data, loading, error };
 };
