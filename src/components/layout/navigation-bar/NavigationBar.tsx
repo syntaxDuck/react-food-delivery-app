@@ -23,7 +23,6 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
   const navVariants: Variants = {
     initial: { y: -100, opacity: 0 },
     animate: { y: 0, opacity: 1, transition: { duration: 0.35, ease: "easeOut" } },
-    hover: { scale: 1.01 }  // Very subtle
   };
 
   return (
@@ -32,7 +31,6 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
       variants={navVariants}
       initial="initial"
       animate="animate"
-      whileHover="hover"
     >
       <div
         aria-hidden="true"
@@ -66,8 +64,8 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
                   rotate: [0, 8, -2, 0],
                   scale: [1, 1.05, 1.02, 1]
                 }}
-                transition={{ 
-                  duration: 4, 
+                transition={{
+                  duration: 4,
                   ease: "easeInOut",
                   repeat: Infinity
                 }}
@@ -78,18 +76,20 @@ const NavigationBar = ({ loginStatus }: NavigationBarProps) => {
           </Link>
 
           {/* Desktop Navigation - Hidden on Mobile */}
-          <div className="hidden md:flex">
+
+          <div className="hidden lg:flex">
             <DesktopNavigation
-              loginStatus={loginStatus}
               activeSection={activeSection}
               setActiveSection={setActiveSection}
             />
           </div>
 
           {/* Cart Button */}
-          <CartButton onCartStateChange={toggleCart} />
-          <div className="hidden md:flex">
-            <AuthButtons loginStatus={loginStatus} />
+          <div className="flex flex-row gap-4 items-center">
+            <CartButton onCartStateChange={toggleCart} />
+            <div className="hidden md:flex">
+              <AuthButtons loginStatus={loginStatus} />
+            </div>
           </div>
         </div>
 

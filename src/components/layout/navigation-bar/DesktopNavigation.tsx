@@ -6,12 +6,11 @@ import { compoundClasses } from "../../../utils/compoundClasses";
 import { navigationItems } from "./NavigationItems";
 
 interface DesktopNavigationProps {
-  loginStatus: boolean;
   activeSection: string;
   setActiveSection: (section: string) => void;
 }
 
-const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ loginStatus, activeSection, setActiveSection }) => {
+const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ activeSection, setActiveSection }) => {
   return (
     <nav className={compoundClasses.navigation.desktop}>
       {navigationItems.map((menuElement, index) => (

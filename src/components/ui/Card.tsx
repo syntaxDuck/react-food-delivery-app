@@ -23,7 +23,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ className, children, id, hover = true }) => {
-  const baseClasses = "bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 shadow-xl";
+  const baseClasses = "surface-panel rounded-2xl p-6 shadow-xl";
   const classes = `${baseClasses} ${className ?? ""}`;
 
   return (

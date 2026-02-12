@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-import image from "../../assets/drone.jpg";
+import image from "../../assets/ezgif.com-webp-maker.webp";
 import { compoundClasses } from "../../utils/compoundClasses";
 import AnimatedCard from "../ui/AnimatedCard";
 import Section from "./Section";

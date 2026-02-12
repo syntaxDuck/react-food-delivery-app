@@ -42,7 +42,7 @@ const CartItem: React.FC<CartItemProps> = ({
       variants={itemVariants}
       initial="initial"
       animate="animate"
-      className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200 group"
+      className="flex items-center justify-between p-4 surface-muted rounded-lg hover:bg-white/10 transition-all duration-200 group"
     >
       <div className="flex-1">
         <div className="flex items-center justify-between mb-2">

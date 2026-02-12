@@ -56,7 +56,7 @@ const CartButton: React.FC<CartButtonProps> = ({ onCartStateChange }) => {
 
   return (
     <motion.button
-      className="relative p-3 bg-primary rounded-full shadow-lg hover:shadow-primary/30 group"
+      className="relative p-2 bg-primary rounded-full shadow-lg hover:shadow-primary/30 group"
       onClick={handleClick}
       variants={buttonVariants}
       initial="initial"
@@ -66,7 +66,7 @@ const CartButton: React.FC<CartButtonProps> = ({ onCartStateChange }) => {
       aria-label="View shopping cart"
     >
       <motion.span
-        className="material-icons md-36 text-white"
+        className="material-icons md-36 text-white relative top-1"
         animate={{ rotate: [0, -10, 10, 0] }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
       >

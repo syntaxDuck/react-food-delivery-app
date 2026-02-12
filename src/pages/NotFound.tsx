@@ -8,7 +8,7 @@ const NotFound = () => {
   return (
     <MotionContainer className="flex items-center justify-center px-6 py-16">
       <motion.div
-        className="max-w-lg text-center bg-white/5 border border-white/10 rounded-2xl p-10 backdrop-blur"
+        className="max-w-lg text-center surface-muted rounded-2xl p-10 backdrop-blur"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}

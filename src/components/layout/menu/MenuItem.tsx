@@ -56,7 +56,7 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
   return (
     <motion.div
       id={id}
-      className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden group h-full"
+      className="surface-panel rounded-2xl overflow-hidden group h-full"
       variants={itemVariants}
       initial="initial"
       animate="animate"
@@ -77,7 +77,7 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
             </p>
           </div>
           <div className="ml-4">
-            <div className="w-20 h-20 bg-white/10 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+            <div className="w-20 h-20 surface-panel rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
               <span className="material-icons md-36 text-primary">restaurant</span>
             </div>
           </div>

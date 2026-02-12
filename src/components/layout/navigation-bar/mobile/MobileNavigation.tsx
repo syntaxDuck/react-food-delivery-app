@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import React from "react";
 import { Link } from "react-router";
 
@@ -17,6 +17,10 @@ interface MobileNavigationProps {
   loginStatus: boolean;
 }
 
+const slideButtonStyle = `absolute top-25 h-20 w-7 flex items-center gap-2 surface-glass 
+text-white px-3 py-1.5 rounded-l-xl shadow-[0_12px_40px_rgba(0,0,0,0.35)]`;
+
+const chevronStyle = "relative right-3 material-icons md-20";
 const MobileNavigation: React.FC<MobileNavigationProps> = ({
   mobileMenuOpen,
   setMobileMenuOpen,
@@ -24,16 +28,17 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
   setActiveSection,
   loginStatus
 }) => {
-  const navItemVariants = {
+
+  const navItemVariants: Variants = {
     initial: { opacity: 0, x: -10 },
     animate: { opacity: 1, x: 0 },
     hover: { scale: 1.02, x: 2 },
     active: { scale: 1.02 }
   };
 
-  const mobileMenuVariants = {
+  const mobileMenuVariants: Variants = {
     initial: { x: "100%", opacity: 0 },
-    animate: { x: 0, opacity: 1 },
+    animate: { x: 0, opacity: 1, transition: { duration: 1, type: "spring", stiffness: 250, damping: 25 } },
     exit: { x: "100%", opacity: 0 }
   };
 
@@ -66,18 +71,15 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
         {!mobileMenuOpen && (
           <motion.button
             type="button"
-            className="fixed right-0 top-20 z-50 md:hidden flex items-center gap-2 bg-gradient-to-r from-gray-900/90 via-gray-800/85 to-gray-900/90 backdrop-blur-md border border-white/10 text-white px-3 py-1.5 rounded-l-full shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+            className={`right-0 top-25 z-50 md:hidden ${slideButtonStyle}`}
             onClick={() => {
               setMobileMenuOpen(true);
             }}
-            initial={{ opacity: 0, x: 8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.2 }}
             aria-label={toggleLabel}
             aria-expanded={false}
             aria-controls="mobile-nav-panel"
           >
-            <span className="material-icons md-20">{toggleIcon}</span>
+            <span className={chevronStyle}>{toggleIcon}</span>
           </motion.button>
         )}
 
@@ -107,7 +109,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             >
               <motion.button
                 type="button"
-                className="absolute -left-10 top-20 flex items-center gap-2 bg-gradient-to-r from-gray-900/90 via-gray-800/85 to-gray-900/90 backdrop-blur-md border border-white/10 text-white px-3 py-1.5 rounded-l-full shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+                className={`-left-7 ${slideButtonStyle}`}
                 onClick={() => {
                   setMobileMenuOpen(false);
                 }}
@@ -115,10 +117,10 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-nav-panel"
               >
-                <span className="material-icons md-20">{toggleIcon}</span>
+                <span className={chevronStyle}>{toggleIcon}</span>
               </motion.button>
 
-              <div className="bg-black/60 p-6 space-y-6">
+              <div className="surface-strong p-6 space-y-6">
                 {/* Mobile Menu Header */}
                 <div className="flex items-center justify-between border-b border-white/20 pb-4">
                   <h3 className="text-lg font-semibold text-white">Menu</h3>
@@ -178,7 +180,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
           </>
         )}
       </>
-    </AnimatePresence>
+    </AnimatePresence >
   );
 };
 

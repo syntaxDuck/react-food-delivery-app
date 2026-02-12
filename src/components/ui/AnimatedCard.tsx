@@ -38,7 +38,7 @@ const AnimatedCard = ({
   ...props 
 }: AnimatedCardProps) => {
   // Enhanced base classes with better padding
-  const baseClasses = "bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 sm:p-8 shadow-xl transition-all duration-300";
+  const baseClasses = "surface-panel rounded-2xl p-6 sm:p-8 shadow-xl transition-all duration-300";
   const classes = `${baseClasses} ${className}`;
   
   return (
