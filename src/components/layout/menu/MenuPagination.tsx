@@ -16,7 +16,7 @@ const MenuPagination: React.FC<MenuPaginationProps> = ({
   const maxButtons = 5;
   const half = Math.floor(maxButtons / 2);
   let start = Math.max(1, currentPage - half);
-  let end = Math.min(totalPages, start + maxButtons - 1);
+  const end = Math.min(totalPages, start + maxButtons - 1);
 
   if (end - start < maxButtons - 1) {
     start = Math.max(1, end - maxButtons + 1);

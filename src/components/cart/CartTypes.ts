@@ -52,3 +52,36 @@ export interface OrderSubmissionData {
   deliveryAddress?: string;
   timestamp: string;
 }
+
+export const defaultCartState: CartState = {
+  items: [],
+  totalAmount: 0,
+  cartActive: false,
+};
+
+export const UpdateCartAction = (items: CartItemType[]) => ({
+  type: "UPDATE_CART" as const,
+  items
+});
+
+export const ToggleCartAction = () => ({
+  type: "TOGGLE_CART" as const
+});
+
+export const ClearCartAction = () => ({
+  type: "CLEAR_CART" as const
+});
+
+export const CartActions = {
+  Update: "UPDATE_CART",
+  Toggle: "TOGGLE_CART",
+  Clear: "CLEAR_CART"
+} as const;
+
+
+export type CartActionUnion =
+  | ReturnType<typeof UpdateCartAction>
+  | ReturnType<typeof ToggleCartAction>
+  | ReturnType<typeof ClearCartAction>;
+
+export type CartReducerFunction = (state: CartState, action: CartActionUnion) => CartState;

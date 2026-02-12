@@ -1,10 +1,4 @@
-import type { CartItemType, CartState } from "../CartTypes";
-import CartReducer, {
-  clearCart,
-  defaultCartState,
-  toggleCart,
-  updateCart,
-} from "./CartReducer";
+import type { CartItemType, CartState, ClearCartAction, defaultCartState, ToggleCartAction, updateCart } from "../CartTypes";
 
 const createItem = (overrides: Partial<CartItemType> = {}): CartItemType => ({
   id: "item-1",
@@ -40,7 +34,7 @@ describe("CartReducer", () => {
   });
 
   test("toggles cart active state", () => {
-    const result = CartReducer(defaultCartState, toggleCart());
+    const result = CartReducer(defaultCartState, ToggleCartAction());
     expect(result.cartActive).toBe(true);
   });
 
@@ -51,7 +45,7 @@ describe("CartReducer", () => {
       totalAmount: 10,
     };
 
-    const result = CartReducer(state, clearCart());
+    const result = CartReducer(state, ClearCartAction());
 
     expect(result.items).toEqual([]);
     expect(result.totalAmount).toBe(0);

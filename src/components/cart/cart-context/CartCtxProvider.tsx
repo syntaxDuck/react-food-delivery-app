@@ -1,7 +1,9 @@
 import React from "react";
 
+import { ClearCartAction, ToggleCartAction, UpdateCartAction } from "../CartTypes";
 import { type CartContextValue, type CartItemType } from "../CartTypes";
-import CartReducer, { clearCart, defaultCartState, toggleCart, updateCart } from "./CartReducer";
+import { defaultCartState } from "../CartTypes";
+import CartReducer from "./CartReducer";
 
 const CartContext = React.createContext<CartContextValue>({
   state: defaultCartState,
@@ -9,8 +11,6 @@ const CartContext = React.createContext<CartContextValue>({
   clearCart: () => undefined,
   toggleCart: () => undefined,
 });
-
-export const useCart = (): CartContextValue => React.useContext(CartContext);
 
 interface CartCtxProviderProps {
   children: React.ReactNode;
@@ -23,15 +23,15 @@ const CartCtxProvider = ({ children }: CartCtxProviderProps) => {
   );
 
   const updateCartHandler = (items: CartItemType[]): void => {
-    dispatchCartAction(updateCart(items));
+    dispatchCartAction(UpdateCartAction(items));
   };
 
   const clearCartHandler = () => {
-    dispatchCartAction(clearCart());
+    dispatchCartAction(ClearCartAction());
   };
 
   const toggleCartHandler = () => {
-    dispatchCartAction(toggleCart());
+    dispatchCartAction(ToggleCartAction());
   };
 
   const cartContext: CartContextValue = {

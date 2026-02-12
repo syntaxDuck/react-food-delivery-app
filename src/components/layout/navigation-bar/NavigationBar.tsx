@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 import { compoundClasses } from "../../../utils/compoundClasses";
 //Functional Imports
-import { useCart } from "../../cart/cart-context/CartCtxProvider";
+import { useCart } from "../../cart/cart-context/CartCtx";
 //Component Imports
 import CartButton from "../../cart/CartButton";
 import AuthButtons from "./AuthButtons";

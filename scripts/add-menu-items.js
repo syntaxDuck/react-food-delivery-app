@@ -1,4 +1,7 @@
 import { readFile } from "node:fs/promises";
+import process from "node:process";
+import console from "node:console";
+import fetch from 'node-fetch';
 
 const REQUIRED_FIELDS = ["id", "price", "description", "category"];
 

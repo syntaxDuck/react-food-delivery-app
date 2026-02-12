@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
-import MobileNavigation from "../../../../../components/layout/navigation-bar/mobile/MobileNavigation";
 import CartCtxProvider from "../../../../../components/cart/cart-context/CartCtxProvider";
+import MobileNavigation from "../../../../../components/layout/navigation-bar/mobile/MobileNavigation";
 
 describe("MobileNavigation", () => {
   test("toggles menu with slide handle", async () => {

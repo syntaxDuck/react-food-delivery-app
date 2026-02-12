@@ -11,12 +11,12 @@ export const useMenuData = () => {
   const menuItemsMap = data as MenuData | null;
   const menuItems: MenuItemType[] = menuItemsMap
     ? Object.keys(menuItemsMap)
-        .sort((a, b) => a.localeCompare(b))
-        .map((key) => ({
-          ...menuItemsMap[key],
-          name: menuItemsMap[key].name ?? key,
-          category: menuItemsMap[key].category ?? "uncategorized"
-        }))
+      .sort((a, b) => a.localeCompare(b))
+      .map((key) => ({
+        ...menuItemsMap[key],
+        name: menuItemsMap[key].name ?? key,
+        category: menuItemsMap[key].category ?? "uncategorized"
+      }))
     : [];
 
   return {

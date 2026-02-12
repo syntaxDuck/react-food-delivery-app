@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import React from "react";
 
 import AnimatedButton from "../ui/AnimatedButton";
@@ -8,7 +8,7 @@ interface MobileCartButtonProps {
   animate: boolean;
 }
 
-const iconVariants = {
+const iconVariants: Variants = {
   initial: { x: -18, opacity: 0 },
   animate: {
     x: 0,

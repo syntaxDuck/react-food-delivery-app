@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router";
 
 import { compoundClasses } from "../../../../utils/compoundClasses";
-import { useCart } from "../../../cart/cart-context/CartCtxProvider";
+import { useCart } from "../../../cart/cart-context/CartCtx";
 import MobileCartButton from "../../../cart/MobileCartButton";
 import AnimatedButton from "../../../ui/AnimatedButton";
 import AuthButtons from "../AuthButtons";

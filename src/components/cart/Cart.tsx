@@ -5,7 +5,7 @@ import { FIREBASE_ENDPOINT } from "../../App";
 import AnimatedButton from "../ui/AnimatedButton";
 //Component Imports
 import AnimatedModal from "../ui/AnimatedModal";
-import { useCart } from "./cart-context/CartCtxProvider";
+import { useCart } from "./cart-context/CartCtx";
 import CartItem from "./CartItem";
 import type { CartItemType } from "./CartTypes";
 

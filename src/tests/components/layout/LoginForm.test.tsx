@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { useRef, useState } from "react";
 import { vi } from "vitest";
 
-import type { UserAction } from "../../../types/auth";
 import LoginForm from "../../../components/layout/LoginForm";
+import type { UserAction } from "../../../types/auth";
 
 const LoginFormHarness = ({
   onSubmit,

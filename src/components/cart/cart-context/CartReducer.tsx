@@ -1,37 +1,6 @@
-import { type CartItemType,type CartState } from "../CartTypes";
+import { CartActions, type CartItemType, type CartReducerFunction, type CartState, defaultCartState } from "../CartTypes";
 
-export const defaultCartState: CartState = {
-  items: [],
-  totalAmount: 0,
-  cartActive: false,
-};
-
-const CartActions = {
-  Update: "UPDATE_CART",
-  Toggle: "TOGGLE_CART",
-  Clear: "CLEAR_CART"
-} as const;
-
-export const updateCart = (items: CartItemType[]) => ({
-  type: "UPDATE_CART" as const,
-  items
-});
-
-export const toggleCart = () => ({
-  type: "TOGGLE_CART" as const
-});
-
-export const clearCart = () => ({
-  type: "CLEAR_CART" as const
-});
-
-type CartActionUnion =
-  | ReturnType<typeof updateCart>
-  | ReturnType<typeof toggleCart>
-  | ReturnType<typeof clearCart>;
-
-export type CartReducerFunction = (state: CartState, action: CartActionUnion) => CartState;
-
+// const actions = CartActions;
 
 const handleUpdateCart = (state: CartState, items: CartItemType[]): CartState => {
   const updatedItems = [...state.items];

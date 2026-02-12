@@ -1,9 +1,9 @@
-import { AnimatePresence,motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 //Component Imports
 import Cart from "../components/cart/Cart.tsx";
 //Functional Imports
-import { useCart } from "../components/cart/cart-context/CartCtxProvider";
+import { useCart } from "../components/cart/cart-context/CartCtx.tsx";
 import AboutUs from "../components/layout/About";
 import Location from "../components/layout/Location";
 import Menu from "../components/layout/menu/Menu";
