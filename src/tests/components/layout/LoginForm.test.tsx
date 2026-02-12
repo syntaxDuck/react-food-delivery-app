@@ -46,7 +46,7 @@ describe("LoginForm", () => {
     await user.click(screen.getByRole("button", { name: /login/i }));
 
     expect(onSubmit).not.toHaveBeenCalled();
-    expect(screen.getByText(/please enter a valid email address/i)).toBeInTheDocument();
+    expect(await screen.findByText(/please enter a valid email address/i)).toBeInTheDocument();
   });
 
   test("switches to sign up mode", async () => {

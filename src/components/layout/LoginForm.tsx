@@ -49,11 +49,9 @@ const LoginForm = (props: LoginFormProps) => {
   ]);
 
   const checkUsername = (username: string): ValidationResult => {
-    const acceptableDomains = [".com", ".org", ".net"];
-    const properDomain = acceptableDomains.some((domain) => {
-      return username.endsWith(domain);
-    });
-    if (properDomain && username.includes("@")) {
+    // Enhanced email validation using regex to support all valid domains
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(username)) {
       setUsernameValid(true);
       return { isValid: true, errors: [] };
     }
@@ -62,18 +60,22 @@ const LoginForm = (props: LoginFormProps) => {
   };
 
   const checkPassword = (password: string): ValidationResult => {
-    const specialCharacters = [
-      "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=",
-    ];
-    const includesSpecialCharacter = specialCharacters.some((char) => {
-      return password.includes(char);
-    });
-    if (password.length > 6 && includesSpecialCharacter) {
+    // Enhanced password requirements: min 8 chars, uppercase, lowercase, number, special character
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()\-_=+]/.test(password);
+    const isLongEnough = password.length >= 8;
+
+    if (isLongEnough && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar) {
       setPasswordValid(true);
       return { isValid: true, errors: [] };
     }
     setPasswordValid(false);
-    return { isValid: false, errors: ["Password must be >6 chars with special character"] };
+    return {
+      isValid: false,
+      errors: ["Password must be at least 8 characters with uppercase, lowercase, number and special character"],
+    };
   };
 
   const checkConfirmPassword = (password: string, confirmPassword: string): ValidationResult => {
@@ -142,7 +144,7 @@ const LoginForm = (props: LoginFormProps) => {
           </motion.div>
         )}
 
-        <form onSubmit={formSubmitHandler} className="space-y-6">
+        <form onSubmit={formSubmitHandler} className="space-y-6" noValidate>
           <div>
             <label htmlFor="username" className="block text-text font-medium mb-2">
               Email Address
@@ -150,7 +152,7 @@ const LoginForm = (props: LoginFormProps) => {
             <motion.input
               id="username"
               className={getInputClasses(usernameValid)}
-              type="text"
+              type="email"
               ref={props.usernameInputRef}
               placeholder="your@email.com"
               variants={inputVariants}
@@ -206,7 +208,7 @@ const LoginForm = (props: LoginFormProps) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                Password must be                 &gt;6 chars with special character
+                Password must be at least 8 characters with uppercase, lowercase, number and special character
               </motion.p>
             )}
           </div>
