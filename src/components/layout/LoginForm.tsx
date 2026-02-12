@@ -33,6 +33,7 @@ const LoginForm = (props: LoginFormProps) => {
   const [usernameValid, setUsernameValid] = React.useState(true);
   const [passwordValid, setPasswordValid] = React.useState(true);
   const [confPasswordValid, setConfPasswordValid] = React.useState(true);
+  const [showPassword, setShowPassword] = React.useState(false);
 
   React.useEffect(() => {
     if (props.usernameInputRef.current?.value === "") setUsernameValid(true);
@@ -176,18 +177,30 @@ const LoginForm = (props: LoginFormProps) => {
             <label htmlFor="password" className="block text-text font-medium mb-2">
               Password
             </label>
-            <motion.input
-              id="password"
-              className={getInputClasses(passwordValid)}
-              type="password"
-              ref={props.passwordInputRef}
-              placeholder="Enter your password"
-              variants={inputVariants}
-              whileFocus="focus"
-              autoComplete={props.userAction === "SignIn" ? "current-password" : "new-password"}
-              required
-              aria-invalid={!passwordValid}
-            />
+            <div className="relative">
+              <motion.input
+                id="password"
+                className={`${getInputClasses(passwordValid)} pr-12`}
+                type={showPassword ? "text" : "password"}
+                ref={props.passwordInputRef}
+                placeholder="Enter your password"
+                variants={inputVariants}
+                whileFocus="focus"
+                autoComplete={props.userAction === "SignIn" ? "current-password" : "new-password"}
+                required
+                aria-invalid={!passwordValid}
+              />
+              <button
+                type="button"
+                onClick={() => { setShowPassword(!showPassword); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-text/50 hover:text-text transition-colors focus:outline-none"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                <span className="material-icons md-18">
+                  {showPassword ? "visibility_off" : "visibility"}
+                </span>
+              </button>
+            </div>
             {!passwordValid && (
               <motion.p
                 className="text-danger text-sm mt-2"
@@ -205,16 +218,40 @@ const LoginForm = (props: LoginFormProps) => {
               <label htmlFor="confirm-password" className="block text-text font-medium mb-2">
                 Confirm Password
               </label>
-              <input
-                id="confirm-password"
-                className={getInputClasses(confPasswordValid)}
-                type="password"
-                placeholder="Confirm password"
-                ref={props.confpasswordInputRef}
-                autoComplete="new-password"
-                required
-                aria-invalid={!confPasswordValid}
-              />
+              <div className="relative">
+                <motion.input
+                  id="confirm-password"
+                  className={`${getInputClasses(confPasswordValid)} pr-12`}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm password"
+                  ref={props.confpasswordInputRef}
+                  variants={inputVariants}
+                  whileFocus="focus"
+                  autoComplete="new-password"
+                  required
+                  aria-invalid={!confPasswordValid}
+                />
+                <button
+                  type="button"
+                  onClick={() => { setShowPassword(!showPassword); }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text/50 hover:text-text transition-colors focus:outline-none"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  <span className="material-icons md-18">
+                    {showPassword ? "visibility_off" : "visibility"}
+                  </span>
+                </button>
+              </div>
+              {!confPasswordValid && (
+                <motion.p
+                  className="text-danger text-sm mt-2"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  Passwords do not match
+                </motion.p>
+              )}
             </div>
           )}
 

@@ -42,7 +42,7 @@ describe("LoginForm", () => {
     render(<LoginFormHarness onSubmit={onSubmit} />);
 
     await user.type(screen.getByLabelText(/email address/i), "invalid-email");
-    await user.type(screen.getByLabelText(/password/i), "password123");
+    await user.type(screen.getByLabelText(/^password$/i), "short");
     await user.click(screen.getByRole("button", { name: /login/i }));
 
     expect(onSubmit).not.toHaveBeenCalled();
@@ -60,5 +60,22 @@ describe("LoginForm", () => {
   test("renders error message when provided", () => {
     render(<LoginFormHarness onSubmit={() => undefined} errorMessage="Invalid credentials" />);
     expect(screen.getByText(/invalid credentials/i)).toBeInTheDocument();
+  });
+
+  test("toggles password visibility", async () => {
+    const user = userEvent.setup();
+    render(<LoginFormHarness onSubmit={() => undefined} />);
+
+    const passwordInput = screen.getByLabelText(/^password$/i);
+    expect(passwordInput).toHaveAttribute("type", "password");
+
+    const toggleButton = screen.getByLabelText(/show password/i);
+    await user.click(toggleButton);
+
+    expect(passwordInput).toHaveAttribute("type", "text");
+    expect(screen.getByLabelText(/hide password/i)).toBeInTheDocument();
+
+    await user.click(screen.getByLabelText(/hide password/i));
+    expect(passwordInput).toHaveAttribute("type", "password");
   });
 });
