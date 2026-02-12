@@ -16,7 +16,7 @@ const cardVariants: Variants = {
   hover: { 
     scale: 1.01,      // Reduced from 1.02
     y: -3,           // Reduced from -5
-    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)",
+    boxShadow: "0 20px 25px -5px color-mix(in oklab, var(--bg-dark) 30%, transparent), 0 10px 10px -5px color-mix(in oklab, var(--bg-dark) 20%, transparent)",
     transition: { type: "spring", stiffness: 200, damping: 25 }  // Softer
   }
 };

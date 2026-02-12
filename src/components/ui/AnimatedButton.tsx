@@ -33,10 +33,10 @@ const SizeClasses = {
 type SizeClassTypes = keyof typeof SizeClasses;
 
 const VariantClasses = {
-  default: "bg-primary hover:bg-primary/90 text-white border border-primary focus:ring-primary",
-  secondary: "bg-secondary hover:bg-secondary/90 text-dark-gray border border-secondary focus:ring-secondary",
+  default: "bg-primary hover:bg-primary/90 text-text border border-primary focus:ring-primary",
+  secondary: "bg-secondary hover:bg-secondary/90 text-bg-dark border border-secondary focus:ring-secondary",
   outline: "bg-transparent hover:bg-primary/10 text-primary border border-primary focus:ring-primary",
-  ghost: "bg-transparent hover:bg-white/10 text-white border border-transparent focus:ring-white"
+  ghost: "bg-transparent hover:bg-bg-light/30 text-text border border-transparent focus:ring-border"
 } as const;
 type VariantClassTypes = keyof typeof VariantClasses;
 

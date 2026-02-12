@@ -23,7 +23,7 @@ const sizeClasses = {
 const colorClasses = {
   primary: "bg-primary",
   secondary: "bg-secondary",
-  white: "bg-white"
+  white: "bg-text"
 } as const;
 
 type SpinnerSize = keyof typeof sizeClasses;

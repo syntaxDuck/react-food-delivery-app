@@ -68,7 +68,7 @@ const AnimatedModal = ({
           onClick={handleBackdropClick}
         >
           <motion.div
-            className={`${sizeClasses[size]} ${className} bg-dark-gray border border-primary/30 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar`}
+            className={`${sizeClasses[size]} ${className} bg-dark-gray border border-border/70 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar`}
             variants={modalVariants}
             onClick={(e) => {
               e.stopPropagation();
