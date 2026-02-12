@@ -1,11 +1,60 @@
 @import "tailwindcss";
 
+:root {
+  /* oklch */
+  color-scheme: light;
+  --bg-dark: oklch(0.92 0 20);
+  --bg: oklch(0.96 0 20);
+  --bg-light: oklch(1 0 20);
+  --text: oklch(0.15 0 20);
+  --text-muted: oklch(0.4 0 20);
+  --highlight: oklch(1 0 20);
+  --border: oklch(0.6 0 20);
+  --border-muted: oklch(0.7 0 20);
+  --primary: oklch(0.4 0.1 20);
+  --secondary: oklch(0.4 0.1 200);
+  --danger: oklch(0.5 0.05 30);
+  --warning: oklch(0.5 0.05 100);
+  --success: oklch(0.5 0.05 160);
+  --info: oklch(0.5 0.05 260);
+}
+
+.dark {
+  /* oklch */
+  color-scheme: dark;
+  --bg-dark: oklch(0.1 0 20);
+  --bg: oklch(0.15 0 20);
+  --bg-light: oklch(0.2 0 20);
+  --text: oklch(0.96 0 20);
+  --text-muted: oklch(0.76 0 20);
+  --highlight: oklch(0.5 0 20);
+  --border: oklch(0.4 0 20);
+  --border-muted: oklch(0.3 0 20);
+  --primary: oklch(0.76 0.1 20);
+  --secondary: oklch(0.76 0.1 200);
+  --danger: oklch(0.7 0.05 30);
+  --warning: oklch(0.7 0.05 100);
+  --success: oklch(0.7 0.05 160);
+  --info: oklch(0.7 0.05 260);
+}
+
 @theme {
-  --color-primary: #d66e6e;
-  --color-secondary: #f6d365;
-  --color-dark-gray: #14161a;
-  --color-light-gray: #e5e7eb;
-  --color-accent: #6ee7f0;
+  --color-bg-dark: var(--bg-dark);
+  --color-bg: var(--bg);
+  --color-bg-light: var(--bg-light);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-dark-gray: var(--bg-dark);
+  --color-light-gray: var(--bg-light);
+  --color-accent: var(--highlight);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-muted: var(--border-muted);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-info: var(--info);
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
@@ -13,8 +62,8 @@
 @layer base {
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-dark-gray);
-    color: #ffffff;
+    background-color: var(--bg-dark);
+    color: var(--text);
   }
 
   h1,
@@ -29,29 +78,58 @@
 }
 
 @layer utilities {
+  .theme-gradient-hero {
+    background-image: linear-gradient(
+      120deg,
+      color-mix(in oklab, var(--bg-dark) 92%, var(--secondary) 8%),
+      color-mix(in oklab, var(--bg) 86%, var(--primary) 14%),
+      color-mix(in oklab, var(--bg-dark) 90%, var(--secondary) 10%)
+    );
+  }
+
+  .theme-gradient-subtle {
+    background-image: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--bg) 96%, transparent),
+      color-mix(in oklab, var(--primary) 8%, var(--bg) 92%),
+      color-mix(in oklab, var(--secondary) 10%, var(--bg-dark) 90%)
+    );
+  }
+
+  .text-gradient-brand {
+    background-image: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--primary) 88%, var(--text) 12%),
+      color-mix(in oklab, var(--secondary) 86%, var(--text) 14%)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .surface-panel {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    @apply bg-bg-light/40 backdrop-blur-md border border-border/70;
   }
 
   .surface-muted {
-    @apply bg-white/5 border border-white/10;
+    @apply bg-bg/60 border border-border-muted/70;
   }
 
   .surface-strong {
-    @apply bg-black/70;
+    @apply bg-bg-dark/85;
   }
 
   .surface-glass {
-    @apply bg-gradient-to-r from-gray-900/95 via-gray-800/92 to-gray-900/95 backdrop-blur-md border border-white/10;
+    @apply bg-gradient-to-r from-bg-dark/95 via-bg/92 to-bg-dark/95 backdrop-blur-md border border-border/60;
   }
 
   .glow-effect {
-    box-shadow: 0 0 20px rgba(214, 110, 110, 0.35);
+    box-shadow: 0 0 20px color-mix(in oklab, var(--primary) 35%, transparent);
   }
 
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(214, 110, 110, 0.6) rgba(255, 255, 255, 0.08);
+    scrollbar-color: color-mix(in oklab, var(--primary) 60%, transparent) color-mix(in oklab, var(--bg-light) 50%, transparent);
   }
 
   .custom-scrollbar::-webkit-scrollbar {
@@ -59,16 +137,16 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.08);
+    background: color-mix(in oklab, var(--bg-light) 50%, transparent);
     border-radius: 999px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(214, 110, 110, 0.6);
+    background: color-mix(in oklab, var(--primary) 60%, transparent);
     border-radius: 999px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(214, 110, 110, 0.75);
+    background: color-mix(in oklab, var(--primary) 75%, transparent);
   }
 }
