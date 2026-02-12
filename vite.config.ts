@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // @ts-expect-error - vitest configuration
   test: {
     environment: "jsdom",
     globals: true,
