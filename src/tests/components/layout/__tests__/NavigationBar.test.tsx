@@ -10,7 +10,11 @@ describe("NavigationBar", () => {
     render(
       <BrowserRouter>
         <CartCtxProvider>
-          <NavigationBar loginStatus={false} />
+          <NavigationBar
+            loginStatus={false}
+            isLightTheme={false}
+            onToggleTheme={() => undefined}
+          />
         </CartCtxProvider>
       </BrowserRouter>
     );
@@ -32,7 +36,11 @@ describe("NavigationBar", () => {
     render(
       <BrowserRouter>
         <CartCtxProvider>
-          <NavigationBar loginStatus={false} />
+          <NavigationBar
+            loginStatus={false}
+            isLightTheme={false}
+            onToggleTheme={() => undefined}
+          />
         </CartCtxProvider>
       </BrowserRouter>
     );

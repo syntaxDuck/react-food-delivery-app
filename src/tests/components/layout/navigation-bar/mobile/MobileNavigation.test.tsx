@@ -18,6 +18,8 @@ describe("MobileNavigation", () => {
           activeSection="about-us"
           setActiveSection={() => undefined}
           loginStatus={false}
+          isLightTheme={false}
+          onToggleTheme={() => undefined}
         />
       </CartCtxProvider>
     );
@@ -34,6 +36,8 @@ describe("MobileNavigation", () => {
           activeSection="about-us"
           setActiveSection={() => undefined}
           loginStatus={false}
+          isLightTheme={false}
+          onToggleTheme={() => undefined}
         />
       </CartCtxProvider>
     );
@@ -57,6 +61,8 @@ describe("MobileNavigation", () => {
           activeSection="about-us"
           setActiveSection={() => undefined}
           loginStatus={false}
+          isLightTheme={false}
+          onToggleTheme={() => undefined}
         />
       </CartCtxProvider>
     );
