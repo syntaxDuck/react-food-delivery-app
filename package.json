@@ -11,7 +11,8 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "menu:bulk-add": "node scripts/add-menu-items.js --file"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

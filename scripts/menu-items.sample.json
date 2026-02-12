@@ -1,0 +1,1202 @@
+{
+  "Spicy Chicken Roll": {
+    "id": "item-001",
+    "price": 9.5,
+    "description": "Spicy chicken with seasonal vegetables and house sauce.",
+    "category": "sushi"
+  },
+  "Spicy Chicken Bowl": {
+    "id": "item-002",
+    "price": 10.25,
+    "description": "Spicy chicken served with aromatic rice and fresh herbs.",
+    "category": "italian"
+  },
+  "Spicy Chicken Platter": {
+    "id": "item-003",
+    "price": 11,
+    "description": "Spicy chicken finished with toasted sesame and scallions.",
+    "category": "mexican"
+  },
+  "Spicy Chicken Skillet": {
+    "id": "item-004",
+    "price": 11.75,
+    "description": "Spicy chicken topped with pickled onions and aioli.",
+    "category": "indian"
+  },
+  "Spicy Chicken Wrap": {
+    "id": "item-005",
+    "price": 12.5,
+    "description": "Spicy chicken slow-cooked and layered with bold spices.",
+    "category": "thai"
+  },
+  "Spicy Chicken Tacos": {
+    "id": "item-006",
+    "price": 13.25,
+    "description": "Spicy chicken crisped to order with a warm glaze.",
+    "category": "american"
+  },
+  "Spicy Chicken Curry": {
+    "id": "item-007",
+    "price": 14,
+    "description": "Spicy chicken paired with a bright citrus dressing.",
+    "category": "mediterranean"
+  },
+  "Spicy Chicken Stir Fry": {
+    "id": "item-008",
+    "price": 14.75,
+    "description": "Spicy chicken simmered in a rich, savory broth.",
+    "category": "chinese"
+  },
+  "Spicy Chicken Risotto": {
+    "id": "item-009",
+    "price": 15.5,
+    "description": "Spicy chicken wrapped in a soft flatbread with greens.",
+    "category": "korean"
+  },
+  "Spicy Chicken Paella": {
+    "id": "item-010",
+    "price": 16.25,
+    "description": "Spicy chicken baked until golden with a melty finish.",
+    "category": "vietnamese"
+  },
+  "Spicy Chicken Kebab": {
+    "id": "item-011",
+    "price": 17,
+    "description": "Spicy chicken with seasonal vegetables and house sauce.",
+    "category": "french"
+  },
+  "Spicy Chicken Dumplings": {
+    "id": "item-012",
+    "price": 17.75,
+    "description": "Spicy chicken served with aromatic rice and fresh herbs.",
+    "category": "greek"
+  },
+  "Spicy Chicken Souvlaki": {
+    "id": "item-013",
+    "price": 18.5,
+    "description": "Spicy chicken finished with toasted sesame and scallions.",
+    "category": "bbq"
+  },
+  "Spicy Beef Roll": {
+    "id": "item-014",
+    "price": 19.25,
+    "description": "Spicy beef topped with pickled onions and aioli.",
+    "category": "dessert"
+  },
+  "Spicy Beef Bowl": {
+    "id": "item-015",
+    "price": 20,
+    "description": "Spicy beef slow-cooked and layered with bold spices.",
+    "category": "vegan"
+  },
+  "Spicy Beef Platter": {
+    "id": "item-016",
+    "price": 9.5,
+    "description": "Spicy beef crisped to order with a warm glaze.",
+    "category": "breakfast"
+  },
+  "Spicy Beef Skillet": {
+    "id": "item-017",
+    "price": 10.25,
+    "description": "Spicy beef paired with a bright citrus dressing.",
+    "category": "seafood"
+  },
+  "Spicy Beef Wrap": {
+    "id": "item-018",
+    "price": 11,
+    "description": "Spicy beef simmered in a rich, savory broth.",
+    "category": "burgers"
+  },
+  "Spicy Beef Tacos": {
+    "id": "item-019",
+    "price": 11.75,
+    "description": "Spicy beef wrapped in a soft flatbread with greens.",
+    "category": "pizza"
+  },
+  "Spicy Beef Curry": {
+    "id": "item-020",
+    "price": 12.5,
+    "description": "Spicy beef baked until golden with a melty finish.",
+    "category": "pasta"
+  },
+  "Spicy Beef Stir Fry": {
+    "id": "item-021",
+    "price": 13.25,
+    "description": "Spicy beef with seasonal vegetables and house sauce.",
+    "category": "salad"
+  },
+  "Spicy Beef Risotto": {
+    "id": "item-022",
+    "price": 14,
+    "description": "Spicy beef served with aromatic rice and fresh herbs.",
+    "category": "sandwiches"
+  },
+  "Spicy Beef Paella": {
+    "id": "item-023",
+    "price": 14.75,
+    "description": "Spicy beef finished with toasted sesame and scallions.",
+    "category": "ramen"
+  },
+  "Spicy Beef Kebab": {
+    "id": "item-024",
+    "price": 15.5,
+    "description": "Spicy beef topped with pickled onions and aioli.",
+    "category": "tapas"
+  },
+  "Spicy Beef Dumplings": {
+    "id": "item-025",
+    "price": 16.25,
+    "description": "Spicy beef slow-cooked and layered with bold spices.",
+    "category": "middle eastern"
+  },
+  "Spicy Beef Souvlaki": {
+    "id": "item-026",
+    "price": 17,
+    "description": "Spicy beef crisped to order with a warm glaze.",
+    "category": "caribbean"
+  },
+  "Spicy Pork Roll": {
+    "id": "item-027",
+    "price": 17.75,
+    "description": "Spicy pork paired with a bright citrus dressing.",
+    "category": "brunch"
+  },
+  "Spicy Pork Bowl": {
+    "id": "item-028",
+    "price": 18.5,
+    "description": "Spicy pork simmered in a rich, savory broth.",
+    "category": "noodles"
+  },
+  "Spicy Pork Platter": {
+    "id": "item-029",
+    "price": 19.25,
+    "description": "Spicy pork wrapped in a soft flatbread with greens.",
+    "category": "steak"
+  },
+  "Spicy Pork Skillet": {
+    "id": "item-030",
+    "price": 20,
+    "description": "Spicy pork baked until golden with a melty finish.",
+    "category": "soups"
+  },
+  "Spicy Pork Wrap": {
+    "id": "item-031",
+    "price": 9.5,
+    "description": "Spicy pork with seasonal vegetables and house sauce.",
+    "category": "sushi"
+  },
+  "Spicy Pork Tacos": {
+    "id": "item-032",
+    "price": 10.25,
+    "description": "Spicy pork served with aromatic rice and fresh herbs.",
+    "category": "italian"
+  },
+  "Spicy Pork Curry": {
+    "id": "item-033",
+    "price": 11,
+    "description": "Spicy pork finished with toasted sesame and scallions.",
+    "category": "mexican"
+  },
+  "Spicy Pork Stir Fry": {
+    "id": "item-034",
+    "price": 11.75,
+    "description": "Spicy pork topped with pickled onions and aioli.",
+    "category": "indian"
+  },
+  "Spicy Pork Risotto": {
+    "id": "item-035",
+    "price": 12.5,
+    "description": "Spicy pork slow-cooked and layered with bold spices.",
+    "category": "thai"
+  },
+  "Spicy Pork Paella": {
+    "id": "item-036",
+    "price": 13.25,
+    "description": "Spicy pork crisped to order with a warm glaze.",
+    "category": "american"
+  },
+  "Spicy Pork Kebab": {
+    "id": "item-037",
+    "price": 14,
+    "description": "Spicy pork paired with a bright citrus dressing.",
+    "category": "mediterranean"
+  },
+  "Spicy Pork Dumplings": {
+    "id": "item-038",
+    "price": 14.75,
+    "description": "Spicy pork simmered in a rich, savory broth.",
+    "category": "chinese"
+  },
+  "Spicy Pork Souvlaki": {
+    "id": "item-039",
+    "price": 15.5,
+    "description": "Spicy pork wrapped in a soft flatbread with greens.",
+    "category": "korean"
+  },
+  "Spicy Salmon Roll": {
+    "id": "item-040",
+    "price": 16.25,
+    "description": "Spicy salmon baked until golden with a melty finish.",
+    "category": "vietnamese"
+  },
+  "Spicy Salmon Bowl": {
+    "id": "item-041",
+    "price": 17,
+    "description": "Spicy salmon with seasonal vegetables and house sauce.",
+    "category": "french"
+  },
+  "Spicy Salmon Platter": {
+    "id": "item-042",
+    "price": 17.75,
+    "description": "Spicy salmon served with aromatic rice and fresh herbs.",
+    "category": "greek"
+  },
+  "Spicy Salmon Skillet": {
+    "id": "item-043",
+    "price": 18.5,
+    "description": "Spicy salmon finished with toasted sesame and scallions.",
+    "category": "bbq"
+  },
+  "Spicy Salmon Wrap": {
+    "id": "item-044",
+    "price": 19.25,
+    "description": "Spicy salmon topped with pickled onions and aioli.",
+    "category": "dessert"
+  },
+  "Spicy Salmon Tacos": {
+    "id": "item-045",
+    "price": 20,
+    "description": "Spicy salmon slow-cooked and layered with bold spices.",
+    "category": "vegan"
+  },
+  "Spicy Salmon Curry": {
+    "id": "item-046",
+    "price": 9.5,
+    "description": "Spicy salmon crisped to order with a warm glaze.",
+    "category": "breakfast"
+  },
+  "Spicy Salmon Stir Fry": {
+    "id": "item-047",
+    "price": 10.25,
+    "description": "Spicy salmon paired with a bright citrus dressing.",
+    "category": "seafood"
+  },
+  "Spicy Salmon Risotto": {
+    "id": "item-048",
+    "price": 11,
+    "description": "Spicy salmon simmered in a rich, savory broth.",
+    "category": "burgers"
+  },
+  "Spicy Salmon Paella": {
+    "id": "item-049",
+    "price": 11.75,
+    "description": "Spicy salmon wrapped in a soft flatbread with greens.",
+    "category": "pizza"
+  },
+  "Spicy Salmon Kebab": {
+    "id": "item-050",
+    "price": 12.5,
+    "description": "Spicy salmon baked until golden with a melty finish.",
+    "category": "pasta"
+  },
+  "Spicy Salmon Dumplings": {
+    "id": "item-051",
+    "price": 13.25,
+    "description": "Spicy salmon with seasonal vegetables and house sauce.",
+    "category": "salad"
+  },
+  "Spicy Salmon Souvlaki": {
+    "id": "item-052",
+    "price": 14,
+    "description": "Spicy salmon served with aromatic rice and fresh herbs.",
+    "category": "sandwiches"
+  },
+  "Spicy Tuna Roll": {
+    "id": "item-053",
+    "price": 14.75,
+    "description": "Spicy tuna finished with toasted sesame and scallions.",
+    "category": "ramen"
+  },
+  "Spicy Tuna Bowl": {
+    "id": "item-054",
+    "price": 15.5,
+    "description": "Spicy tuna topped with pickled onions and aioli.",
+    "category": "tapas"
+  },
+  "Spicy Tuna Platter": {
+    "id": "item-055",
+    "price": 16.25,
+    "description": "Spicy tuna slow-cooked and layered with bold spices.",
+    "category": "middle eastern"
+  },
+  "Spicy Tuna Skillet": {
+    "id": "item-056",
+    "price": 17,
+    "description": "Spicy tuna crisped to order with a warm glaze.",
+    "category": "caribbean"
+  },
+  "Spicy Tuna Wrap": {
+    "id": "item-057",
+    "price": 17.75,
+    "description": "Spicy tuna paired with a bright citrus dressing.",
+    "category": "brunch"
+  },
+  "Spicy Tuna Tacos": {
+    "id": "item-058",
+    "price": 18.5,
+    "description": "Spicy tuna simmered in a rich, savory broth.",
+    "category": "noodles"
+  },
+  "Spicy Tuna Curry": {
+    "id": "item-059",
+    "price": 19.25,
+    "description": "Spicy tuna wrapped in a soft flatbread with greens.",
+    "category": "steak"
+  },
+  "Spicy Tuna Stir Fry": {
+    "id": "item-060",
+    "price": 20,
+    "description": "Spicy tuna baked until golden with a melty finish.",
+    "category": "soups"
+  },
+  "Spicy Tuna Risotto": {
+    "id": "item-061",
+    "price": 9.5,
+    "description": "Spicy tuna with seasonal vegetables and house sauce.",
+    "category": "sushi"
+  },
+  "Spicy Tuna Paella": {
+    "id": "item-062",
+    "price": 10.25,
+    "description": "Spicy tuna served with aromatic rice and fresh herbs.",
+    "category": "italian"
+  },
+  "Spicy Tuna Kebab": {
+    "id": "item-063",
+    "price": 11,
+    "description": "Spicy tuna finished with toasted sesame and scallions.",
+    "category": "mexican"
+  },
+  "Spicy Tuna Dumplings": {
+    "id": "item-064",
+    "price": 11.75,
+    "description": "Spicy tuna topped with pickled onions and aioli.",
+    "category": "indian"
+  },
+  "Spicy Tuna Souvlaki": {
+    "id": "item-065",
+    "price": 12.5,
+    "description": "Spicy tuna slow-cooked and layered with bold spices.",
+    "category": "thai"
+  },
+  "Spicy Shrimp Roll": {
+    "id": "item-066",
+    "price": 13.25,
+    "description": "Spicy shrimp crisped to order with a warm glaze.",
+    "category": "american"
+  },
+  "Spicy Shrimp Bowl": {
+    "id": "item-067",
+    "price": 14,
+    "description": "Spicy shrimp paired with a bright citrus dressing.",
+    "category": "mediterranean"
+  },
+  "Spicy Shrimp Platter": {
+    "id": "item-068",
+    "price": 14.75,
+    "description": "Spicy shrimp simmered in a rich, savory broth.",
+    "category": "chinese"
+  },
+  "Spicy Shrimp Skillet": {
+    "id": "item-069",
+    "price": 15.5,
+    "description": "Spicy shrimp wrapped in a soft flatbread with greens.",
+    "category": "korean"
+  },
+  "Spicy Shrimp Wrap": {
+    "id": "item-070",
+    "price": 16.25,
+    "description": "Spicy shrimp baked until golden with a melty finish.",
+    "category": "vietnamese"
+  },
+  "Spicy Shrimp Tacos": {
+    "id": "item-071",
+    "price": 17,
+    "description": "Spicy shrimp with seasonal vegetables and house sauce.",
+    "category": "french"
+  },
+  "Spicy Shrimp Curry": {
+    "id": "item-072",
+    "price": 17.75,
+    "description": "Spicy shrimp served with aromatic rice and fresh herbs.",
+    "category": "greek"
+  },
+  "Spicy Shrimp Stir Fry": {
+    "id": "item-073",
+    "price": 18.5,
+    "description": "Spicy shrimp finished with toasted sesame and scallions.",
+    "category": "bbq"
+  },
+  "Spicy Shrimp Risotto": {
+    "id": "item-074",
+    "price": 19.25,
+    "description": "Spicy shrimp topped with pickled onions and aioli.",
+    "category": "dessert"
+  },
+  "Spicy Shrimp Paella": {
+    "id": "item-075",
+    "price": 20,
+    "description": "Spicy shrimp slow-cooked and layered with bold spices.",
+    "category": "vegan"
+  },
+  "Spicy Shrimp Kebab": {
+    "id": "item-076",
+    "price": 9.5,
+    "description": "Spicy shrimp crisped to order with a warm glaze.",
+    "category": "breakfast"
+  },
+  "Spicy Shrimp Dumplings": {
+    "id": "item-077",
+    "price": 10.25,
+    "description": "Spicy shrimp paired with a bright citrus dressing.",
+    "category": "seafood"
+  },
+  "Spicy Shrimp Souvlaki": {
+    "id": "item-078",
+    "price": 11,
+    "description": "Spicy shrimp simmered in a rich, savory broth.",
+    "category": "burgers"
+  },
+  "Spicy Tofu Roll": {
+    "id": "item-079",
+    "price": 11.75,
+    "description": "Spicy tofu wrapped in a soft flatbread with greens.",
+    "category": "pizza"
+  },
+  "Spicy Tofu Bowl": {
+    "id": "item-080",
+    "price": 12.5,
+    "description": "Spicy tofu baked until golden with a melty finish.",
+    "category": "pasta"
+  },
+  "Spicy Tofu Platter": {
+    "id": "item-081",
+    "price": 13.25,
+    "description": "Spicy tofu with seasonal vegetables and house sauce.",
+    "category": "salad"
+  },
+  "Spicy Tofu Skillet": {
+    "id": "item-082",
+    "price": 14,
+    "description": "Spicy tofu served with aromatic rice and fresh herbs.",
+    "category": "sandwiches"
+  },
+  "Spicy Tofu Wrap": {
+    "id": "item-083",
+    "price": 14.75,
+    "description": "Spicy tofu finished with toasted sesame and scallions.",
+    "category": "ramen"
+  },
+  "Spicy Tofu Tacos": {
+    "id": "item-084",
+    "price": 15.5,
+    "description": "Spicy tofu topped with pickled onions and aioli.",
+    "category": "tapas"
+  },
+  "Spicy Tofu Curry": {
+    "id": "item-085",
+    "price": 16.25,
+    "description": "Spicy tofu slow-cooked and layered with bold spices.",
+    "category": "middle eastern"
+  },
+  "Spicy Tofu Stir Fry": {
+    "id": "item-086",
+    "price": 17,
+    "description": "Spicy tofu crisped to order with a warm glaze.",
+    "category": "caribbean"
+  },
+  "Spicy Tofu Risotto": {
+    "id": "item-087",
+    "price": 17.75,
+    "description": "Spicy tofu paired with a bright citrus dressing.",
+    "category": "brunch"
+  },
+  "Spicy Tofu Paella": {
+    "id": "item-088",
+    "price": 18.5,
+    "description": "Spicy tofu simmered in a rich, savory broth.",
+    "category": "noodles"
+  },
+  "Spicy Tofu Kebab": {
+    "id": "item-089",
+    "price": 19.25,
+    "description": "Spicy tofu wrapped in a soft flatbread with greens.",
+    "category": "steak"
+  },
+  "Spicy Tofu Dumplings": {
+    "id": "item-090",
+    "price": 20,
+    "description": "Spicy tofu baked until golden with a melty finish.",
+    "category": "soups"
+  },
+  "Spicy Tofu Souvlaki": {
+    "id": "item-091",
+    "price": 9.5,
+    "description": "Spicy tofu with seasonal vegetables and house sauce.",
+    "category": "sushi"
+  },
+  "Spicy Mushroom Roll": {
+    "id": "item-092",
+    "price": 10.25,
+    "description": "Spicy mushroom served with aromatic rice and fresh herbs.",
+    "category": "italian"
+  },
+  "Spicy Mushroom Bowl": {
+    "id": "item-093",
+    "price": 11,
+    "description": "Spicy mushroom finished with toasted sesame and scallions.",
+    "category": "mexican"
+  },
+  "Spicy Mushroom Platter": {
+    "id": "item-094",
+    "price": 11.75,
+    "description": "Spicy mushroom topped with pickled onions and aioli.",
+    "category": "indian"
+  },
+  "Spicy Mushroom Skillet": {
+    "id": "item-095",
+    "price": 12.5,
+    "description": "Spicy mushroom slow-cooked and layered with bold spices.",
+    "category": "thai"
+  },
+  "Spicy Mushroom Wrap": {
+    "id": "item-096",
+    "price": 13.25,
+    "description": "Spicy mushroom crisped to order with a warm glaze.",
+    "category": "american"
+  },
+  "Spicy Mushroom Tacos": {
+    "id": "item-097",
+    "price": 14,
+    "description": "Spicy mushroom paired with a bright citrus dressing.",
+    "category": "mediterranean"
+  },
+  "Spicy Mushroom Curry": {
+    "id": "item-098",
+    "price": 14.75,
+    "description": "Spicy mushroom simmered in a rich, savory broth.",
+    "category": "chinese"
+  },
+  "Spicy Mushroom Stir Fry": {
+    "id": "item-099",
+    "price": 15.5,
+    "description": "Spicy mushroom wrapped in a soft flatbread with greens.",
+    "category": "korean"
+  },
+  "Spicy Mushroom Risotto": {
+    "id": "item-100",
+    "price": 16.25,
+    "description": "Spicy mushroom baked until golden with a melty finish.",
+    "category": "vietnamese"
+  },
+  "Spicy Mushroom Paella": {
+    "id": "item-101",
+    "price": 17,
+    "description": "Spicy mushroom with seasonal vegetables and house sauce.",
+    "category": "french"
+  },
+  "Spicy Mushroom Kebab": {
+    "id": "item-102",
+    "price": 17.75,
+    "description": "Spicy mushroom served with aromatic rice and fresh herbs.",
+    "category": "greek"
+  },
+  "Spicy Mushroom Dumplings": {
+    "id": "item-103",
+    "price": 18.5,
+    "description": "Spicy mushroom finished with toasted sesame and scallions.",
+    "category": "bbq"
+  },
+  "Spicy Mushroom Souvlaki": {
+    "id": "item-104",
+    "price": 19.25,
+    "description": "Spicy mushroom topped with pickled onions and aioli.",
+    "category": "dessert"
+  },
+  "Spicy Lamb Roll": {
+    "id": "item-105",
+    "price": 20,
+    "description": "Spicy lamb slow-cooked and layered with bold spices.",
+    "category": "vegan"
+  },
+  "Spicy Lamb Bowl": {
+    "id": "item-106",
+    "price": 9.5,
+    "description": "Spicy lamb crisped to order with a warm glaze.",
+    "category": "breakfast"
+  },
+  "Spicy Lamb Platter": {
+    "id": "item-107",
+    "price": 10.25,
+    "description": "Spicy lamb paired with a bright citrus dressing.",
+    "category": "seafood"
+  },
+  "Spicy Lamb Skillet": {
+    "id": "item-108",
+    "price": 11,
+    "description": "Spicy lamb simmered in a rich, savory broth.",
+    "category": "burgers"
+  },
+  "Spicy Lamb Wrap": {
+    "id": "item-109",
+    "price": 11.75,
+    "description": "Spicy lamb wrapped in a soft flatbread with greens.",
+    "category": "pizza"
+  },
+  "Spicy Lamb Tacos": {
+    "id": "item-110",
+    "price": 12.5,
+    "description": "Spicy lamb baked until golden with a melty finish.",
+    "category": "pasta"
+  },
+  "Spicy Lamb Curry": {
+    "id": "item-111",
+    "price": 13.25,
+    "description": "Spicy lamb with seasonal vegetables and house sauce.",
+    "category": "salad"
+  },
+  "Spicy Lamb Stir Fry": {
+    "id": "item-112",
+    "price": 14,
+    "description": "Spicy lamb served with aromatic rice and fresh herbs.",
+    "category": "sandwiches"
+  },
+  "Spicy Lamb Risotto": {
+    "id": "item-113",
+    "price": 14.75,
+    "description": "Spicy lamb finished with toasted sesame and scallions.",
+    "category": "ramen"
+  },
+  "Spicy Lamb Paella": {
+    "id": "item-114",
+    "price": 15.5,
+    "description": "Spicy lamb topped with pickled onions and aioli.",
+    "category": "tapas"
+  },
+  "Spicy Lamb Kebab": {
+    "id": "item-115",
+    "price": 16.25,
+    "description": "Spicy lamb slow-cooked and layered with bold spices.",
+    "category": "middle eastern"
+  },
+  "Spicy Lamb Dumplings": {
+    "id": "item-116",
+    "price": 17,
+    "description": "Spicy lamb crisped to order with a warm glaze.",
+    "category": "caribbean"
+  },
+  "Spicy Lamb Souvlaki": {
+    "id": "item-117",
+    "price": 17.75,
+    "description": "Spicy lamb paired with a bright citrus dressing.",
+    "category": "brunch"
+  },
+  "Spicy Turkey Roll": {
+    "id": "item-118",
+    "price": 18.5,
+    "description": "Spicy turkey simmered in a rich, savory broth.",
+    "category": "noodles"
+  },
+  "Spicy Turkey Bowl": {
+    "id": "item-119",
+    "price": 19.25,
+    "description": "Spicy turkey wrapped in a soft flatbread with greens.",
+    "category": "steak"
+  },
+  "Spicy Turkey Platter": {
+    "id": "item-120",
+    "price": 20,
+    "description": "Spicy turkey baked until golden with a melty finish.",
+    "category": "soups"
+  },
+  "Spicy Turkey Skillet": {
+    "id": "item-121",
+    "price": 9.5,
+    "description": "Spicy turkey with seasonal vegetables and house sauce.",
+    "category": "sushi"
+  },
+  "Spicy Turkey Wrap": {
+    "id": "item-122",
+    "price": 10.25,
+    "description": "Spicy turkey served with aromatic rice and fresh herbs.",
+    "category": "italian"
+  },
+  "Spicy Turkey Tacos": {
+    "id": "item-123",
+    "price": 11,
+    "description": "Spicy turkey finished with toasted sesame and scallions.",
+    "category": "mexican"
+  },
+  "Spicy Turkey Curry": {
+    "id": "item-124",
+    "price": 11.75,
+    "description": "Spicy turkey topped with pickled onions and aioli.",
+    "category": "indian"
+  },
+  "Spicy Turkey Stir Fry": {
+    "id": "item-125",
+    "price": 12.5,
+    "description": "Spicy turkey slow-cooked and layered with bold spices.",
+    "category": "thai"
+  },
+  "Spicy Turkey Risotto": {
+    "id": "item-126",
+    "price": 13.25,
+    "description": "Spicy turkey crisped to order with a warm glaze.",
+    "category": "american"
+  },
+  "Spicy Turkey Paella": {
+    "id": "item-127",
+    "price": 14,
+    "description": "Spicy turkey paired with a bright citrus dressing.",
+    "category": "mediterranean"
+  },
+  "Spicy Turkey Kebab": {
+    "id": "item-128",
+    "price": 14.75,
+    "description": "Spicy turkey simmered in a rich, savory broth.",
+    "category": "chinese"
+  },
+  "Spicy Turkey Dumplings": {
+    "id": "item-129",
+    "price": 15.5,
+    "description": "Spicy turkey wrapped in a soft flatbread with greens.",
+    "category": "korean"
+  },
+  "Spicy Turkey Souvlaki": {
+    "id": "item-130",
+    "price": 16.25,
+    "description": "Spicy turkey baked until golden with a melty finish.",
+    "category": "vietnamese"
+  },
+  "Spicy Veggie Roll": {
+    "id": "item-131",
+    "price": 17,
+    "description": "Spicy veggie with seasonal vegetables and house sauce.",
+    "category": "french"
+  },
+  "Spicy Veggie Bowl": {
+    "id": "item-132",
+    "price": 17.75,
+    "description": "Spicy veggie served with aromatic rice and fresh herbs.",
+    "category": "greek"
+  },
+  "Spicy Veggie Platter": {
+    "id": "item-133",
+    "price": 18.5,
+    "description": "Spicy veggie finished with toasted sesame and scallions.",
+    "category": "bbq"
+  },
+  "Spicy Veggie Skillet": {
+    "id": "item-134",
+    "price": 19.25,
+    "description": "Spicy veggie topped with pickled onions and aioli.",
+    "category": "dessert"
+  },
+  "Spicy Veggie Wrap": {
+    "id": "item-135",
+    "price": 20,
+    "description": "Spicy veggie slow-cooked and layered with bold spices.",
+    "category": "vegan"
+  },
+  "Spicy Veggie Tacos": {
+    "id": "item-136",
+    "price": 9.5,
+    "description": "Spicy veggie crisped to order with a warm glaze.",
+    "category": "breakfast"
+  },
+  "Spicy Veggie Curry": {
+    "id": "item-137",
+    "price": 10.25,
+    "description": "Spicy veggie paired with a bright citrus dressing.",
+    "category": "seafood"
+  },
+  "Spicy Veggie Stir Fry": {
+    "id": "item-138",
+    "price": 11,
+    "description": "Spicy veggie simmered in a rich, savory broth.",
+    "category": "burgers"
+  },
+  "Spicy Veggie Risotto": {
+    "id": "item-139",
+    "price": 11.75,
+    "description": "Spicy veggie wrapped in a soft flatbread with greens.",
+    "category": "pizza"
+  },
+  "Spicy Veggie Paella": {
+    "id": "item-140",
+    "price": 12.5,
+    "description": "Spicy veggie baked until golden with a melty finish.",
+    "category": "pasta"
+  },
+  "Spicy Veggie Kebab": {
+    "id": "item-141",
+    "price": 13.25,
+    "description": "Spicy veggie with seasonal vegetables and house sauce.",
+    "category": "salad"
+  },
+  "Spicy Veggie Dumplings": {
+    "id": "item-142",
+    "price": 14,
+    "description": "Spicy veggie served with aromatic rice and fresh herbs.",
+    "category": "sandwiches"
+  },
+  "Spicy Veggie Souvlaki": {
+    "id": "item-143",
+    "price": 14.75,
+    "description": "Spicy veggie finished with toasted sesame and scallions.",
+    "category": "ramen"
+  },
+  "Spicy Crab Roll": {
+    "id": "item-144",
+    "price": 15.5,
+    "description": "Spicy crab topped with pickled onions and aioli.",
+    "category": "tapas"
+  },
+  "Spicy Crab Bowl": {
+    "id": "item-145",
+    "price": 16.25,
+    "description": "Spicy crab slow-cooked and layered with bold spices.",
+    "category": "middle eastern"
+  },
+  "Spicy Crab Platter": {
+    "id": "item-146",
+    "price": 17,
+    "description": "Spicy crab crisped to order with a warm glaze.",
+    "category": "caribbean"
+  },
+  "Spicy Crab Skillet": {
+    "id": "item-147",
+    "price": 17.75,
+    "description": "Spicy crab paired with a bright citrus dressing.",
+    "category": "brunch"
+  },
+  "Spicy Crab Wrap": {
+    "id": "item-148",
+    "price": 18.5,
+    "description": "Spicy crab simmered in a rich, savory broth.",
+    "category": "noodles"
+  },
+  "Spicy Crab Tacos": {
+    "id": "item-149",
+    "price": 19.25,
+    "description": "Spicy crab wrapped in a soft flatbread with greens.",
+    "category": "steak"
+  },
+  "Spicy Crab Curry": {
+    "id": "item-150",
+    "price": 20,
+    "description": "Spicy crab baked until golden with a melty finish.",
+    "category": "soups"
+  },
+  "Spicy Crab Stir Fry": {
+    "id": "item-151",
+    "price": 9.5,
+    "description": "Spicy crab with seasonal vegetables and house sauce.",
+    "category": "sushi"
+  },
+  "Spicy Crab Risotto": {
+    "id": "item-152",
+    "price": 10.25,
+    "description": "Spicy crab served with aromatic rice and fresh herbs.",
+    "category": "italian"
+  },
+  "Spicy Crab Paella": {
+    "id": "item-153",
+    "price": 11,
+    "description": "Spicy crab finished with toasted sesame and scallions.",
+    "category": "mexican"
+  },
+  "Spicy Crab Kebab": {
+    "id": "item-154",
+    "price": 11.75,
+    "description": "Spicy crab topped with pickled onions and aioli.",
+    "category": "indian"
+  },
+  "Spicy Crab Dumplings": {
+    "id": "item-155",
+    "price": 12.5,
+    "description": "Spicy crab slow-cooked and layered with bold spices.",
+    "category": "thai"
+  },
+  "Spicy Crab Souvlaki": {
+    "id": "item-156",
+    "price": 13.25,
+    "description": "Spicy crab crisped to order with a warm glaze.",
+    "category": "american"
+  },
+  "Spicy Duck Roll": {
+    "id": "item-157",
+    "price": 14,
+    "description": "Spicy duck paired with a bright citrus dressing.",
+    "category": "mediterranean"
+  },
+  "Spicy Duck Bowl": {
+    "id": "item-158",
+    "price": 14.75,
+    "description": "Spicy duck simmered in a rich, savory broth.",
+    "category": "chinese"
+  },
+  "Spicy Duck Platter": {
+    "id": "item-159",
+    "price": 15.5,
+    "description": "Spicy duck wrapped in a soft flatbread with greens.",
+    "category": "korean"
+  },
+  "Spicy Duck Skillet": {
+    "id": "item-160",
+    "price": 16.25,
+    "description": "Spicy duck baked until golden with a melty finish.",
+    "category": "vietnamese"
+  },
+  "Spicy Duck Wrap": {
+    "id": "item-161",
+    "price": 17,
+    "description": "Spicy duck with seasonal vegetables and house sauce.",
+    "category": "french"
+  },
+  "Spicy Duck Tacos": {
+    "id": "item-162",
+    "price": 17.75,
+    "description": "Spicy duck served with aromatic rice and fresh herbs.",
+    "category": "greek"
+  },
+  "Spicy Duck Curry": {
+    "id": "item-163",
+    "price": 18.5,
+    "description": "Spicy duck finished with toasted sesame and scallions.",
+    "category": "bbq"
+  },
+  "Spicy Duck Stir Fry": {
+    "id": "item-164",
+    "price": 19.25,
+    "description": "Spicy duck topped with pickled onions and aioli.",
+    "category": "dessert"
+  },
+  "Spicy Duck Risotto": {
+    "id": "item-165",
+    "price": 20,
+    "description": "Spicy duck slow-cooked and layered with bold spices.",
+    "category": "vegan"
+  },
+  "Spicy Duck Paella": {
+    "id": "item-166",
+    "price": 9.5,
+    "description": "Spicy duck crisped to order with a warm glaze.",
+    "category": "breakfast"
+  },
+  "Spicy Duck Kebab": {
+    "id": "item-167",
+    "price": 10.25,
+    "description": "Spicy duck paired with a bright citrus dressing.",
+    "category": "seafood"
+  },
+  "Spicy Duck Dumplings": {
+    "id": "item-168",
+    "price": 11,
+    "description": "Spicy duck simmered in a rich, savory broth.",
+    "category": "burgers"
+  },
+  "Spicy Duck Souvlaki": {
+    "id": "item-169",
+    "price": 11.75,
+    "description": "Spicy duck wrapped in a soft flatbread with greens.",
+    "category": "pizza"
+  },
+  "Spicy Scallop Roll": {
+    "id": "item-170",
+    "price": 12.5,
+    "description": "Spicy scallop baked until golden with a melty finish.",
+    "category": "pasta"
+  },
+  "Spicy Scallop Bowl": {
+    "id": "item-171",
+    "price": 13.25,
+    "description": "Spicy scallop with seasonal vegetables and house sauce.",
+    "category": "salad"
+  },
+  "Spicy Scallop Platter": {
+    "id": "item-172",
+    "price": 14,
+    "description": "Spicy scallop served with aromatic rice and fresh herbs.",
+    "category": "sandwiches"
+  },
+  "Spicy Scallop Skillet": {
+    "id": "item-173",
+    "price": 14.75,
+    "description": "Spicy scallop finished with toasted sesame and scallions.",
+    "category": "ramen"
+  },
+  "Spicy Scallop Wrap": {
+    "id": "item-174",
+    "price": 15.5,
+    "description": "Spicy scallop topped with pickled onions and aioli.",
+    "category": "tapas"
+  },
+  "Spicy Scallop Tacos": {
+    "id": "item-175",
+    "price": 16.25,
+    "description": "Spicy scallop slow-cooked and layered with bold spices.",
+    "category": "middle eastern"
+  },
+  "Spicy Scallop Curry": {
+    "id": "item-176",
+    "price": 17,
+    "description": "Spicy scallop crisped to order with a warm glaze.",
+    "category": "caribbean"
+  },
+  "Spicy Scallop Stir Fry": {
+    "id": "item-177",
+    "price": 17.75,
+    "description": "Spicy scallop paired with a bright citrus dressing.",
+    "category": "brunch"
+  },
+  "Spicy Scallop Risotto": {
+    "id": "item-178",
+    "price": 18.5,
+    "description": "Spicy scallop simmered in a rich, savory broth.",
+    "category": "noodles"
+  },
+  "Spicy Scallop Paella": {
+    "id": "item-179",
+    "price": 19.25,
+    "description": "Spicy scallop wrapped in a soft flatbread with greens.",
+    "category": "steak"
+  },
+  "Spicy Scallop Kebab": {
+    "id": "item-180",
+    "price": 20,
+    "description": "Spicy scallop baked until golden with a melty finish.",
+    "category": "soups"
+  },
+  "Spicy Scallop Dumplings": {
+    "id": "item-181",
+    "price": 9.5,
+    "description": "Spicy scallop with seasonal vegetables and house sauce.",
+    "category": "sushi"
+  },
+  "Spicy Scallop Souvlaki": {
+    "id": "item-182",
+    "price": 10.25,
+    "description": "Spicy scallop served with aromatic rice and fresh herbs.",
+    "category": "italian"
+  },
+  "Spicy Eggplant Roll": {
+    "id": "item-183",
+    "price": 11,
+    "description": "Spicy eggplant finished with toasted sesame and scallions.",
+    "category": "mexican"
+  },
+  "Spicy Eggplant Bowl": {
+    "id": "item-184",
+    "price": 11.75,
+    "description": "Spicy eggplant topped with pickled onions and aioli.",
+    "category": "indian"
+  },
+  "Spicy Eggplant Platter": {
+    "id": "item-185",
+    "price": 12.5,
+    "description": "Spicy eggplant slow-cooked and layered with bold spices.",
+    "category": "thai"
+  },
+  "Spicy Eggplant Skillet": {
+    "id": "item-186",
+    "price": 13.25,
+    "description": "Spicy eggplant crisped to order with a warm glaze.",
+    "category": "american"
+  },
+  "Spicy Eggplant Wrap": {
+    "id": "item-187",
+    "price": 14,
+    "description": "Spicy eggplant paired with a bright citrus dressing.",
+    "category": "mediterranean"
+  },
+  "Spicy Eggplant Tacos": {
+    "id": "item-188",
+    "price": 14.75,
+    "description": "Spicy eggplant simmered in a rich, savory broth.",
+    "category": "chinese"
+  },
+  "Spicy Eggplant Curry": {
+    "id": "item-189",
+    "price": 15.5,
+    "description": "Spicy eggplant wrapped in a soft flatbread with greens.",
+    "category": "korean"
+  },
+  "Spicy Eggplant Stir Fry": {
+    "id": "item-190",
+    "price": 16.25,
+    "description": "Spicy eggplant baked until golden with a melty finish.",
+    "category": "vietnamese"
+  },
+  "Spicy Eggplant Risotto": {
+    "id": "item-191",
+    "price": 17,
+    "description": "Spicy eggplant with seasonal vegetables and house sauce.",
+    "category": "french"
+  },
+  "Spicy Eggplant Paella": {
+    "id": "item-192",
+    "price": 17.75,
+    "description": "Spicy eggplant served with aromatic rice and fresh herbs.",
+    "category": "greek"
+  },
+  "Spicy Eggplant Kebab": {
+    "id": "item-193",
+    "price": 18.5,
+    "description": "Spicy eggplant finished with toasted sesame and scallions.",
+    "category": "bbq"
+  },
+  "Spicy Eggplant Dumplings": {
+    "id": "item-194",
+    "price": 19.25,
+    "description": "Spicy eggplant topped with pickled onions and aioli.",
+    "category": "dessert"
+  },
+  "Spicy Eggplant Souvlaki": {
+    "id": "item-195",
+    "price": 20,
+    "description": "Spicy eggplant slow-cooked and layered with bold spices.",
+    "category": "vegan"
+  },
+  "Spicy Falafel Roll": {
+    "id": "item-196",
+    "price": 9.5,
+    "description": "Spicy falafel crisped to order with a warm glaze.",
+    "category": "breakfast"
+  },
+  "Spicy Falafel Bowl": {
+    "id": "item-197",
+    "price": 10.25,
+    "description": "Spicy falafel paired with a bright citrus dressing.",
+    "category": "seafood"
+  },
+  "Spicy Falafel Platter": {
+    "id": "item-198",
+    "price": 11,
+    "description": "Spicy falafel simmered in a rich, savory broth.",
+    "category": "burgers"
+  },
+  "Spicy Falafel Skillet": {
+    "id": "item-199",
+    "price": 11.75,
+    "description": "Spicy falafel wrapped in a soft flatbread with greens.",
+    "category": "pizza"
+  },
+  "Spicy Falafel Wrap": {
+    "id": "item-200",
+    "price": 12.5,
+    "description": "Spicy falafel baked until golden with a melty finish.",
+    "category": "pasta"
+  }
+}

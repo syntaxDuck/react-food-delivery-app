@@ -119,6 +119,31 @@ npm run test:coverage
 - Menu and order submission rely on valid Firebase env config.
 - The project is frontend-only in this repository.
 
+## Bulk Add Menu Items
+
+You can bulk add menu items to Firebase using a JSON file keyed by item name.
+
+Example file: `scripts/menu-items.example.json`
+
+Run:
+
+```bash
+npm run menu:bulk-add -- --file scripts/menu-items.example.json
+```
+
+JSON format:
+
+```json
+{
+  "Sushi Roll": {
+    "id": "item-1",
+    "price": 12.99,
+    "description": "Fresh salmon, avocado, and rice",
+    "category": "sushi"
+  }
+}
+```
+
 ## Screenshots
 
 ![Chrono Delivery app demo](./artifacts/demo.gif)
