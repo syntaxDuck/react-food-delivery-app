@@ -3,9 +3,6 @@ export interface CartItemType {
   name: string;
   price: number;
   amount: number;
-  description?: string;
-  category?: string;
-  image?: string;
 }
 
 export interface CartState {

@@ -98,16 +98,16 @@ const Cart: React.FC = () => {
         >
           <span className="material-icons md-96 text-primary">shopping_cart</span>
         </motion.div>
-        <h3 className="text-2xl font-bold text-white mb-2">Your cart is empty</h3>
-        <p className="text-white/60">Add some delicious items to get started!</p>
+        <h3 className="text-2xl font-bold text-text mb-2">Your cart is empty</h3>
+        <p className="text-text/60">Add some delicious items to get started!</p>
       </motion.div>
     );
   } else {
     cartContent = (
       <div className="flex flex-col h-full">
-        <div className="flex justify-between items-center p-6 border-b border-white/20">
+        <div className="flex justify-between items-center p-6 border-b border-border/60">
           <motion.h2
-            className="text-2xl font-bold text-white"
+            className="text-2xl font-bold text-text"
             key={crtCtx.state.totalAmount}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
@@ -186,19 +186,19 @@ const Cart: React.FC = () => {
       isOpen={crtCtx.state.cartActive}
       onClose={crtCtx.toggleCart}
       size="lg"
-      className="bg-dark-gray border-primary/30"
+      className="bg-dark-gray border-border/70"
     >
       <div className="space-y-4">
         {error && (
           <div
-            className="rounded-lg border border-red-400/60 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+            className="rounded-lg border border-danger/70 bg-danger/15 px-4 py-3 text-sm text-danger"
             role="alert"
           >
             {error}
           </div>
         )}
         {successMessage && (
-          <div className="rounded-lg border border-green-300/60 bg-green-500/10 px-4 py-3 text-sm text-green-100">
+          <div className="rounded-lg border border-success/70 bg-success/15 px-4 py-3 text-sm text-success">
             {successMessage}
           </div>
         )}

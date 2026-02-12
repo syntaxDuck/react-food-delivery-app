@@ -67,7 +67,7 @@ const CartButton: React.FC<CartButtonProps> = ({ onCartStateChange }) => {
       aria-label="View shopping cart"
     >
       <motion.span
-        className="material-icons md-36 text-white relative top-1"
+        className="material-icons md-36 text-text relative top-1"
         animate={{ rotate: [0, -10, 10, 0] }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
       >
@@ -77,7 +77,7 @@ const CartButton: React.FC<CartButtonProps> = ({ onCartStateChange }) => {
       <AnimatePresence>
         {itemTotal > 0 && (
           <motion.div
-            className="absolute -top-1 -right-1 bg-secondary text-dark-gray text-xs font-bold rounded-full min-w-[20px] min-h-[20px] flex items-center justify-center border-2 border-white"
+            className="absolute -top-1 -right-1 bg-secondary text-bg-dark text-xs font-bold rounded-full min-w-[20px] min-h-[20px] flex items-center justify-center border-2 border-border"
             variants={badgeVariants}
             initial="initial"
             animate={isBouncing ? "pop" : "animate"}

@@ -42,13 +42,13 @@ const CartItem: React.FC<CartItemProps> = ({
       variants={itemVariants}
       initial="initial"
       animate="animate"
-      className="flex items-center justify-between p-4 surface-muted rounded-lg hover:bg-white/10 transition-all duration-200 group"
+      className="flex items-center justify-between p-4 surface-muted rounded-lg hover:bg-bg-light/30 transition-all duration-200 group"
     >
       <div className="flex-1">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-lg font-semibold text-white">{item.name}</h3>
+          <h3 className="text-lg font-semibold text-text">{item.name}</h3>
           <motion.button
-            className="text-white/40 hover:text-red-400 transition-colors p-1"
+            className="text-text/40 hover:text-danger transition-colors p-1"
             onClick={handleRemove}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -56,7 +56,7 @@ const CartItem: React.FC<CartItemProps> = ({
             <span className="material-icons md-18">delete</span>
           </motion.button>
         </div>
-        <div className="text-sm text-white/60">
+        <div className="text-sm text-text/60">
           {item.amount} × ${item.price.toFixed(2)} ={" "}
           <span className="text-primary font-semibold text-base ml-1">
             ${formattedPrice}

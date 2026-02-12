@@ -9,11 +9,11 @@ interface MobileCartButtonProps {
 }
 
 const iconVariants: Variants = {
-  initial: { x: -18, opacity: 0 },
+  initial: { x: -100, opacity: 0 },
   animate: {
     x: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 260, damping: 20 }
+    transition: { delay: 0.5, type: "spring", stiffness: 260, damping: 20 }
   }
 };
 
