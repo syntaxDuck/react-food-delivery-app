@@ -29,6 +29,22 @@
 }
 
 @layer utilities {
+  .surface-panel {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .surface-muted {
+    @apply bg-white/5 border border-white/10;
+  }
+
+  .surface-strong {
+    @apply bg-black/70;
+  }
+
+  .surface-glass {
+    @apply bg-gradient-to-r from-gray-900/95 via-gray-800/92 to-gray-900/95 backdrop-blur-md border border-white/10;
+  }
+
   .glow-effect {
     box-shadow: 0 0 20px rgba(214, 110, 110, 0.35);
   }
