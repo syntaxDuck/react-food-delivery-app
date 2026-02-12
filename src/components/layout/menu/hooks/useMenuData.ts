@@ -14,8 +14,8 @@ export const useMenuData = () => {
       .sort((a, b) => a.localeCompare(b))
       .map((key) => ({
         ...menuItemsMap[key],
-        name: menuItemsMap[key].name ?? key,
-        category: menuItemsMap[key].category ?? "uncategorized"
+        name: menuItemsMap[key].name,
+        category: menuItemsMap[key].category
       }))
     : [];
 

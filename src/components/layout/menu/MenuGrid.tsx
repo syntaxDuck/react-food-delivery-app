@@ -5,10 +5,10 @@ import { menuVariants } from "./animations";
 import MenuItem from "./MenuItem";
 import type { MenuGridProps } from "./types";
 
-const MenuGrid: React.FC<MenuGridProps> = ({ 
-  menuItems, 
-  itemAmountsMap, 
-  addToPreCartHandler 
+const MenuGrid: React.FC<MenuGridProps> = ({
+  menuItems,
+  itemAmountsMap,
+  addToPreCartHandler
 }) => {
   return (
     <motion.div

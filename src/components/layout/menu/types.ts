@@ -2,10 +2,10 @@ import type { CartItemType } from "../../cart/CartTypes";
 
 export interface MenuItemType {
   id: string;
-  name?: string;
+  name: string;
   price: number;
   description: string;
-  category?: string;
+  category: string;
 }
 
 export type MenuData = Record<string, MenuItemType>;
