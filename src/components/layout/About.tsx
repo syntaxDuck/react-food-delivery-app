@@ -59,7 +59,7 @@ const AboutUs = () => {
       container={true}
     >
       <motion.div variants={heroVariants} className={compoundClasses.content.hero}>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text mb-8">
+        <h1 className="pt-12 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text mb-8">
           Welcome to{" "}
           <span className="text-gradient-brand">Chrono Delivery!</span>
         </h1>
@@ -133,15 +133,15 @@ const AboutUs = () => {
           </div>
         </AnimatedCard>
 
-        <AnimatedCard delay={0.6} className="flex items-center justify-center p-8">
+        <div className="flex items-center justify-center p-8">
           <motion.img
             src={image}
             alt="Delivery Drone"
-            className="rounded-xl max-w-full h-auto shadow-xl"
+            className="max-w-full h-auto"
             whileHover={{ scale: 1.02, rotate: 1 }}  // Much more subtle
             transition={{ type: "spring", stiffness: 200 }}
           />
-        </AnimatedCard>
+        </div>
       </div>
     </Section>
   );

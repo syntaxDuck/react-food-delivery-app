@@ -6,22 +6,22 @@ export interface NavigationItem {
 
 // Centralized navigation items configuration
 export const navigationItems: NavigationItem[] = [
+  { id: "about-us", text: "About Us", icon: "info" },
   { id: "menu", text: "menu", icon: "restaurant_menu" },
   { id: "location", text: "location", icon: "location_on" },
-  { id: "about-us", text: "About Us", icon: "info" },
 ];
 
 // Utility function to get active item styling
 export const getActiveItemClass = (isActive: boolean): string => {
-  return isActive 
-    ? 'bg-primary/20 text-primary border border-primary/30 shadow-glow' 
+  return isActive
+    ? 'bg-primary/20 text-primary border border-primary/30 shadow-glow'
     : 'text-text/70 hover:text-text hover:bg-bg-light/20 border border-transparent';
 };
 
 // Utility function to get mobile active item styling
 export const getMobileActiveItemClass = (isActive: boolean): string => {
-  return isActive 
-    ? 'bg-gradient-to-r from-primary/20 to-primary/10 text-primary border border-primary/40 shadow-glow-glass' 
+  return isActive
+    ? 'bg-gradient-to-r from-primary/20 to-primary/10 text-primary border border-primary/40 shadow-glow-glass'
     : 'text-text/80 hover:text-text hover:bg-bg-light/30 border border-border/50';
 };
 
@@ -32,13 +32,13 @@ export const handleNavigationClick = (
   toggleMobileMenu?: () => void
 ): void => {
   setActiveSection(menuElement.id);
-  
+
   // Handle smooth scroll to section
   if (menuElement.id !== 'about-us') {
     const element = document.getElementById(menuElement.id);
     element?.scrollIntoView({ behavior: 'smooth' });
   }
-  
+
   // Close mobile menu if open
   if (toggleMobileMenu) {
     toggleMobileMenu();

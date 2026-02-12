@@ -32,7 +32,7 @@ export const compoundClasses = {
 
   // Content compound classes
   content: {
-    hero: 'text-center mb-16 sm:mb-20',
+    hero: 'pt-8 text-center mb-16 sm:mb-20',
     section: 'mb-12 sm:mb-16',
     card: 'p-6 sm:p-8 space-y-4',
     grid: {

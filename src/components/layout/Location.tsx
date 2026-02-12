@@ -13,7 +13,8 @@ const Location = () => {
     { city: "Los Angeles", season: "Summer", year: "2026", delay: 0.2 },
     { city: "Boston", season: "Winter", year: "2026", delay: 0.3 },
     { city: "Chicago", season: "Spring", year: "2027", delay: 0.4 },
-    { city: "Las Vegas", season: "Summer", year: "2027", delay: 0.5 }
+    { city: "Las Vegas", season: "Summer", year: "2027", delay: 0.5 },
+    { city: "Grand Rapids", season: "Summer", year: "2027", delay: 0.5 }
   ];
 
   // More subtle city variants
@@ -33,7 +34,7 @@ const Location = () => {
       container={true}
     >
       <motion.div
-        className={compoundClasses.content.section}
+        className={compoundClasses.content.hero}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}  // More subtle

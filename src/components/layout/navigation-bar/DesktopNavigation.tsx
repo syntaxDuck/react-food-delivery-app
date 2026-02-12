@@ -19,25 +19,28 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({ activeSection, se
           className="basis-1/3"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          whileHover="hover"
-          transition={{ delay: index * 0.05 }}
+          whileHover={{ y: -2, scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ delay: index * 0.05, type: "spring", stiffness: 320, damping: 22 }}
         >
           <Link
             to={menuElement.id === "about-us" ? "/index" : "/index"}
             className={`
-              ${compoundClasses.navigation.item}
+              ${compoundClasses.navigation.item} group
               ${activeSection === menuElement.id ? 'glow-effect' : ''}
             `}
             onClick={() => {
               setActiveSection(menuElement.id);
-              if (menuElement.id !== "about-us") {
-                const element = document.getElementById(menuElement.id);
-                element?.scrollIntoView({ behavior: "smooth" });
-              }
+              const element = document.getElementById(menuElement.id);
+              element?.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            <span className="material-icons md-18 mr-3">{menuElement.icon}</span>
-            <span className="font-medium whitespace-nowrap">{menuElement.text}</span>
+            <span className="material-icons md-18 mr-3 transition-transform duration-200 group-hover:-translate-y-0.5">
+              {menuElement.icon}
+            </span>
+            <span className="font-medium whitespace-nowrap transition-colors duration-200 group-hover:text-primary">
+              {menuElement.text}
+            </span>
           </Link>
         </motion.div>
       ))}
