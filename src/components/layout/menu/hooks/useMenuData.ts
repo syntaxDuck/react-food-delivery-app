@@ -2,7 +2,7 @@ import { useMemo, useRef } from "react";
 
 import { FIREBASE_ENDPOINT } from "../../../../App";
 import useFetch from "../../../../functions/useFetch";
-import type { MenuData, MenuItemType } from "../types";
+import type { MenuData } from "../types";
 
 export const useMenuData = () => {
   const dbUrl = useRef<string>(FIREBASE_ENDPOINT + "Menu.json");
