@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import React from "react";
 
 import Section from "../Section";
 import { compoundClasses } from "../../../utils/compoundClasses";
@@ -14,6 +15,19 @@ const Menu = () => {
     updateCartHandler,
     clearPreCart
   } = usePreCart();
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 8;
+  const totalPages = Math.max(1, Math.ceil(menuItems.length / itemsPerPage));
+  const pagedItems = React.useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return menuItems.slice(start, start + itemsPerPage);
+  }, [currentPage, itemsPerPage, menuItems]);
+
+  React.useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, totalPages]);
 
   return (
     <Section 
@@ -39,13 +53,16 @@ const Menu = () => {
       </motion.div>
 
       <MenuDisplay
-        menuItems={menuItems}
+        menuItems={pagedItems}
         loading={loading}
         error={error}
         itemAmountsMap={itemAmountsMap}
         addToPreCartHandler={addToPreCartHandler}
         updateCartHandler={updateCartHandler}
         clearPreCart={clearPreCart}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
       />
     </Section>
   );

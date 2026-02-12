@@ -7,6 +7,7 @@ import ErrorState from "./ErrorState";
 import LoadingState from "./LoadingState";
 import MenuActions from "./MenuActions";
 import MenuGrid from "./MenuGrid";
+import MenuPagination from "./MenuPagination";
 import type { MenuDisplayProps } from "./types";
 
 const MenuDisplay: React.FC<MenuDisplayProps> = ({
@@ -16,12 +17,15 @@ const MenuDisplay: React.FC<MenuDisplayProps> = ({
   itemAmountsMap,
   addToPreCartHandler,
   updateCartHandler,
-  clearPreCart
+  clearPreCart,
+  currentPage,
+  totalPages,
+  onPageChange
 }) => {
   let menuContent;
   if (loading) {
     menuContent = <LoadingState />;
-  } else if (menuItems) {
+  } else if (menuItems.length > 0) {
     menuContent = (
       <MenuGrid
         menuItems={menuItems}
@@ -48,6 +52,12 @@ const MenuDisplay: React.FC<MenuDisplayProps> = ({
           itemCount={itemAmountsMap.size}
           onAddToCart={updateCartHandler}
           onClearCart={clearPreCart}
+        />
+
+        <MenuPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
         />
       </form>
     </Card>
