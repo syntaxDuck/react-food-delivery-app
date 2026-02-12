@@ -14,14 +14,14 @@ const NotFound = () => {
         transition={{ duration: 0.4 }}
       >
         <motion.h1
-          className="text-5xl font-bold text-white mb-4"
+          className="text-5xl font-bold text-text mb-4"
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
           404: Page Not Found
         </motion.h1>
-        <p className="text-white/70 text-lg mb-8">
+        <p className="text-text/70 text-lg mb-8">
           The route you requested doesn&apos;t exist. Let&apos;s get you back to the menu.
         </p>
         <Link to="/index">
