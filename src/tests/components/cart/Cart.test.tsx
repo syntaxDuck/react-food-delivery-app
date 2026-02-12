@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { vi } from "vitest";
 
 import Cart from "../../../components/cart/Cart";
-import CartCtxProvider, { useCart } from "../../../components/cart/cart-context/CartCtxProvider";
+import { useCart } from "../../../components/cart/cart-context/CartContext";
+import CartCtxProvider from "../../../components/cart/cart-context/CartCtxProvider";
 import type { CartItemType } from "../../../components/cart/CartTypes";
 
 const item: CartItemType = {

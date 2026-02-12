@@ -16,8 +16,10 @@ export interface MenuDisplayProps {
   error: string | null;
   itemAmountsMap: Map<string, number>;
   addToPreCartHandler: (item: CartItemType) => void;
+  addItemToCartHandler: (item: CartItemType) => void;
   updateCartHandler: React.EventHandler<React.SyntheticEvent<HTMLFormElement>>;
   clearPreCart: () => void;
+  isSubmittingToCart: boolean;
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
@@ -27,10 +29,12 @@ export interface MenuGridProps {
   menuItems: MenuItemType[];
   itemAmountsMap: Map<string, number>;
   addToPreCartHandler: (item: CartItemType) => void;
+  addItemToCartHandler: (item: CartItemType) => void;
 }
 
 export interface MenuActionsProps {
   itemCount: number;
+  isSubmittingToCart: boolean;
   onAddToCart: React.MouseEventHandler<HTMLFormElement>;
   onClearCart: () => void;
 }

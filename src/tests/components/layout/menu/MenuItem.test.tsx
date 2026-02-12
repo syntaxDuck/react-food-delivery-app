@@ -9,7 +9,8 @@ const baseProps = {
   price: 12.99,
   description: "A classic roll with avocado and eel.",
   amount: 1,
-  onAddToPreCart: vi.fn()
+  onChangePreCartAmount: vi.fn(),
+  onAddItemToCart: vi.fn()
 };
 
 describe("MenuItem", () => {

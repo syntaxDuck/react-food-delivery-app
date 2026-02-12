@@ -22,8 +22,10 @@ describe("MenuDisplay", () => {
         error={null}
         itemAmountsMap={new Map()}
         addToPreCartHandler={() => undefined}
+        addItemToCartHandler={() => undefined}
         updateCartHandler={() => undefined}
         clearPreCart={() => undefined}
+        isSubmittingToCart={false}
         currentPage={1}
         totalPages={1}
         onPageChange={() => undefined}
@@ -41,8 +43,10 @@ describe("MenuDisplay", () => {
         error={null}
         itemAmountsMap={new Map()}
         addToPreCartHandler={() => undefined}
+        addItemToCartHandler={() => undefined}
         updateCartHandler={() => undefined}
         clearPreCart={() => undefined}
+        isSubmittingToCart={false}
         currentPage={1}
         totalPages={1}
         onPageChange={() => undefined}
@@ -61,8 +65,10 @@ describe("MenuDisplay", () => {
         error="Failed"
         itemAmountsMap={new Map()}
         addToPreCartHandler={() => undefined}
+        addItemToCartHandler={() => undefined}
         updateCartHandler={() => undefined}
         clearPreCart={() => undefined}
+        isSubmittingToCart={false}
         currentPage={1}
         totalPages={1}
         onPageChange={() => undefined}

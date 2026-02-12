@@ -1,11 +1,40 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import React from "react";
 import { useEffect } from "react";
 import { vi } from "vitest";
 
-import CartCtxProvider, { useCart } from "../../../components/cart/cart-context/CartCtxProvider";
+import { useCart } from "../../../components/cart/cart-context/CartContext";
+import CartCtxProvider from "../../../components/cart/cart-context/CartCtxProvider";
 import CartButton from "../../../components/cart/CartButton";
 import type { CartItemType } from "../../../components/cart/CartTypes";
+
+vi.mock("framer-motion", () => ({
+  AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  motion: {
+    button: React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+      ({ children, ...props }, ref) => (
+        <button ref={ref} {...props}>
+          {children}
+        </button>
+      )
+    ),
+    span: React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
+      ({ children, ...props }, ref) => (
+        <span ref={ref} {...props}>
+          {children}
+        </span>
+      )
+    ),
+    div: React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+      ({ children, ...props }, ref) => (
+        <div ref={ref} {...props}>
+          {children}
+        </div>
+      )
+    ),
+  },
+}));
 
 const CartButtonHarness = ({
   items,
@@ -21,6 +50,17 @@ const CartButtonHarness = ({
   }, [items, updateCart]);
 
   return <CartButton onCartStateChange={onCartStateChange} />;
+};
+
+const CartToggleHarness = () => {
+  const { state, toggleCart } = useCart();
+
+  return (
+    <div>
+      <div data-testid="cart-active">{state.cartActive ? "active" : "inactive"}</div>
+      <CartButton onCartStateChange={toggleCart} />
+    </div>
+  );
 };
 
 describe("CartButton", () => {
@@ -40,8 +80,22 @@ describe("CartButton", () => {
       </CartCtxProvider>
     );
 
-    expect(screen.getByText("3")).toBeInTheDocument();
+    expect(screen.getByText("3")).toBeDefined();
     await user.click(screen.getByRole("button", { name: /view shopping cart/i }));
     expect(onCartStateChange).toHaveBeenCalledTimes(1);
+  });
+
+  test("opens cart when clicked with provider toggle handler", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <CartCtxProvider>
+        <CartToggleHarness />
+      </CartCtxProvider>
+    );
+
+    expect(screen.getByTestId("cart-active").textContent).toBe("inactive");
+    await user.click(screen.getByRole("button", { name: /view shopping cart/i }));
+    expect(screen.getByTestId("cart-active").textContent).toBe("active");
   });
 });

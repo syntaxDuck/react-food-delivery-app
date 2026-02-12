@@ -12,8 +12,10 @@ const Menu = () => {
   const {
     itemAmountsMap,
     addToPreCartHandler,
+    addItemToCartHandler,
     updateCartHandler,
-    clearPreCart
+    clearPreCart,
+    isSubmittingToCart
   } = usePreCart();
   const [currentPage, setCurrentPage] = React.useState(1);
   const itemsPerPage = 8;
@@ -58,8 +60,10 @@ const Menu = () => {
         error={error}
         itemAmountsMap={itemAmountsMap}
         addToPreCartHandler={addToPreCartHandler}
+        addItemToCartHandler={addItemToCartHandler}
         updateCartHandler={updateCartHandler}
         clearPreCart={clearPreCart}
+        isSubmittingToCart={isSubmittingToCart}
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}

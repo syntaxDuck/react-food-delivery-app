@@ -6,9 +6,12 @@ import type { MenuActionsProps } from "./types";
 
 const MenuActions: React.FC<MenuActionsProps> = ({
   itemCount,
+  isSubmittingToCart,
   onAddToCart,
   onClearCart
 }) => {
+  const isSubmitDisabled = itemCount === 0 || isSubmittingToCart;
+
   return (
     <div className={`flex flex-col sm:flex-row justify-center items-center space-y-4 
       sm:space-y-0 sm:space-x-6 p-8 border-t border-white/20 mt-8`}>
@@ -16,8 +19,8 @@ const MenuActions: React.FC<MenuActionsProps> = ({
         type="submit"
         variant="default"
         size="lg"
-        disabled={itemCount === 0}
-        className={!itemCount ? "opacity-50 cursor-not-allowed" : ""}
+        disabled={isSubmitDisabled}
+        className={isSubmitDisabled ? "opacity-50 cursor-not-allowed" : ""}
         onClick={onAddToCart}
       >
         <span className="material-icons md-20 mr-3">add_shopping_cart</span>

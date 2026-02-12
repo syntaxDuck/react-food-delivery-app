@@ -8,7 +8,8 @@ import type { MenuGridProps } from "./types";
 const MenuGrid: React.FC<MenuGridProps> = ({
   menuItems,
   itemAmountsMap,
-  addToPreCartHandler
+  addToPreCartHandler,
+  addItemToCartHandler
 }) => {
   return (
     <motion.div
@@ -28,7 +29,8 @@ const MenuGrid: React.FC<MenuGridProps> = ({
             name={menuItem.name}
             description={menuItem.description}
             amount={itemAmount}
-            onAddToPreCart={addToPreCartHandler}
+            onChangePreCartAmount={addToPreCartHandler}
+            onAddItemToCart={addItemToCartHandler}
             delay={index * 0.1}
           />
         );

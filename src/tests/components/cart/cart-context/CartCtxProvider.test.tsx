@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import CartCtxProvider, { useCart } from "../../../../components/cart/cart-context/CartCtxProvider";
+import { useCart } from "../../../../components/cart/cart-context/CartContext";
+import CartCtxProvider from "../../../../components/cart/cart-context/CartCtxProvider";
 
 const TestConsumer = () => {
   const { state, updateCart, clearCart, toggleCart } = useCart();

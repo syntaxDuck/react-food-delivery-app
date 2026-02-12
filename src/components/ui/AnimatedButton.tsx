@@ -4,6 +4,10 @@ import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
 
 const buttonVariants: Variants = {
+  enabled: {
+    opacity: 1,
+    cursor: "pointer"
+  },
   hover: {
     scale: 1.02,  // Reduced from 1.05
     transition: { type: "spring", stiffness: 300, damping: 20 }  // Softer
@@ -98,7 +102,7 @@ const AnimatedButton = ({
       variants={buttonVariants}
       whileHover={!disabled ? "hover" : undefined}
       whileTap={!disabled ? "tap" : undefined}
-      animate={disabled ? "disabled" : undefined}
+      animate={disabled ? "disabled" : "enabled"}
     >
       {children ?? buttonContent}
     </motion.button>

@@ -2,7 +2,7 @@ import type { Variants } from "framer-motion";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 
-import { useCart } from "./cart-context/CartCtx";
+import { useCart } from "./cart-context/CartContext";
 
 
 const buttonVariants: Variants = {

@@ -1,6 +1,7 @@
 import { act,renderHook } from "@testing-library/react";
 
-import CartCtxProvider, { useCart } from "../../../../../components/cart/cart-context/CartCtxProvider";
+import { useCart } from "../../../../../components/cart/cart-context/CartContext";
+import CartCtxProvider from "../../../../../components/cart/cart-context/CartCtxProvider";
 import type { CartItemType } from "../../../../../components/cart/CartTypes";
 import { usePreCart } from "../../../../../components/layout/menu/hooks/usePreCart";
 
@@ -53,5 +54,27 @@ describe("usePreCart", () => {
     expect(result.current.cart.state.items).toHaveLength(1);
     expect(result.current.cart.state.items[0].amount).toBe(3);
     expect(result.current.preCart.preCart).toHaveLength(0);
+  });
+
+  test("adds selected item directly to cart and clears staged card amount", () => {
+    const { result } = renderHook(
+      () => ({ preCart: usePreCart(), cart: useCart() }),
+      { wrapper: CartCtxProvider }
+    );
+
+    act(() => {
+      result.current.preCart.addToPreCartHandler(createItem({ id: "item-9", amount: 2 }));
+    });
+
+    expect(result.current.preCart.itemAmountsMap.get("item-9")).toBe(2);
+
+    act(() => {
+      result.current.preCart.addItemToCartHandler(createItem({ id: "item-9", amount: 2 }));
+    });
+
+    expect(result.current.cart.state.items).toHaveLength(1);
+    expect(result.current.cart.state.items[0].id).toBe("item-9");
+    expect(result.current.cart.state.items[0].amount).toBe(2);
+    expect(result.current.preCart.itemAmountsMap.has("item-9")).toBe(false);
   });
 });

@@ -29,7 +29,8 @@ interface MenuItemProps {
   price: number;
   description: string;
   amount: number;
-  onAddToPreCart: (item: { id: string; name: string; price: number; amount: number }) => void;
+  onChangePreCartAmount: (item: { id: string; name: string; price: number; amount: number }) => void;
+  onAddItemToCart: (item: { id: string; name: string; price: number; amount: number }) => void;
   delay?: number;
 }
 
@@ -39,13 +40,23 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
   price,
   description,
   amount,
-  onAddToPreCart,
+  onChangePreCartAmount,
+  onAddItemToCart,
   delay = 0
 }) => {
   const formattedPrice = useMemo(() => `$${price.toFixed(2)}`, [price]);
 
-  const addToPreCartHandler = (itemQuantity: number): void => {
-    onAddToPreCart({
+  const changePreCartAmountHandler = (itemQuantity: number): void => {
+    onChangePreCartAmount({
+      id: id,
+      name: name,
+      price: price,
+      amount: itemQuantity,
+    });
+  };
+
+  const addItemToCartHandler = (itemQuantity: number): void => {
+    onAddItemToCart({
       id: id,
       name: name,
       price: price,
@@ -85,7 +96,8 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
 
         <MenuItemAmount
           amount={amount}
-          onAddToPreCart={addToPreCartHandler}
+          onChangeAmount={changePreCartAmountHandler}
+          onAddToCart={addItemToCartHandler}
         />
       </div>
     </motion.div>

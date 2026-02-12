@@ -16,8 +16,10 @@ const MenuDisplay: React.FC<MenuDisplayProps> = ({
   error,
   itemAmountsMap,
   addToPreCartHandler,
+  addItemToCartHandler,
   updateCartHandler,
   clearPreCart,
+  isSubmittingToCart,
   currentPage,
   totalPages,
   onPageChange
@@ -31,6 +33,7 @@ const MenuDisplay: React.FC<MenuDisplayProps> = ({
         menuItems={menuItems}
         itemAmountsMap={itemAmountsMap}
         addToPreCartHandler={addToPreCartHandler}
+        addItemToCartHandler={addItemToCartHandler}
       />
     );
   } else if (error) {
@@ -50,6 +53,7 @@ const MenuDisplay: React.FC<MenuDisplayProps> = ({
 
         <MenuActions
           itemCount={itemAmountsMap.size}
+          isSubmittingToCart={isSubmittingToCart}
           onAddToCart={updateCartHandler}
           onClearCart={clearPreCart}
         />
