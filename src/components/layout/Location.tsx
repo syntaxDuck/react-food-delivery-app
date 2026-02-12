@@ -38,11 +38,11 @@ const Location = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}  // More subtle
       >
-        <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+        <h2 className="text-4xl sm:text-5xl font-bold text-text mb-6">
           Find Us in{" "}
-          <span className="text-primary">Austin, TX</span>
+          <span className="text-gradient-brand">Austin, TX</span>
         </h2>
-        <p className="text-xl text-white/80 max-w-3xl mx-auto">
+        <p className="text-xl text-text/80 max-w-3xl mx-auto">
           We're currently serving the Austin area, with exciting expansion plans coming soon to major cities across the US.
         </p>
       </motion.div>
@@ -66,23 +66,23 @@ const Location = () => {
         </AnimatedCard>
 
         <AnimatedCard delay={0.5} className="p-8">
-          <h3 className="text-2xl font-bold text-white mb-8">Service Area</h3>
-          <p className="text-white/80 leading-relaxed text-lg mb-8">
+          <h3 className="text-2xl font-bold text-text mb-8">Service Area</h3>
+          <p className="text-text/80 leading-relaxed text-lg mb-8">
             We're proud to serve the greater Austin area with our cutting-edge delivery technology.
             From downtown to the suburbs, we've got you covered.
           </p>
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <span className="material-icons md-20 text-primary">schedule</span>
-              <span className="text-white">24/7 Delivery Service</span>
+              <span className="text-text">24/7 Delivery Service</span>
             </div>
             <div className="flex items-center space-x-3">
               <span className="material-icons md-20 text-primary">local_shipping</span>
-              <span className="text-white">Autonomous Drone Fleet</span>
+              <span className="text-text">Autonomous Drone Fleet</span>
             </div>
             <div className="flex items-center space-x-3">
               <span className="material-icons md-20 text-primary">attach_money</span>
-              <span className="text-white">Flat $5 Delivery Fee</span>
+              <span className="text-text">Flat $5 Delivery Fee</span>
             </div>
           </div>
         </AnimatedCard>
@@ -90,12 +90,12 @@ const Location = () => {
 
       {/* Enhanced Future Cities */}
       <AnimatedCard delay={0.7} className="p-8">
-        <h3 className="text-2xl font-bold text-white mb-8 text-center">Coming Soon to Your City</h3>
+        <h3 className="text-2xl font-bold text-text mb-8 text-center">Coming Soon to Your City</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {futureCities.map((city) => (
             <motion.div
               key={city.city}
-              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10"
+              className="flex items-center justify-between p-4 bg-bg-light/20 rounded-lg border border-border/40"
               variants={cityVariants}
               initial="initial"
               animate="animate"
@@ -103,8 +103,8 @@ const Location = () => {
               transition={{ delay: city.delay }}
             >
               <div>
-                <div className="text-white font-medium">{city.city}</div>
-                <div className="text-sm text-white/60">{city.season} {city.year}</div>
+                <div className="text-text font-medium">{city.city}</div>
+                <div className="text-sm text-text/60">{city.season} {city.year}</div>
               </div>
               <AnimatedButton size="sm" variant="outline">
                 Coming Soon

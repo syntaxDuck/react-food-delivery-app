@@ -59,11 +59,11 @@ const AboutUs = () => {
       container={true}
     >
       <motion.div variants={heroVariants} className={compoundClasses.content.hero}>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text mb-8">
           Welcome to{" "}
-          <span className="text-primary">Chrono Delivery!</span>
+          <span className="text-gradient-brand">Chrono Delivery!</span>
         </h1>
-        <p className="text-xl sm:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed">
+        <p className="text-xl sm:text-2xl text-text/80 max-w-4xl mx-auto leading-relaxed">
           We have everything for your daily delivery needs! Please keep an eye out for new items
           as our menu is constantly being updated with local cuisine from several restaurants in your area.
         </p>
@@ -82,7 +82,7 @@ const AboutUs = () => {
           >
             <AnimatedCard
               delay={index * 0.05}
-              className="text-center group hover:bg-white/15 p-8"
+              className="text-center group hover:bg-bg-light/50 p-8"
             >
               <motion.div
                 className="mb-6"
@@ -91,10 +91,10 @@ const AboutUs = () => {
               >
                 <span className="material-icons md-48 text-primary">{feature.icon}</span>
               </motion.div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
+              <h3 className="text-2xl sm:text-3xl font-bold text-text mb-4 group-hover:text-primary transition-colors">
                 {feature.title}
               </h3>
-              <p className="text-white/70 leading-relaxed text-lg">
+              <p className="text-text/70 leading-relaxed text-lg">
                 {feature.description}
               </p>
             </AnimatedCard>
@@ -105,9 +105,9 @@ const AboutUs = () => {
       {/* Enhanced Technology Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <AnimatedCard delay={0.4} className="p-8">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-8">Technology First</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-text mb-8">Technology First</h3>
           <div className="space-y-6">
-            <p className="text-white/80 leading-relaxed text-lg">
+            <p className="text-text/80 leading-relaxed text-lg">
               Chrono Delivery is proud to be the only delivery app that can deliver whatever you want
               whenever you want with our autonomous drone fleet.
             </p>
@@ -127,7 +127,7 @@ const AboutUs = () => {
               </motion.span>
               <div className="flex-1 h-1 bg-primary/30 rounded"></div>
             </motion.div>
-            <p className="text-white/80 leading-relaxed text-lg">
+            <p className="text-text/80 leading-relaxed text-lg">
               All this at one flat delivery charge with precision timing and real-time tracking.
             </p>
           </div>

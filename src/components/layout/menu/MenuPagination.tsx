@@ -49,8 +49,8 @@ const MenuPagination: React.FC<MenuPaginationProps> = ({
           className={
             `min-w-[44px] px-4 py-2 rounded-full text-sm font-semibold border transition-all ` +
             (page === currentPage
-              ? "bg-primary text-white border-primary shadow-[0_8px_24px_rgba(214,110,110,0.35)]"
-              : "bg-white/5 text-white/80 border-white/10 hover:bg-white/10")
+              ? "bg-primary text-text border-primary shadow-lg"
+              : "bg-bg-light/20 text-text/80 border-border/50 hover:bg-bg-light/30")
           }
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

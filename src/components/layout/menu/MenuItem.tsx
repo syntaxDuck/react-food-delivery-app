@@ -1,6 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import React, { useMemo } from "react";
 
+import type { CartItemType } from "../../cart/CartTypes";
 import MenuItemAmount from "./MenuItemAmount";
 
 // Move static objects outside component to prevent recreation
@@ -18,7 +19,7 @@ const itemVariants: Variants = {
   },
   hover: {
     scale: 1.03,
-    boxShadow: "0 20px 25px -5px rgba(214, 110, 110, 0.3), 0 10px 10px -5px rgba(214, 110, 110, 0.2)",
+    boxShadow: "0 20px 25px -5px color-mix(in oklab, var(--primary) 30%, transparent), 0 10px 10px -5px color-mix(in oklab, var(--primary) 20%, transparent)",
     transition: { type: "spring", stiffness: 400, damping: 15 }
   }
 };
@@ -29,8 +30,8 @@ interface MenuItemProps {
   price: number;
   description: string;
   amount: number;
-  onChangePreCartAmount: (item: { id: string; name: string; price: number; amount: number }) => void;
-  onAddItemToCart: (item: { id: string; name: string; price: number; amount: number }) => void;
+  onChangePreCartAmount: (item: CartItemType) => void;
+  onAddItemToCart: (item: CartItemType) => void;
   delay?: number;
 }
 
@@ -77,13 +78,13 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
       <div className="p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-4 flex-1">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors truncate">
+            <h3 className="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors truncate">
               {name}
             </h3>
             <div className="text-2xl font-bold text-primary mb-3">
               {formattedPrice}
             </div>
-            <p className="text-white/70 leading-relaxed truncate">
+            <p className="text-text/70 leading-relaxed truncate">
               {description}
             </p>
           </div>

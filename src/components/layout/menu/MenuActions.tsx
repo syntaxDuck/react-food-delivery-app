@@ -14,7 +14,7 @@ const MenuActions: React.FC<MenuActionsProps> = ({
 
   return (
     <div className={`flex flex-col sm:flex-row justify-center items-center space-y-4 
-      sm:space-y-0 sm:space-x-6 p-8 border-t border-white/20 mt-8`}>
+      sm:space-y-0 sm:space-x-6 p-8 border-t border-border/60 mt-8`}>
       <AnimatedButton
         type="submit"
         variant="default"
@@ -27,7 +27,7 @@ const MenuActions: React.FC<MenuActionsProps> = ({
         Add to Cart
         {itemCount > 0 && (
           <motion.span
-            className="ml-3 bg-white/20 px-3 py-1 rounded-full text-sm"
+            className="ml-3 bg-bg-light/40 px-3 py-1 rounded-full text-sm"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}

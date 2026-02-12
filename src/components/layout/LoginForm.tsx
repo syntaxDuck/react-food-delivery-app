@@ -24,8 +24,8 @@ const formVariants: Variants = {
 const inputVariants: Variants = {
   focus: {
     scale: 1.02,
-    borderColor: "#d66e6e",
-    boxShadow: "0 0 0 3px rgba(214, 110, 110, 0.3)"
+    borderColor: "var(--primary)",
+    boxShadow: "0 0 0 3px color-mix(in oklab, var(--primary) 30%, transparent)"
   }
 };
 
@@ -104,12 +104,12 @@ const LoginForm = (props: LoginFormProps) => {
   };
 
   const getInputClasses = (isValid: boolean): string => `
-    w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-white/50
+    w-full px-4 py-3 bg-bg-light/30 border rounded-lg text-text placeholder:text-text/50
     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-gray
     transition-all duration-200
     ${isValid
-      ? 'border-white/30 focus:ring-primary focus:border-primary'
-      : 'border-red-400 focus:ring-red-400 focus:border-red-400'
+      ? 'border-border/60 focus:ring-primary focus:border-primary'
+      : 'border-danger focus:ring-danger focus:border-danger'
     }
   `;
 
@@ -122,7 +122,7 @@ const LoginForm = (props: LoginFormProps) => {
     >
       <AnimatedCard className="w-full max-w-md">
         <motion.h1
-          className="text-3xl font-bold text-white text-center mb-8"
+          className="text-3xl font-bold text-text text-center mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -132,7 +132,7 @@ const LoginForm = (props: LoginFormProps) => {
 
         {props.errorMessage && (
           <motion.div
-            className="mb-6 rounded-lg border border-red-400/60 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+            className="mb-6 rounded-lg border border-danger/70 bg-danger/15 px-4 py-3 text-sm text-danger"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             role="alert"
@@ -143,7 +143,7 @@ const LoginForm = (props: LoginFormProps) => {
 
         <form onSubmit={formSubmitHandler} className="space-y-6">
           <div>
-            <label htmlFor="username" className="block text-white font-medium mb-2">
+            <label htmlFor="username" className="block text-text font-medium mb-2">
               Email Address
             </label>
             <motion.input
@@ -160,7 +160,7 @@ const LoginForm = (props: LoginFormProps) => {
             />
             {!usernameValid && (
               <motion.p
-                className="text-red-400 text-sm mt-2"
+                className="text-danger text-sm mt-2"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -171,7 +171,7 @@ const LoginForm = (props: LoginFormProps) => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-white font-medium mb-2">
+            <label htmlFor="password" className="block text-text font-medium mb-2">
               Password
             </label>
             <motion.input
@@ -188,7 +188,7 @@ const LoginForm = (props: LoginFormProps) => {
             />
             {!passwordValid && (
               <motion.p
-                className="text-red-400 text-sm mt-2"
+                className="text-danger text-sm mt-2"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -200,7 +200,7 @@ const LoginForm = (props: LoginFormProps) => {
 
           {props.userAction === "SignUp" && (
             <div className="mb-6">
-              <label htmlFor="confirm-password" className="block text-white font-medium mb-2">
+              <label htmlFor="confirm-password" className="block text-text font-medium mb-2">
                 Confirm Password
               </label>
               <input
@@ -240,7 +240,7 @@ const LoginForm = (props: LoginFormProps) => {
           transition={{ delay: 0.5 }}
         >
           {props.userAction === "SignIn" ? (
-            <p className="text-white/70">
+            <p className="text-text/70">
               Don't have an account?{" "}
               <AnimatedButton
                 variant="outline"
@@ -254,7 +254,7 @@ const LoginForm = (props: LoginFormProps) => {
               </AnimatedButton>
             </p>
           ) : (
-            <p className="text-white/70">
+            <p className="text-text/70">
               Already have an account?{" "}
               <AnimatedButton
                 variant="outline"

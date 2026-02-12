@@ -9,17 +9,17 @@ const buttonVariants: Variants = {
 };
 
 // Memoized style functions to prevent recreation
-const stepButton = `w-10 h-10 bg-white/20 text-dark-gray rounded-full flex items-center justify-center 
+const stepButton = `w-10 h-10 bg-bg-light/40 text-text rounded-full flex items-center justify-center 
   font-bold text-lg hover:bg-secondary/80 transition-colors shadow-md`;
 
-const counter = `w-16 h-12 bg-white/20 rounded-lg flex items-center justify-center font-bold 
-  text-white text-lg border border-white/30 min-w-[4rem]`;
+const counter = `w-16 h-12 bg-bg-light/40 rounded-lg flex items-center justify-center font-bold 
+  text-text text-lg border border-border/60 min-w-[4rem]`;
 
 const cartButton = (isDisabled: boolean) => `
   px-4 py-2 rounded-full font-medium cursor-pointer
   ${!isDisabled
-    ? 'bg-white/20 text-white hover:bg-primary/90 shadow-lg'
-    : 'bg-white/10 text-white/50 border border-white/20'
+    ? 'bg-bg-light/50 text-text hover:bg-primary/90 shadow-lg'
+    : 'bg-bg-light/25 text-text/50 border border-border/50'
   }`;
 
 interface MenuItemAmountProps {

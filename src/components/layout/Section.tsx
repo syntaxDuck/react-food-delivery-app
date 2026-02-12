@@ -45,8 +45,8 @@ const Section: React.FC<SectionProps> = ({
 
   const backgroundClasses = {
     transparent: "",
-    gradient: "bg-gradient-to-b from-transparent to-primary/5",
-    dark: "bg-dark-gray/50"
+    gradient: "bg-gradient-to-b from-transparent via-primary/4 to-transparent",
+    dark: "bg-bg-dark/20"
   };
 
   // Subtle animation variants

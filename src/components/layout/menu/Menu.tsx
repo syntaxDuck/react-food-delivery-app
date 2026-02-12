@@ -46,10 +46,10 @@ const Menu = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.6 }}
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-          Our <span className="text-primary">Delicious Menu</span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text mb-6">
+          Our <span className="text-gradient-brand">Delicious Menu</span>
         </h2>
-        <p className="text-xl text-white/80 max-w-3xl mx-auto">
+        <p className="text-xl text-text/80 max-w-3xl mx-auto">
           Choose from our carefully selected local restaurants. Quality food, delivered any time!
         </p>
       </motion.div>
