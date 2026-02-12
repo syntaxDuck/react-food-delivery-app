@@ -1,4 +1,8 @@
-import type { CartItemType, CartState, ClearCartAction, defaultCartState, ToggleCartAction, updateCart } from "../CartTypes";
+import { describe, expect, test } from "vitest";
+
+import { ClearCartAction, defaultCartState, ToggleCartAction, UpdateCartAction } from "../CartTypes";
+import type { CartItemType, CartState } from "../CartTypes";
+import CartReducer from "./CartReducer";
 
 const createItem = (overrides: Partial<CartItemType> = {}): CartItemType => ({
   id: "item-1",
@@ -13,7 +17,7 @@ describe("CartReducer", () => {
     const state: CartState = { ...defaultCartState };
     const items = [createItem({ amount: 2, price: 10 })];
 
-    const result = CartReducer(state, updateCart(items));
+    const result = CartReducer(state, UpdateCartAction(items));
 
     expect(result.items).toHaveLength(1);
     expect(result.totalAmount).toBe(20);
@@ -26,7 +30,7 @@ describe("CartReducer", () => {
       totalAmount: 8,
     };
 
-    const result = CartReducer(state, updateCart([createItem({ amount: 3, price: 8 })]));
+    const result = CartReducer(state, UpdateCartAction([createItem({ amount: 3, price: 8 })]));
 
     expect(result.items).toHaveLength(1);
     expect(result.items[0].amount).toBe(3);
