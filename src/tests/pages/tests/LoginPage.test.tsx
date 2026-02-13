@@ -28,7 +28,7 @@ const renderLoginPage = (onLoginChange: (username: string) => void) => {
 test("Verify: Login Page Component Default State", () => {
   renderLoginPage(vi.fn());
   expect(screen.getByRole("textbox", { name: /email address/i }));
-  expect(screen.getByLabelText(/password/i));
+  expect(screen.getByLabelText(/^password$/i));
   expect(screen.getByRole("button", { name: /login/i }));
   expect(screen.getByRole("button", { name: /sign up/i }));
 });
@@ -38,7 +38,7 @@ test("Verify: Switch From Login to Sign Up Functionality", async () => {
   const user = userEvent.setup();
 
   expect(screen.getByRole("textbox", { name: /email address/i }));
-  expect(screen.getByLabelText(/password/i));
+  expect(screen.getByLabelText(/^password$/i));
   expect(screen.getByRole("button", { name: /login/i }));
   expect(screen.getByRole("button", { name: /sign up/i }));
 
@@ -72,7 +72,7 @@ test("Submits login form and navigates on success", async () => {
   renderLoginPage(onLoginChange);
 
   await user.type(screen.getByLabelText(/email address/i), "user@test.com");
-  await user.type(screen.getByLabelText(/password/i), "passw0rd!");
+  await user.type(screen.getByLabelText(/^password$/i), "Passw0rd!");
   await user.click(screen.getByRole("button", { name: /login/i }));
 
   await waitFor(() => {

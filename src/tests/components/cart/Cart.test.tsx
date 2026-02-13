@@ -75,7 +75,7 @@ describe("Cart", () => {
     await user.click(screen.getByRole("button", { name: /submit order/i }));
 
     expect(
-      await screen.findByText(/http error: status 500/i)
+      await screen.findByText(/failed to submit order/i)
     ).toBeInTheDocument();
   });
 });

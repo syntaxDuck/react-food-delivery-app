@@ -2,6 +2,7 @@ import { AnimatePresence, motion, type Variants } from "framer-motion";
 import React from "react";
 
 import { FIREBASE_ENDPOINT } from "../../App";
+import { getSanitizedApiError } from "../../utils/security";
 import AnimatedButton from "../ui/AnimatedButton";
 //Component Imports
 import AnimatedModal from "../ui/AnimatedModal";
@@ -54,16 +55,15 @@ const Cart: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error: Status ${String(response.status)}`);
+        throw new Error(`HTTP ${String(response.status)}`);
       }
 
       setError(null);
       crtCtx.clearCart();
       setSuccessMessage("Order submitted successfully! We'll get your delivery on the way.");
 
-    } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-      setError(errorMessage);
+    } catch {
+      setError(getSanitizedApiError("submit order"));
       setSuccessMessage(null);
     } finally {
       setIsSubmitting(false);

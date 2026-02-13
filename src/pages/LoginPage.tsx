@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import LoginForm from "../components/layout/LoginForm";
 import { API_KEY } from "../private/PRIVATE";
 import type { AuthResponse,LoginPageProps, UserAction } from "../types/auth";
+import { getSanitizedAuthError } from "../utils/security";
 
 const API_URLS: Record<UserAction, string> = {
   SignUp: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
@@ -60,9 +61,12 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
         });
 
         if (!response.ok) {
-          throw new Error(
-            `This is an HTTP error: The status is ${String(response.status)}`
-          );
+          // Attempt to get detailed error info from Firebase, but then sanitize it
+          const errorData = (await response.json().catch(() => ({}))) as {
+            error?: { message?: string };
+          };
+          const errorMsg = errorData.error?.message ?? `HTTP ${String(response.status)}`;
+          throw new Error(errorMsg);
         }
 
         responseData = await response.json() as AuthResponse;
@@ -70,8 +74,7 @@ const LoginPage = ({ onLoginChange }: LoginPageProps) => {
         setError(null);
         return responseData;
       } catch (err: unknown) {
-        const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-        setError(errorMessage);
+        setError(getSanitizedAuthError(err));
         return undefined;
       }
     };

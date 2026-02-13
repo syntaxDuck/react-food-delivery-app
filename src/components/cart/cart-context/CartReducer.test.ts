@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
-import { ClearCartAction, defaultCartState, ToggleCartAction, UpdateCartAction } from "../CartTypes";
 import type { CartItemType, CartState } from "../CartTypes";
+import { ClearCartAction, defaultCartState, ToggleCartAction, UpdateCartAction } from "../CartTypes";
 import CartReducer from "./CartReducer";
 
 const createItem = (overrides: Partial<CartItemType> = {}): CartItemType => ({
