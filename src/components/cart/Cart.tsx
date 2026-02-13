@@ -83,7 +83,36 @@ const Cart: React.FC = () => {
   };
 
   let cartContent: React.ReactElement;
-  if (crtCtx.state.items.length === 0) {
+  if (successMessage) {
+    cartContent = (
+      <motion.div
+        className="flex flex-col items-center justify-center h-80 text-center p-8"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: "spring", stiffness: 200 }}
+      >
+        <motion.div
+          className="text-7xl mb-6 text-success"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1, rotate: [0, 10, -10, 0] }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
+        >
+          <span className="material-icons md-96">check_circle</span>
+        </motion.div>
+        <h3 className="text-3xl font-bold text-text mb-4">Order Received!</h3>
+        <p className="text-text/70 text-lg mb-8 max-w-md">
+          {successMessage}
+        </p>
+        <AnimatedButton
+          variant="default"
+          size="lg"
+          onClick={crtCtx.toggleCart}
+        >
+          Great, thanks!
+        </AnimatedButton>
+      </motion.div>
+    );
+  } else if (crtCtx.state.items.length === 0) {
     cartContent = (
       <motion.div
         className="flex flex-col items-center justify-center h-64 text-center"
@@ -99,7 +128,14 @@ const Cart: React.FC = () => {
           <span className="material-icons md-96 text-primary">shopping_cart</span>
         </motion.div>
         <h3 className="text-2xl font-bold text-text mb-2">Your cart is empty</h3>
-        <p className="text-text/60">Add some delicious items to get started!</p>
+        <p className="text-text/60 mb-6">Add some delicious items to get started!</p>
+        <AnimatedButton
+          variant="outline"
+          size="md"
+          onClick={crtCtx.toggleCart}
+        >
+          Start Shopping
+        </AnimatedButton>
       </motion.div>
     );
   } else {
@@ -195,11 +231,6 @@ const Cart: React.FC = () => {
             role="alert"
           >
             {error}
-          </div>
-        )}
-        {successMessage && (
-          <div className="rounded-lg border border-success/70 bg-success/15 px-4 py-3 text-sm text-success">
-            {successMessage}
           </div>
         )}
         {cartContent}

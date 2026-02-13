@@ -84,7 +84,7 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
             <div className="text-2xl font-bold text-primary mb-3">
               {formattedPrice}
             </div>
-            <p className="text-text/70 leading-relaxed truncate">
+            <p className="text-text/70 leading-relaxed line-clamp-2">
               {description}
             </p>
           </div>

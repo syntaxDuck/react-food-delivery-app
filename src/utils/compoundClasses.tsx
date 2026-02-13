@@ -20,7 +20,7 @@ export const compoundClasses = {
 
   // Navigation compound classes  
   navigation: {
-    header: 'top-0 z-40 w-full theme-gradient-hero backdrop-blur-md border-b border-border/40 shadow-2xl',
+    header: 'sticky top-0 z-40 w-full theme-gradient-hero backdrop-blur-md border-b border-border/40 shadow-2xl',
     container: 'w-full mx-2 px-4 px-1 py-3 md:py-4 relative z-60',
     logo: 'flex items-center space-x-3 group cursor-pointer px-3 py-2',
     desktop: 'flex items-center gap-2 lg:gap-4',
