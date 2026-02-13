@@ -55,15 +55,15 @@ const Cart: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${String(response.status)}`);
+        throw new Error(String(response.status));
       }
 
       setError(null);
       crtCtx.clearCart();
       setSuccessMessage("Order submitted successfully! We'll get your delivery on the way.");
 
-    } catch {
-      setError(getSanitizedApiError("submit order"));
+    } catch (err: unknown) {
+      setError(getSanitizedApiError(err));
       setSuccessMessage(null);
     } finally {
       setIsSubmitting(false);

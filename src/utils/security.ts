@@ -1,49 +1,48 @@
 /**
- * Security utilities for the application.
+ * Security utilities for sanitizing errors and preventing information leakage.
  */
 
 /**
- * Sanitizes authentication error messages to prevent information leakage
- * (e.g., user enumeration) and technical details exposure.
+ * Maps Firebase Auth and generic authentication errors to user-friendly messages.
+ * Prevents account enumeration and leakage of internal API details.
  */
 export const getSanitizedAuthError = (error: unknown): string => {
-  if (!(error instanceof Error)) {
-    return "An unexpected authentication error occurred. Please try again.";
+  const message = error instanceof Error ? error.message : String(error);
+
+  if (message.includes('EMAIL_NOT_FOUND') || message.includes('INVALID_PASSWORD')) {
+    return 'Invalid email or password.';
   }
+  if (message.includes('USER_DISABLED')) return 'This account has been disabled.';
+  if (message.includes('EMAIL_EXISTS')) return 'This email is already in use.';
+  if (message.includes('TOO_MANY_ATTEMPTS')) return 'Too many attempts. Please try again later.';
+  if (message.includes('WEAK_PASSWORD')) return 'Password is too weak.';
+  if (message.includes('HTTP 401') || message.includes('HTTP 403')) return 'Authentication failed.';
 
-  // Firebase Auth error codes often appear in the message string if not parsed properly,
-  // or we might have custom error messages from our fetch logic.
-  const message = error.message;
-
-  // Prevent information leakage by using generic messages for common auth failures
-  if (
-    message.includes("EMAIL_NOT_FOUND") ||
-    message.includes("INVALID_PASSWORD") ||
-    message.includes("INVALID_EMAIL") ||
-    message.includes("USER_DISABLED") ||
-    message.includes("Status 400") ||
-    message.includes("HTTP 400")
-  ) {
-    return "Invalid email or password. Please check your credentials and try again.";
-  }
-
-  if (message.includes("EMAIL_EXISTS")) {
-    return "An account with this email already exists.";
-  }
-
-  if (message.includes("TOO_MANY_ATTEMPTS_TRY_LATER")) {
-    return "Too many failed attempts. Please try again later for your security.";
-  }
-
-  // Log the actual error for developers (in a real app, use a proper logging service)
-  console.error("[Security] Auth Error:", message);
-
-  return "An error occurred during authentication. Please try again later.";
+  return 'An error occurred during authentication. Please try again.';
 };
 
 /**
- * Sanitizes general API error messages to prevent technical details exposure.
+ * Maps API status codes and network errors to generic messages.
+ * Prevents leakage of technical implementation details or server state.
  */
-export const getSanitizedApiError = (context: string): string => {
-  return `Failed to ${context}. Please try again later.`;
+export const getSanitizedApiError = (error: unknown): string => {
+  const message = (error instanceof Error ? error.message : String(error));
+  const status = Number(message);
+
+  if (!isNaN(status) && status > 0) {
+    if (status >= 500) return 'Server error. Please try again later.';
+    if (status === 401 || status === 403) return 'Access denied.';
+    if (status === 404) return 'The requested resource was not found.';
+    return 'An error occurred while communicating with the server.';
+  }
+
+  const lowerMsg = message.toLowerCase();
+  if (lowerMsg.includes('network') || lowerMsg.includes('fetch')) {
+    return 'Network error. Please check your connection.';
+  }
+  if (lowerMsg.includes('permission') || lowerMsg.includes('unauthorized')) {
+    return 'Access denied.';
+  }
+
+  return 'An unexpected error occurred.';
 };

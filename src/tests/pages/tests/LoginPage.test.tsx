@@ -80,3 +80,23 @@ test("Submits login form and navigates on success", async () => {
     expect(mockNavigate).toHaveBeenCalledWith("/index");
   });
 });
+
+test("Displays sanitized error message on failed login", async () => {
+  const user = userEvent.setup();
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue({
+      ok: false,
+      status: 401,
+      json: async () => ({ error: { message: "INVALID_PASSWORD" } }),
+    })
+  );
+
+  renderLoginPage(vi.fn());
+
+  await user.type(screen.getByLabelText(/email address/i), "user@test.com");
+  await user.type(screen.getByLabelText(/^password$/i), "WrongPass123!");
+  await user.click(screen.getByRole("button", { name: /login/i }));
+
+  expect(await screen.findByText("Invalid email or password.")).toBeInTheDocument();
+});
