@@ -14,13 +14,13 @@ const baseProps = {
 };
 
 describe("MenuItem", () => {
-  test("applies single-line truncation to name and description", () => {
+  test("applies proper truncation to name and description", () => {
     render(<MenuItem {...baseProps} />);
 
     const name = screen.getByText(baseProps.name);
     const description = screen.getByText(baseProps.description);
 
     expect(name).toHaveClass("truncate");
-    expect(description).toHaveClass("truncate");
+    expect(description).toHaveClass("line-clamp-2");
   });
 });

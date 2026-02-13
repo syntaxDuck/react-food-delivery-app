@@ -5,3 +5,7 @@
 ## 2026-02-10 - [Consistent Password UX]
 **Learning:** Implementing password visibility toggles and real-time mismatch feedback improves accessibility for users with cognitive disabilities or motor impairments who may struggle with re-typing.
 **Action:** Use a standardized visibility toggle pattern for all sensitive fields. Ensure the toggle is keyboard-accessible (button role, aria-label) and placed within the input field's visual boundary using absolute positioning.
+
+## 2026-02-12 - [Guiding Users through Terminal States]
+**Learning:** Empty states and success screens are critical "micro-moments" that need clear navigation guidance. A "dead-end" UI (like an empty cart with no button) leads to user drop-off.
+**Action:** Always provide actionable Call-To-Action (CTA) buttons in empty or terminal success states (e.g., "Start Shopping" in an empty cart, "Great, thanks!" to dismiss a success message). Use `line-clamp-2` instead of `truncate` for descriptions to balance context and space.

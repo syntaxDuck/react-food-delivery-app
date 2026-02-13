@@ -30,7 +30,7 @@ const NavigationBar = ({ loginStatus, isLightTheme, onToggleTheme }: NavigationB
   return (
     <>
       <motion.header
-        className={`stickey lg:fixed ${compoundClasses.navigation.header}`}
+        className={`lg:fixed ${compoundClasses.navigation.header}`}
         variants={navVariants}
         initial="initial"
         animate="animate"
