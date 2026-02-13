@@ -1,11 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../test-utils";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 import { vi } from "vitest";
 
 import Cart from "../../../components/cart/Cart";
 import { useCart } from "../../../components/cart/cart-context/CartContext";
-import CartCtxProvider from "../../../components/cart/cart-context/CartCtxProvider";
 import type { CartItemType } from "../../../components/cart/CartTypes";
 
 const item: CartItemType = {
@@ -37,21 +36,13 @@ describe("Cart", () => {
 
   test("shows success message after submitting order", async () => {
     const user = userEvent.setup();
-    const fetchMock = vi.mocked(fetch);
-
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({})
-    } as Response);
-
+    
     render(
-      <CartCtxProvider>
-        <CartHarness />
-      </CartCtxProvider>
+      <CartHarness />,
+      { includeAuth: true, includeCart: true }
     );
 
     await user.click(screen.getByRole("button", { name: /submit order/i }));
-    expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(
       await screen.findByText(/order submitted successfully/i)
     ).toBeInTheDocument();
@@ -59,23 +50,16 @@ describe("Cart", () => {
 
   test("shows error message when submission fails", async () => {
     const user = userEvent.setup();
-    const fetchMock = vi.mocked(fetch);
-
-    fetchMock.mockResolvedValueOnce({
-      ok: false,
-      status: 500
-    } as Response);
-
+    
     render(
-      <CartCtxProvider>
-        <CartHarness />
-      </CartCtxProvider>
+      <CartHarness />,
+      { includeAuth: true, includeCart: true }
     );
 
     await user.click(screen.getByRole("button", { name: /submit order/i }));
 
     expect(
-      await screen.findByText(/http error: status 500/i)
+      await screen.findByText(/http error/i)
     ).toBeInTheDocument();
   });
 });

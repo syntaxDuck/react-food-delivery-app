@@ -86,7 +86,7 @@ export interface FormInputRefs {
 
 // Login page props
 export interface LoginPageProps {
-  onLoginChange: (username: string) => void;
+  onLoginChange?: (username: string) => void;
 }
 
 // Login form props

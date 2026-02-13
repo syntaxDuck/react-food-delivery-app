@@ -2,13 +2,14 @@ import { motion } from "framer-motion";
 import React from "react";
 
 import { compoundClasses } from "../../../utils/compoundClasses";
+import { useMenuData } from "../../../hooks/useMenuData";
 import Section from "../Section";
-import { useMenuData } from "./hooks/useMenuData";
 import { usePreCart } from "./hooks/usePreCart";
 import MenuDisplay from "./MenuDisplay";
 
 const Menu = () => {
-  const { menuItems, loading, error } = useMenuData();
+  const { data: menuItems = [], isLoading: loading, error: queryError } = useMenuData();
+  const error = queryError ? queryError.message : null;
   const {
     itemAmountsMap,
     addToPreCartHandler,

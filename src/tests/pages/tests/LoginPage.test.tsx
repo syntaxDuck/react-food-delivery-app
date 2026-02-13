@@ -1,6 +1,6 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "../../test-utils";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter, Navigate,Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { vi } from "vitest";
 
 import LoginPage from "../../../pages/LoginPage";
@@ -14,19 +14,33 @@ vi.mock("react-router", async () => {
   };
 });
 
-const renderLoginPage = (onLoginChange: (username: string) => void) => {
+vi.mock("firebase/auth", async () => {
+  const actual = await vi.importActual<typeof import("firebase/auth")>("firebase/auth");
+  return {
+    ...actual,
+    signInWithEmailAndPassword: vi.fn().mockResolvedValue({ user: { email: "user@test.com" } }),
+    createUserWithEmailAndPassword: vi.fn().mockResolvedValue({ user: { email: "user@test.com" } }),
+    onAuthStateChanged: vi.fn((_auth, callback) => {
+      callback(null);
+      return vi.fn();
+    }),
+  };
+});
+
+const renderLoginPage = () => {
   render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate replace to="/Login" />} />
-        <Route path="/Login" element={<LoginPage onLoginChange={onLoginChange} />} />
+        <Route path="/Login" element={<LoginPage />} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter>,
+    { includeAuth: true }
   );
 };
 
 test("Verify: Login Page Component Default State", () => {
-  renderLoginPage(vi.fn());
+  renderLoginPage();
   expect(screen.getByRole("textbox", { name: /email address/i }));
   expect(screen.getByLabelText(/password/i));
   expect(screen.getByRole("button", { name: /login/i }));
@@ -34,7 +48,7 @@ test("Verify: Login Page Component Default State", () => {
 });
 
 test("Verify: Switch From Login to Sign Up Functionality", async () => {
-  renderLoginPage(vi.fn());
+  renderLoginPage();
   const user = userEvent.setup();
 
   expect(screen.getByRole("textbox", { name: /email address/i }));
@@ -44,7 +58,6 @@ test("Verify: Switch From Login to Sign Up Functionality", async () => {
 
   await user.click(screen.getByText(/sign up/i));
   
-  // Wait for the UI to update
   await screen.findByRole("button", { name: /sign in/i });
 
   expect(screen.getByRole("textbox", { name: /email address/i }));
@@ -59,24 +72,14 @@ test("Verify: Switch From Login to Sign Up Functionality", async () => {
 
 test("Submits login form and navigates on success", async () => {
   const user = userEvent.setup();
-  const onLoginChange = vi.fn();
 
-  vi.stubGlobal(
-    "fetch",
-    vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => ({ email: "user@test.com" }),
-    })
-  );
-
-  renderLoginPage(onLoginChange);
+  renderLoginPage();
 
   await user.type(screen.getByLabelText(/email address/i), "user@test.com");
   await user.type(screen.getByLabelText(/password/i), "passw0rd!");
   await user.click(screen.getByRole("button", { name: /login/i }));
 
   await waitFor(() => {
-    expect(onLoginChange).toHaveBeenCalledWith("user");
     expect(mockNavigate).toHaveBeenCalledWith("/index");
   });
 });

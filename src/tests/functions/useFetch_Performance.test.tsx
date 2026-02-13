@@ -2,7 +2,8 @@
  * @vitest-environment jsdom
  */
 import { renderHook, waitFor } from "@testing-library/react";
-import { vi, describe, test, expect, beforeEach } from "vitest";
+import { beforeEach,describe, expect, test, vi } from "vitest";
+
 import useFetch from "../../functions/useFetch";
 
 describe("useFetch performance", () => {

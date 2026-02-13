@@ -1,9 +1,10 @@
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import React from "react";
 
-import { FIREBASE_ENDPOINT } from "../../App";
+import { useAuth } from "../../contexts/AuthContext";
+import { db } from "../../firebase/config";
 import AnimatedButton from "../ui/AnimatedButton";
-//Component Imports
 import AnimatedModal from "../ui/AnimatedModal";
 import { useCart } from "./cart-context/CartContext";
 import CartItem from "./CartItem";
@@ -26,11 +27,11 @@ const cartItemVariants: Variants = {
 };
 
 const Cart: React.FC = () => {
+  const { user, isAuthenticated, signInAnonymous } = useAuth();
   const crtCtx = useCart();
   const [error, setError] = React.useState<string | null>(null);
   const [successMessage, setSuccessMessage] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
-  const dbUrl = React.useRef<string>(`${FIREBASE_ENDPOINT}Orders.json`);
 
   React.useEffect(() => {
     if (!crtCtx.state.cartActive) {
@@ -42,20 +43,25 @@ const Cart: React.FC = () => {
   const submitOrderHandler = async (): Promise<void> => {
     if (isSubmitting) return;
 
+    if (!isAuthenticated) {
+      await signInAnonymous();
+    }
+
+    if (!user) {
+      setError("Please sign in to place an order");
+      return;
+    }
+
     setIsSubmitting(true);
     setSuccessMessage(null);
     try {
-      const response = await fetch(dbUrl.current, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(crtCtx.state.items),
+      const ordersRef = collection(db, "Orders");
+      await addDoc(ordersRef, {
+        user_id: user.uid,
+        items: crtCtx.state.items,
+        created_at: serverTimestamp(),
+        status: "pending"
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error: Status ${String(response.status)}`);
-      }
 
       setError(null);
       crtCtx.clearCart();

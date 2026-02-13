@@ -1,75 +1,52 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../../test-utils";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
-import CartCtxProvider from "../../../../../components/cart/cart-context/CartCtxProvider";
 import MobileNavigation from "../../../../../components/layout/navigation-bar/mobile/MobileNavigation";
 
 describe("MobileNavigation", () => {
   test("toggles menu with slide handle", async () => {
     const user = userEvent.setup();
-    const setMobileMenuOpen = vi.fn();
+    const setActiveSection = vi.fn();
 
-    const { rerender } = render(
-      <CartCtxProvider>
-        <MobileNavigation
-          mobileMenuOpen={false}
-          setMobileMenuOpen={setMobileMenuOpen}
-          activeSection="about-us"
-          setActiveSection={() => undefined}
-          loginStatus={false}
-          isLightTheme={false}
-          onToggleTheme={() => undefined}
-        />
-      </CartCtxProvider>
+    render(
+      <MobileNavigation
+        activeSection="about-us"
+        setActiveSection={setActiveSection}
+        loginStatus={false}
+        isLightTheme={false}
+        onToggleTheme={() => undefined}
+      />,
+      { includeAuth: true, includeCart: true, includeRouter: true }
     );
 
     const openButton = screen.getByRole("button", { name: /open menu/i });
     await user.click(openButton);
-    expect(setMobileMenuOpen).toHaveBeenCalledWith(true);
 
-    rerender(
-      <CartCtxProvider>
-        <MobileNavigation
-          mobileMenuOpen
-          setMobileMenuOpen={setMobileMenuOpen}
-          activeSection="about-us"
-          setActiveSection={() => undefined}
-          loginStatus={false}
-          isLightTheme={false}
-          onToggleTheme={() => undefined}
-        />
-      </CartCtxProvider>
-    );
-
-    expect(await screen.findByText(/cart/i)).toBeInTheDocument();
-
-    const closeButton = screen.getByRole("button", { name: /close menu/i });
-    await user.click(closeButton);
-    expect(setMobileMenuOpen).toHaveBeenCalledWith(false);
+    expect(await screen.findByText(/close menu/i)).toBeInTheDocument();
   });
 
   test("closes menu when cart button is clicked", async () => {
     const user = userEvent.setup();
-    const setMobileMenuOpen = vi.fn();
+    const setActiveSection = vi.fn();
 
     render(
-      <CartCtxProvider>
-        <MobileNavigation
-          mobileMenuOpen
-          setMobileMenuOpen={setMobileMenuOpen}
-          activeSection="about-us"
-          setActiveSection={() => undefined}
-          loginStatus={false}
-          isLightTheme={false}
-          onToggleTheme={() => undefined}
-        />
-      </CartCtxProvider>
+      <MobileNavigation
+        activeSection="about-us"
+        setActiveSection={setActiveSection}
+        loginStatus={false}
+        isLightTheme={false}
+        onToggleTheme={() => undefined}
+      />,
+      { includeAuth: true, includeCart: true, includeRouter: true }
     );
+
+    const openButton = screen.getByRole("button", { name: /open menu/i });
+    await user.click(openButton);
 
     const cartButton = await screen.findByText(/cart/i);
     await user.click(cartButton);
 
-    expect(setMobileMenuOpen).toHaveBeenCalledWith(false);
+    expect(screen.queryByText(/close menu/i)).not.toBeInTheDocument();
   });
 });
