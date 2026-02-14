@@ -1,8 +1,8 @@
-import { render, screen } from "../../../../test-utils";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
 import MobileNavigation from "../../../../../components/layout/navigation-bar/mobile/MobileNavigation";
+import { render, screen } from "../../../../test-utils";
 
 describe("MobileNavigation", () => {
   test("toggles menu with slide handle", async () => {

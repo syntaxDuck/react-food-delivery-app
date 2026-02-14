@@ -1,6 +1,6 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Layout from "./components/layout/Layout";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";

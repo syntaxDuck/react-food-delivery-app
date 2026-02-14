@@ -1,9 +1,9 @@
-import { render, screen, waitFor } from "../../test-utils";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { vi } from "vitest";
 
 import LoginPage from "../../../pages/LoginPage";
+import { render, screen, waitFor } from "../../test-utils";
 
 const mockNavigate = vi.fn();
 vi.mock("react-router", async () => {

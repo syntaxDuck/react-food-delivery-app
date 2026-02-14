@@ -1,9 +1,9 @@
-import { render, screen } from "../../test-utils";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 
 import Layout from "../../../components/layout/Layout";
 import HomePage from "../../../pages/HomePage";
+import { render, screen } from "../../test-utils";
 
 beforeAll(() => {
   const modal = document.createElement('div');

@@ -1,6 +1,6 @@
+import { type FirebaseOptions,initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import { initializeApp, type FirebaseOptions } from 'firebase/app';
 
 const getFirebaseConfig = (): FirebaseOptions => {
   const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;

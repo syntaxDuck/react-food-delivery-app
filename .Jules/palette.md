@@ -9,3 +9,7 @@
 ## 2026-02-12 - [Guiding Users through Terminal States]
 **Learning:** Empty states and success screens are critical "micro-moments" that need clear navigation guidance. A "dead-end" UI (like an empty cart with no button) leads to user drop-off.
 **Action:** Always provide actionable Call-To-Action (CTA) buttons in empty or terminal success states (e.g., "Start Shopping" in an empty cart, "Great, thanks!" to dismiss a success message). Use `line-clamp-2` instead of `truncate` for descriptions to balance context and space.
+
+## 2026-02-14 - [Enhanced Form Accessibility Pattern]
+**Learning:** Standardized form accessibility improves the experience for both visual and screen-reader users. Using `aria-describedby` to link error messages ensures screen readers announce errors immediately upon focusing an invalid field.
+**Action:** Always link field-level error messages to inputs using `aria-describedby`. Add visual required indicators (\*) using `aria-hidden="true"` to avoid screen reader clutter, as the `required` attribute already handles the semantic announcement. Ensure interactive icons have `focus-visible` rings for keyboard navigation.

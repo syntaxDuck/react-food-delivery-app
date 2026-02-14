@@ -1,8 +1,8 @@
-import { render, screen, waitFor } from "../../../test-utils";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 
 import NavigationBar from "../../../../components/layout/navigation-bar/NavigationBar.tsx";
+import { render, screen, waitFor } from "../../../test-utils";
 
 describe("NavigationBar", () => {
   test("Renders navigation items and logo link", () => {

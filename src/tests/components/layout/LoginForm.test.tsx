@@ -42,7 +42,7 @@ describe("LoginForm", () => {
     render(<LoginFormHarness onSubmit={onSubmit} />);
 
     await user.type(screen.getByLabelText(/email address/i), "invalid-email");
-    await user.type(screen.getByLabelText(/^password$/i), "short");
+    await user.type(screen.getByLabelText(/password/i, { selector: 'input' }), "short");
     await user.click(screen.getByRole("button", { name: /login/i }));
 
     expect(onSubmit).not.toHaveBeenCalled();
@@ -66,7 +66,7 @@ describe("LoginForm", () => {
     const user = userEvent.setup();
     render(<LoginFormHarness onSubmit={() => undefined} />);
 
-    const passwordInput = screen.getByLabelText(/^password$/i);
+    const passwordInput = screen.getByLabelText(/password/i, { selector: 'input' });
     expect(passwordInput).toHaveAttribute("type", "password");
 
     const toggleButton = screen.getByLabelText(/show password/i);
