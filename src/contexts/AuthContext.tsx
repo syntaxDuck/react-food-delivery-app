@@ -15,8 +15,10 @@ import {
 import {
   createContext,
   type ReactNode,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState} from 'react';
 
 import { auth } from '../firebase/config';
@@ -59,17 +61,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return () => { unsubscribe(); };
   }, []);
 
-  const signInAnonymous = async (): Promise<void> => {
+  const signInAnonymous = useCallback(async (): Promise<void> => {
     if (!auth.currentUser) {
       await signInAnonymously(auth);
     }
-  };
+  }, []);
 
-  const signInWithEmail = async (email: string, password: string): Promise<void> => {
+  const signInWithEmail = useCallback(async (email: string, password: string): Promise<void> => {
     await signInWithEmailAndPassword(auth, email, password);
-  };
+  }, []);
 
-  const signUpWithEmail = async (
+  const signUpWithEmail = useCallback(async (
     email: string,
     password: string,
     displayName?: string
@@ -78,34 +80,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (displayName) {
       await updateProfile(result.user, { displayName });
     }
-  };
+  }, []);
 
-  const signInWithGoogle = async (): Promise<void> => {
+  const signInWithGoogle = useCallback(async (): Promise<void> => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
-  };
+  }, []);
 
-  const linkWithGoogle = async (): Promise<void> => {
+  const linkWithGoogle = useCallback(async (): Promise<void> => {
     if (!auth.currentUser) {
       throw new Error('No user is currently signed in');
     }
     const provider = new GoogleAuthProvider();
     await linkWithPopup(auth.currentUser, provider);
-  };
+  }, []);
 
-  const linkWithEmail = async (email: string, password: string): Promise<void> => {
+  const linkWithEmail = useCallback(async (email: string, password: string): Promise<void> => {
     if (!auth.currentUser) {
       throw new Error('No user is currently signed in');
     }
     const credential = EmailAuthProvider.credential(email, password);
     await linkWithCredential(auth.currentUser, credential);
-  };
+  }, []);
 
-  const signOut = async (): Promise<void> => {
+  const signOut = useCallback(async (): Promise<void> => {
     await firebaseSignOut(auth);
-  };
+  }, []);
 
-  const value: AuthContextValue = {
+  const value: AuthContextValue = useMemo(() => ({
     user,
     isLoading,
     isAuthenticated,
@@ -117,7 +119,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     linkWithGoogle,
     linkWithEmail,
     signOut
-  };
+  }), [
+    user,
+    isLoading,
+    isAuthenticated,
+    isAnonymous,
+    signInAnonymous,
+    signInWithEmail,
+    signUpWithEmail,
+    signInWithGoogle,
+    linkWithGoogle,
+    linkWithEmail,
+    signOut
+  ]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
