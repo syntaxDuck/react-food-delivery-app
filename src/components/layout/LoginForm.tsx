@@ -147,7 +147,7 @@ const LoginForm = (props: LoginFormProps) => {
         <form onSubmit={formSubmitHandler} className="space-y-6" noValidate>
           <div>
             <label htmlFor="username" className="block text-text font-medium mb-2">
-              Email Address
+              Email Address <span className="text-danger ml-1" aria-hidden="true">*</span>
             </label>
             <motion.input
               id="username"
@@ -160,9 +160,11 @@ const LoginForm = (props: LoginFormProps) => {
               autoComplete="email"
               required
               aria-invalid={!usernameValid}
+              aria-describedby={!usernameValid ? "username-error" : undefined}
             />
             {!usernameValid && (
               <motion.p
+                id="username-error"
                 className="text-danger text-sm mt-2"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -175,7 +177,7 @@ const LoginForm = (props: LoginFormProps) => {
 
           <div>
             <label htmlFor="password" className="block text-text font-medium mb-2">
-              Password
+              Password <span className="text-danger ml-1" aria-hidden="true">*</span>
             </label>
             <div className="relative">
               <motion.input
@@ -189,11 +191,12 @@ const LoginForm = (props: LoginFormProps) => {
                 autoComplete={props.userAction === "SignIn" ? "current-password" : "new-password"}
                 required
                 aria-invalid={!passwordValid}
+                aria-describedby={!passwordValid ? "password-error" : undefined}
               />
               <button
                 type="button"
                 onClick={() => { setShowPassword(!showPassword); }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-text/50 hover:text-text transition-colors focus:outline-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-text/50 hover:text-text transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-md"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 <span className="material-icons md-18">
@@ -203,6 +206,7 @@ const LoginForm = (props: LoginFormProps) => {
             </div>
             {!passwordValid && (
               <motion.p
+                id="password-error"
                 className="text-danger text-sm mt-2"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -216,7 +220,7 @@ const LoginForm = (props: LoginFormProps) => {
           {props.userAction === "SignUp" && (
             <div className="mb-6">
               <label htmlFor="confirm-password" className="block text-text font-medium mb-2">
-                Confirm Password
+                Confirm Password <span className="text-danger ml-1" aria-hidden="true">*</span>
               </label>
               <div className="relative">
                 <motion.input
@@ -230,11 +234,12 @@ const LoginForm = (props: LoginFormProps) => {
                   autoComplete="new-password"
                   required
                   aria-invalid={!confPasswordValid}
+                  aria-describedby={!confPasswordValid ? "conf-password-error" : undefined}
                 />
                 <button
                   type="button"
                   onClick={() => { setShowPassword(!showPassword); }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text/50 hover:text-text transition-colors focus:outline-none"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text/50 hover:text-text transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-md"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   <span className="material-icons md-18">
@@ -244,6 +249,7 @@ const LoginForm = (props: LoginFormProps) => {
               </div>
               {!confPasswordValid && (
                 <motion.p
+                  id="conf-password-error"
                   className="text-danger text-sm mt-2"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}

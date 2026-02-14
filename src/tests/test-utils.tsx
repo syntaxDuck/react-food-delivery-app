@@ -1,7 +1,8 @@
 import { render as rtlRender, type RenderOptions } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from '../contexts/AuthContext';
+
 import CartCtxProvider from '../components/cart/cart-context/CartCtxProvider';
+import { AuthProvider } from '../contexts/AuthContext';
 
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   includeAuth?: boolean;

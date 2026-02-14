@@ -1,7 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore';
 
-import { db } from '../firebase/config';
 import type { MenuItemType } from '../components/layout/menu/types';
+import { db } from '../firebase/config';
 import { mockMenuItems } from '../mock/data';
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
