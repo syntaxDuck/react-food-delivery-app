@@ -76,22 +76,19 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
       transition={{ delay }}
     >
       <div className="p-6 flex flex-col h-full">
-        <div className="flex justify-between items-start mb-4 flex-1">
-          <div className="flex-1">
-            <h3 className="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors truncate">
-              {name}
-            </h3>
-            <div className="text-2xl font-bold text-primary mb-3">
-              {formattedPrice}
+        <div className="flex-1">
+          <div className="flex justify-between items-start mb-4">
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors truncate">
+                {name}
+              </h3>
+              <p className="text-text/70 leading-relaxed line-clamp-3">
+                {description}
+              </p>
             </div>
-            <p className="text-text/70 leading-relaxed line-clamp-2">
-              {description}
-            </p>
           </div>
-          <div className="ml-4">
-            <div className="w-20 h-20 surface-panel rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-              <span className="material-icons md-36 text-primary">restaurant</span>
-            </div>
+          <div className="text-2xl font-bold text-primary mb-3">
+            {formattedPrice}
           </div>
         </div>
 

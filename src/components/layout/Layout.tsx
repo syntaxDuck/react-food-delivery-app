@@ -36,6 +36,7 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, children }) => {
 
   const backgroundStyle: React.CSSProperties = {
     backgroundImage: `url(${image})`,
+    backgroundSize: "cover",
   };
 
   React.useEffect(() => {
@@ -69,7 +70,7 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, children }) => {
   return (
     <CartCtxProvider>
       <div
-        className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed relative overflow-x-hidden"
+        className="min-h-screen bg-no-repeat bg-center bg-contain md:bg-cover md:bg-fixed relative overflow-x-hidden"
         style={backgroundStyle}
       >
         <div className="fixed inset-0 bg-bg-dark/70 pointer-events-none" />
