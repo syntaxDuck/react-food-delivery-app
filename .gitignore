@@ -116,3 +116,6 @@ Thumbs.db
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Agent config
+AGENTS.md
