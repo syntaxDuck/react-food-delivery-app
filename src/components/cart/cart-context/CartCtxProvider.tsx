@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 
-import { ClearCartAction, ToggleCartAction, UpdateCartAction } from "../CartTypes";
+import { ClearCartAction, RemoveItemAction, ToggleCartAction, UpdateCartAction } from "../CartTypes";
 import { type CartContextValue, type CartItemType, defaultCartState } from "../CartTypes";
 import { CartContext } from "./CartContext";
 import CartReducer from "./CartReducer";
@@ -27,12 +27,17 @@ const CartCtxProvider = ({ children }: CartCtxProviderProps) => {
     dispatchCartAction(ToggleCartAction());
   }, []);
 
+  const removeItemHandler = useCallback((itemId: string) => {
+    dispatchCartAction(RemoveItemAction(itemId));
+  }, []);
+
   const cartContext: CartContextValue = useMemo(() => ({
     state: cartState,
     updateCart: updateCartHandler,
+    removeItem: removeItemHandler,
     clearCart: clearCartHandler,
     toggleCart: toggleCartHandler,
-  }), [cartState, updateCartHandler, clearCartHandler, toggleCartHandler]);
+  }), [cartState, updateCartHandler, removeItemHandler, clearCartHandler, toggleCartHandler]);
 
   return (
     <CartContext.Provider value={cartContext}>

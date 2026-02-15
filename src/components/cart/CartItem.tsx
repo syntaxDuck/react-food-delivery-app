@@ -52,6 +52,7 @@ const CartItem: React.FC<CartItemProps> = ({
             onClick={handleRemove}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            aria-label={`Remove ${item.name} from cart`}
           >
             <span className="material-icons md-18">delete</span>
           </motion.button>

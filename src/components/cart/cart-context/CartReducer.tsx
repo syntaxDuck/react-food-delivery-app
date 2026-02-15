@@ -38,6 +38,14 @@ const handleClearCart = (state: CartState): CartState => {
   return { ...state, items: [], totalAmount: 0 };
 };
 
+const handleRemoveItem = (state: CartState, itemId: string): CartState => {
+  const updatedItems = state.items.filter(item => item.id !== itemId);
+  const totalAmount = updatedItems.reduce((total, item) => {
+    return total + item.amount * item.price;
+  }, 0);
+  return { ...state, items: updatedItems, totalAmount };
+};
+
 const CartReducer: CartReducerFunction = (state, action) => {
   switch (action.type) {
     case CartActions.Update:
@@ -46,6 +54,8 @@ const CartReducer: CartReducerFunction = (state, action) => {
       return handleToggleCart(state);
     case CartActions.Clear:
       return handleClearCart(state);
+    case CartActions.Remove:
+      return handleRemoveItem(state, action.itemId);
     default:
       return defaultCartState;
   }

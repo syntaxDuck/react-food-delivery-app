@@ -82,7 +82,7 @@ const MenuItem: React.FC<MenuItemProps> = React.memo(({
               <h3 className="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors truncate">
                 {name}
               </h3>
-              <p className="text-text/70 leading-relaxed line-clamp-3">
+              <p className="text-text/70 leading-relaxed line-clamp-2">
                 {description}
               </p>
             </div>

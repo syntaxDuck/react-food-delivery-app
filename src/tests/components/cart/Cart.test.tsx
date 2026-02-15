@@ -1,7 +1,27 @@
-import { render, screen } from "../test-utils";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 import { vi } from "vitest";
+
+import { render, screen } from "../../test-utils";
+
+// Mock Firebase
+vi.mock("../../../firebase/config", () => ({
+  db: {},
+  auth: { currentUser: { uid: 'test-user' } },
+}));
+
+vi.mock("firebase/auth", () => ({
+  getAuth: vi.fn(),
+  signInAnonymously: vi.fn(() => Promise.resolve()),
+  onAuthStateChanged: vi.fn(() => () => {}),
+}));
+
+vi.mock("firebase/firestore", () => ({
+  collection: vi.fn(),
+  addDoc: vi.fn(() => Promise.resolve({ id: 'test-order-id' })),
+  serverTimestamp: vi.fn(),
+  getFirestore: vi.fn(),
+}));
 
 import Cart from "../../../components/cart/Cart";
 import { useCart } from "../../../components/cart/cart-context/CartContext";
@@ -61,5 +81,23 @@ describe("Cart", () => {
     expect(
       await screen.findByText(/http error/i)
     ).toBeInTheDocument();
+  });
+
+  test("removes item from cart when delete button is clicked", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <CartHarness />,
+      { includeAuth: true, includeCart: true }
+    );
+
+    // Initial check
+    expect(screen.getByText(/sushi roll/i)).toBeInTheDocument();
+
+    const deleteButton = screen.getByLabelText(/remove sushi roll from cart/i);
+    await user.click(deleteButton);
+
+    expect(screen.queryByText(/sushi roll/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
   });
 });

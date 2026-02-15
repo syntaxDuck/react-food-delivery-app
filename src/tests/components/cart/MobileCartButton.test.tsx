@@ -1,8 +1,8 @@
-import { render, screen } from "../../test-utils";
 import { act } from "react";
 import { vi } from "vitest";
 
 import MobileCartButton from "../../../components/cart/MobileCartButton";
+import { render, screen } from "../../test-utils";
 
 describe("MobileCartButton", () => {
   test("shows label after animation completes", async () => {

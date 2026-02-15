@@ -9,3 +9,7 @@
 ## 2026-02-12 - [Guiding Users through Terminal States]
 **Learning:** Empty states and success screens are critical "micro-moments" that need clear navigation guidance. A "dead-end" UI (like an empty cart with no button) leads to user drop-off.
 **Action:** Always provide actionable Call-To-Action (CTA) buttons in empty or terminal success states (e.g., "Start Shopping" in an empty cart, "Great, thanks!" to dismiss a success message). Use `line-clamp-2` instead of `truncate` for descriptions to balance context and space.
+
+## 2026-02-14 - [Form Accessibility and Cart Interaction]
+**Learning:** Found a common pattern where form validation errors were visually present but not programmatically linked to inputs. Also discovered that interactive cart buttons were incorrectly tied to global UI visibility toggles instead of state mutations.
+**Action:** Standardize form accessibility by adding required indicators (*) to labels and linking validation error messages to inputs using `aria-describedby` with `aria-live="polite"`. Ensure item removal actions in the cart are decoupled from UI visibility logic to prevent accidental cart closure.

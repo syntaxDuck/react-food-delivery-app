@@ -5,6 +5,7 @@ import { type CartContextValue, defaultCartState } from "../CartTypes";
 export const CartContext = React.createContext<CartContextValue>({
   state: defaultCartState,
   updateCart: () => undefined,
+  removeItem: () => undefined,
   clearCart: () => undefined,
   toggleCart: () => undefined,
 });

@@ -211,8 +211,8 @@ const Cart: React.FC = () => {
                 <CartItem
                   item={item}
                   onUpdateAmount={handleUpdateAmount}
-                  onRemove={() => {
-                    crtCtx.toggleCart();
+                  onRemove={(itemId) => {
+                    crtCtx.removeItem(itemId);
                   }}
                 />
               </motion.div>
