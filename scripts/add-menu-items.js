@@ -1,7 +1,13 @@
 import { readFile } from "node:fs/promises";
 import process from "node:process";
 import console from "node:console";
-import fetch from 'node-fetch';
+import { config } from "dotenv";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+import admin from "firebase-admin";
+import { getFirestore } from "firebase-admin/firestore";
+
+config({ path: join(dirname(fileURLToPath(import.meta.url)), "..", ".env.local") });
 
 const REQUIRED_FIELDS = ["id", "price", "description", "category"];
 
@@ -57,32 +63,50 @@ const parseArgs = (args) => {
 
 const getFirebaseConfig = () => {
   const projectId = process.env.VITE_FIREBASE_PROJECT_ID;
-  const apiKey = process.env.VITE_FIREBASE_API_KEY;
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
 
-  if (!projectId || !apiKey) {
-    throw new Error("Missing VITE_FIREBASE_PROJECT_ID or VITE_FIREBASE_API_KEY in environment.");
+  if (!projectId) {
+    throw new Error("Missing VITE_FIREBASE_PROJECT_ID in environment.");
   }
 
-  return { projectId, apiKey };
+  if (!privateKey || !clientEmail) {
+    throw new Error("Missing FIREBASE_PRIVATE_KEY or FIREBASE_CLIENT_EMAIL in environment. Set these in your .env.local file.");
+  }
+
+  return { projectId, privateKey, clientEmail };
 };
 
-const uploadMenuItems = async (menuItems, { projectId, apiKey }) => {
-  const endpoint = `https://${projectId}.firebaseio.com/Menu.json?auth=${apiKey}`;
-
-  const response = await fetch(endpoint, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(menuItems)
+const uploadMenuItems = async (menuItems, { projectId, privateKey, clientEmail }) => {
+  const formattedKey = privateKey.includes('\\n') 
+    ? privateKey.split('\\n').join('\n') 
+    : privateKey;
+  
+  const credential = admin.credential.cert({
+    projectId,
+    privateKey: formattedKey,
+    clientEmail
   });
 
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Firebase error ${String(response.status)}: ${body}`);
+  const app = admin.initializeApp({ credential, projectId });
+  const db = getFirestore(app);
+
+  const batch = db.batch();
+  const collectionRef = db.collection("Menu");
+
+  for (const item of Object.values(menuItems)) {
+    const docRef = collectionRef.doc(item.id);
+    batch.set(docRef, {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      description: item.description,
+      category: item.category
+    });
   }
 
-  return response.json();
+  await batch.commit();
+  return Object.keys(menuItems).length;
 };
 
 const run = async () => {
@@ -92,8 +116,8 @@ const run = async () => {
   const validated = validateMenuItems(parsed);
   const config = getFirebaseConfig();
 
-  await uploadMenuItems(validated, config);
-  console.log(`Uploaded ${Object.keys(validated).length} menu items.`);
+  const count = await uploadMenuItems(validated, config);
+  console.log(`Uploaded ${count} menu items to Firestore.`);
 };
 
 if (import.meta.url === `file://${process.argv[1]}`) {

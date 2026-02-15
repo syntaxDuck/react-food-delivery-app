@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import type { UserAction } from "../types/auth";
 
 const LoginPage = () => {
-  const { signInWithEmail, signUpWithEmail, isAuthenticated } = useAuth();
+  const { signInWithEmail, signUpWithEmail, signOut, isAuthenticated, isAnonymous } = useAuth();
   const [userAction, setUserAction] = useState<UserAction>("SignIn");
   const navigate = useNavigate();
 
@@ -22,10 +22,10 @@ const LoginPage = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !isAnonymous) {
       void navigate("/index");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, isAnonymous, navigate]);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -51,6 +51,9 @@ const LoginPage = () => {
 
     try {
       setError(null);
+      if (isAnonymous) {
+        await signOut();
+      }
       if (userAction === "SignUp") {
         await signUpWithEmail(email, password);
       } else {

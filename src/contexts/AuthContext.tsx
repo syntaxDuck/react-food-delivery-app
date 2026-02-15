@@ -28,6 +28,7 @@ interface AuthContextValue {
   isLoading: boolean;
   isAuthenticated: boolean;
   isAnonymous: boolean;
+  isExternalAuthInProgress: boolean;
   signInAnonymous: () => Promise<void>;
   signInWithEmail: (email: string, password: string) => Promise<void>;
   signUpWithEmail: (email: string, password: string, displayName?: string) => Promise<void>;
@@ -46,6 +47,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isExternalAuthInProgress, setIsExternalAuthInProgress] = useState(false);
 
   const isAuthenticated = user !== null;
   const isAnonymous = user?.isAnonymous ?? false;
@@ -66,7 +68,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const signInWithEmail = async (email: string, password: string): Promise<void> => {
-    await signInWithEmailAndPassword(auth, email, password);
+    setIsExternalAuthInProgress(true);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } finally {
+      setIsExternalAuthInProgress(false);
+    }
   };
 
   const signUpWithEmail = async (
@@ -74,15 +81,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
     password: string,
     displayName?: string
   ): Promise<void> => {
-    const result = await createUserWithEmailAndPassword(auth, email, password);
-    if (displayName) {
-      await updateProfile(result.user, { displayName });
+    setIsExternalAuthInProgress(true);
+    try {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      if (displayName) {
+        await updateProfile(result.user, { displayName });
+      }
+    } finally {
+      setIsExternalAuthInProgress(false);
     }
   };
 
   const signInWithGoogle = async (): Promise<void> => {
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    setIsExternalAuthInProgress(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+    } finally {
+      setIsExternalAuthInProgress(false);
+    }
   };
 
   const linkWithGoogle = async (): Promise<void> => {
@@ -110,6 +127,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     isLoading,
     isAuthenticated,
     isAnonymous,
+    isExternalAuthInProgress,
     signInAnonymous,
     signInWithEmail,
     signUpWithEmail,

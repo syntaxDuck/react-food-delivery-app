@@ -19,13 +19,13 @@ const queryClient = new QueryClient({
 });
 
 function AppContent() {
-  const { isAuthenticated, isAnonymous, isLoading, signInAnonymous } = useAuth();
+  const { isAuthenticated, isAnonymous, isLoading, isExternalAuthInProgress, signInAnonymous } = useAuth();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (!isLoading && !isAuthenticated && !isExternalAuthInProgress) {
       void signInAnonymous();
     }
-  }, [isLoading, isAuthenticated, signInAnonymous]);
+  }, [isLoading, isAuthenticated, isExternalAuthInProgress, signInAnonymous]);
 
   return (
     <Layout isLoggedIn={isAuthenticated && !isAnonymous}>

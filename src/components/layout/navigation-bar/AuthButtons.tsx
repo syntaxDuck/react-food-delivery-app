@@ -1,6 +1,8 @@
 
 import { motion } from "framer-motion";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+
+import { useAuth } from "../../../contexts/AuthContext";
 // Inline variants since NavigationVariants.js doesn't exist
 const navVariants = {
   navItem: {
@@ -18,14 +20,28 @@ interface AuthButtonsProps {
   loginStatus: boolean;
   className?: string;
   variant?: "desktop" | "mobile";
+  onAuthAction?: () => void;
 }
 
 // Clean auth buttons component - works on both desktop and mobile
-const AuthButtons = ({ loginStatus, className = "", variant = "desktop" }: AuthButtonsProps) => {
+const AuthButtons = ({ loginStatus, className = "", variant = "desktop", onAuthAction }: AuthButtonsProps) => {
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await signOut();
+    onAuthAction?.();
+    void navigate("/index");
+  };
+
+  const handleLoginClick = () => {
+    onAuthAction?.();
+  };
+
   return (
     <motion.div variants={navVariants.navItem} transition={{ delay: 0.2 }} className={className}>
       {!loginStatus ? (
-        <Link to="/Login">
+        <Link to="/Login" onClick={handleLoginClick}>
           <AnimatedButton 
             variant="secondary" 
             size={variant === "mobile" ? "lg" : "sm"} 
@@ -40,9 +56,7 @@ const AuthButtons = ({ loginStatus, className = "", variant = "desktop" }: AuthB
           variant="outline"
           size={variant === "mobile" ? "lg" : "sm"}
           className={variant === "mobile" ? "w-full" : "ml-2"}
-          onClick={() => {
-            window.location.reload();
-          }}
+          onClick={handleLogout}
         >
           <span className="material-icons md-18 mr-2">logout</span>
           Logout
