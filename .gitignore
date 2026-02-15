@@ -119,3 +119,6 @@ Thumbs.db
 
 # Agent config
 AGENTS.md
+
+# Firebase
+.firebase/
