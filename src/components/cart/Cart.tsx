@@ -1,6 +1,6 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
-import React from "react";
+import React, { useCallback } from "react";
 
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase/config";
@@ -28,17 +28,17 @@ const cartItemVariants: Variants = {
 
 const Cart: React.FC = () => {
   const { user, isAuthenticated, signInAnonymous } = useAuth();
-  const crtCtx = useCart();
+  const { state: cartState, updateCart, clearCart, toggleCart } = useCart();
   const [error, setError] = React.useState<string | null>(null);
   const [successMessage, setSuccessMessage] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    if (!crtCtx.state.cartActive) {
+    if (!cartState.cartActive) {
       setError(null);
       setSuccessMessage(null);
     }
-  }, [crtCtx.state.cartActive]);
+  }, [cartState.cartActive]);
 
   const submitOrderHandler = async (): Promise<void> => {
     if (isSubmitting) return;
@@ -58,13 +58,13 @@ const Cart: React.FC = () => {
       const ordersRef = collection(db, "Orders");
       await addDoc(ordersRef, {
         user_id: user.uid,
-        items: crtCtx.state.items,
+        items: cartState.items,
         created_at: serverTimestamp(),
         status: "pending"
       });
 
       setError(null);
-      crtCtx.clearCart();
+      clearCart();
       setSuccessMessage("Order submitted successfully! We'll get your delivery on the way.");
 
     } catch (err: unknown) {
@@ -76,16 +76,17 @@ const Cart: React.FC = () => {
     }
   };
 
-  const handleUpdateAmount = (updatedItem: CartItemType): void => {
-    const updatedCartItems: CartItemType[] = [...crtCtx.state.items];
-    const itemIndex = updatedCartItems.findIndex((item) => item.id == updatedItem.id)
-    updatedCartItems[itemIndex] = updatedItem;
-    crtCtx.updateCart(updatedCartItems);
-  };
+  const handleUpdateAmount = useCallback((updatedItem: CartItemType): void => {
+    updateCart([updatedItem]);
+  }, [updateCart]);
+
+  const handleToggleCart = useCallback((): void => {
+    toggleCart();
+  }, [toggleCart]);
 
   const clearCartHandler = (): void => {
-    crtCtx.clearCart();
-    crtCtx.toggleCart();
+    clearCart();
+    toggleCart();
   };
 
   let cartContent: React.ReactElement;
@@ -112,13 +113,13 @@ const Cart: React.FC = () => {
         <AnimatedButton
           variant="default"
           size="lg"
-          onClick={crtCtx.toggleCart}
+          onClick={toggleCart}
         >
           Great, thanks!
         </AnimatedButton>
       </motion.div>
     );
-  } else if (crtCtx.state.items.length === 0) {
+  } else if (cartState.items.length === 0) {
     cartContent = (
       <motion.div
         className="flex flex-col items-center justify-center h-64 text-center"
@@ -138,7 +139,7 @@ const Cart: React.FC = () => {
         <AnimatedButton
           variant="outline"
           size="md"
-          onClick={crtCtx.toggleCart}
+          onClick={toggleCart}
         >
           Start Shopping
         </AnimatedButton>
@@ -150,12 +151,12 @@ const Cart: React.FC = () => {
         <div className="flex justify-between items-center p-6 border-b border-border/60">
           <motion.h2
             className="text-2xl font-bold text-text"
-            key={crtCtx.state.totalAmount}
+            key={cartState.totalAmount}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring" as const, stiffness: 400 }}
           >
-            Total: ${crtCtx.state.totalAmount.toFixed(2)}
+            Total: ${cartState.totalAmount.toFixed(2)}
           </motion.h2>
           <div className="flex space-x-3">
             <AnimatedButton
@@ -198,7 +199,7 @@ const Cart: React.FC = () => {
 
         <div className="flex-1 overflow-y-auto custom-scrollbar p-4">
           <AnimatePresence mode="popLayout">
-            {crtCtx.state.items.map((item) => (
+            {cartState.items.map((item) => (
               <motion.div
                 key={item.id}
                 variants={cartItemVariants}
@@ -211,9 +212,7 @@ const Cart: React.FC = () => {
                 <CartItem
                   item={item}
                   onUpdateAmount={handleUpdateAmount}
-                  onRemove={() => {
-                    crtCtx.toggleCart();
-                  }}
+                  onRemove={handleToggleCart}
                 />
               </motion.div>
             ))}
@@ -225,8 +224,8 @@ const Cart: React.FC = () => {
 
   return (
     <AnimatedModal
-      isOpen={crtCtx.state.cartActive}
-      onClose={crtCtx.toggleCart}
+      isOpen={cartState.cartActive}
+      onClose={toggleCart}
       size="lg"
       className="bg-dark-gray border-border/70"
     >
