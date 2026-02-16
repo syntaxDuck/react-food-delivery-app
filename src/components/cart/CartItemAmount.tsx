@@ -15,7 +15,7 @@ interface CartItemAmountProps {
   max?: number;
 }
 
-const CartItemAmount: React.FC<CartItemAmountProps> = ({ amountInCart, onIncrease, onDecrease, min = 0, max = 99 }) => {
+const CartItemAmount: React.FC<CartItemAmountProps> = React.memo(({ amountInCart, onIncrease, onDecrease, min = 0, max = 99 }) => {
   // Remove local state to prevent synchronization issues
   // Use amountInCart directly for all operations
 
@@ -70,6 +70,6 @@ const CartItemAmount: React.FC<CartItemAmountProps> = ({ amountInCart, onIncreas
       </motion.button>
     </div>
   );
-};
+});
 
 export default CartItemAmount;

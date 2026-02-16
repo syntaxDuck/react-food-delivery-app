@@ -1,6 +1,7 @@
 import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 import React from "react";
+import { useCallback } from "react";
 
 import CartItemAmount from "./CartItemAmount";
 import type { CartItemType } from "./CartTypes";
@@ -20,22 +21,30 @@ interface CartItemProps {
   onUpdateAmount: (item: CartItemType) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({
+const CartItem: React.FC<CartItemProps> = React.memo(({
   item,
   onRemove,
   onUpdateAmount
 }) => {
   const formattedPrice = (item.price * item.amount).toFixed(2);
 
-  const handleRemove = (): void => {
+  const handleRemove = useCallback((): void => {
     onRemove(item.id);
-  };
+  }, [item.id, onRemove]);
 
-  const handleUpdateAmount = (newAmount: number): void => {
+  const handleUpdateAmount = useCallback((newAmount: number): void => {
     // Create new object instead of mutating the prop
     const updatedItem = { ...item, amount: newAmount };
     onUpdateAmount(updatedItem);
-  };
+  }, [item, onUpdateAmount]);
+
+  const handleIncrease = useCallback(() => {
+    handleUpdateAmount(item.amount + 1);
+  }, [handleUpdateAmount, item.amount]);
+
+  const handleDecrease = useCallback(() => {
+    handleUpdateAmount(Math.max(1, item.amount - 1));
+  }, [handleUpdateAmount, item.amount]);
 
   return (
     <motion.div
@@ -67,15 +76,11 @@ const CartItem: React.FC<CartItemProps> = ({
 
       <CartItemAmount
         amountInCart={item.amount}
-        onIncrease={() => {
-          handleUpdateAmount(item.amount + 1);
-        }}
-        onDecrease={() => {
-          handleUpdateAmount(Math.max(1, item.amount - 1));
-        }}
+        onIncrease={handleIncrease}
+        onDecrease={handleDecrease}
       />
     </motion.div>
   );
-};
+});
 
 export default CartItem;

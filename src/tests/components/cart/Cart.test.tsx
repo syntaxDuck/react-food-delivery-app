@@ -26,6 +26,7 @@ vi.mock("firebase/firestore", () => ({
 import Cart from "../../../components/cart/Cart";
 import { useCart } from "../../../components/cart/cart-context/CartContext";
 import type { CartItemType } from "../../../components/cart/CartTypes";
+import { render, screen } from "../../test-utils";
 
 const item: CartItemType = {
   id: "item-1",
