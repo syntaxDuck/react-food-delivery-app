@@ -1,6 +1,6 @@
 # Chrono Delivery (React Food Delivery App)
 
-A React + TypeScript food delivery frontend with Firebase-backed menu/order data, Firebase email/password auth, animated UI components, and a cart flow.
+A React + TypeScript food delivery frontend with Firebase-backed menu/order data, Firebase authentication (email/password, Google, anonymous), animated UI components, and a cart flow.
 
 ## Tech Stack
 
@@ -10,26 +10,33 @@ A React + TypeScript food delivery frontend with Firebase-backed menu/order data
 - Tailwind CSS 4
 - Framer Motion
 - React Router 7
+- TanStack Query (React Query)
 - Vitest + Testing Library
-- Firebase Realtime Database + Firebase Identity Toolkit API
+- Firebase Firestore
+- Firebase Authentication
 
 ## Current Features
 
 - Responsive landing experience with:
-1. About section
-2. Menu section (fetched from Firebase)
-3. Location section
+  1. About section
+  2. Menu section (fetched from Firestore)
+  3. Location section
 - Animated desktop/mobile navigation and UI interactions with Framer Motion
 - Cart system with global context and reducer
 - Add, update, clear, and submit cart orders
 - Firebase-backed authentication flow:
-1. Sign in
-2. Sign up
+  1. Sign in with email/password
+  2. Sign up with email/password
+  3. Sign in with Google
+  4. Anonymous sign-in
+  5. Account linking (Google + email)
+  6. Account settings management
 - Route handling:
-1. `/` redirects to `/index`
-2. `/index` home page
-3. `/Login` login/signup page
-4. `*` fallback not-found page
+  1. `/` redirects to `/home`
+  2. `/home` home page
+  3. `/login` login/signup page
+  4. `*` fallback not-found page
+- Mock data mode for development without Firebase
 
 ## Project Structure
 
@@ -37,13 +44,17 @@ A React + TypeScript food delivery frontend with Firebase-backed menu/order data
 src/
   assets/                         # Static images
   components/
+    auth/                         # Authentication UI components
     cart/                         # Cart UI + cart context/reducer
     layout/                       # Layout, navbar, sections, menu domain components
     ui/                           # Shared reusable UI primitives
-  functions/                      # Shared hooks (e.g. useFetch, reduced motion)
+  contexts/                       # React contexts (Auth)
+  firebase/                       # Firebase configuration
+  hooks/                          # Custom React hooks
+  mock/                           # Mock data for development
   pages/                          # Route-level pages
-  private/PRIVATE.tsx             # Reads Firebase values from env
-  tests/                          # Test setup
+  services/                       # API/data services
+  tests/                          # Test setup and utilities
   types/                          # Shared TypeScript types
   utils/                          # Shared utilities
 ```
@@ -53,29 +64,77 @@ src/
 Create `.env.local` in the project root:
 
 ```bash
+# Firebase Web API Key
 VITE_FIREBASE_API_KEY=your_firebase_api_key
+
+# Firebase Project ID
 VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
+
+# Firebase Auth Domain (optional - auto-generated from projectId if omitted)
+VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+
+# Firebase Storage Bucket (optional - auto-generated from projectId if omitted)
+VITE_FIREBASE_STORAGE_BUCKET=your_project_id.firebasestorage.app
+
+# Firebase Messaging Sender ID (optional)
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+
+# Firebase App ID (optional)
+VITE_FIREBASE_APP_ID=your_app_id
+
+# Use mock data instead of Firestore (optional, defaults to false)
+VITE_USE_MOCK=true
 ```
 
 You can copy `.env.example` as a starting point.
 
 ## Firebase Expectations
 
-This app expects Firebase Realtime Database paths:
+This app uses Firestore with the following collections:
 
-- `Menu.json` for menu items
-- `Orders.json` for submitted orders
+### Menu Collection
 
-Menu item shape:
+- **Path**: `Menu/{itemId}`
+- **Permissions**: Public read, admin-only write
+
+Document shape:
 
 ```json
 {
   "id": "item-1",
   "name": "Sushi Roll",
   "price": 12.99,
-  "description": "Fresh salmon and avocado"
+  "description": "Fresh salmon and avocado",
+  "category": "sushi"
 }
 ```
+
+### Orders Collection
+
+- **Path**: `Orders/{orderId}`
+- **Permissions**: Users can read their own orders, create orders for themselves
+
+Document shape:
+
+```json
+{
+  "user_id": "firebase-uid",
+  "items": [...],
+  "total": 25.98,
+  "status": "pending",
+  "created_at": "2024-01-01T00:00:00Z"
+}
+```
+
+## Development with Mock Data
+
+To develop without Firebase, set `VITE_USE_MOCK=true` in your `.env.local`:
+
+```bash
+VITE_USE_MOCK=true
+```
+
+This will use the mock menu data from `src/mock/data.ts` instead of fetching from Firestore.
 
 ## Getting Started
 
@@ -85,6 +144,15 @@ npm run dev
 ```
 
 Default dev URL is typically `http://localhost:5173`.
+
+## Docker
+
+You can also run the app using Docker:
+
+```bash
+docker build -t chrono-delivery .
+docker run -p 3000:3000 chrono-delivery
+```
 
 ## Available Scripts
 
@@ -115,9 +183,9 @@ npm run test:coverage
 
 ## Notes About Current State
 
-- Authentication state is currently stored in-memory (`App.tsx`) and is not persisted across refresh.
 - Menu and order submission rely on valid Firebase env config.
 - The project is frontend-only in this repository.
+- Firestore security rules are defined in `firestore.rules`.
 
 ## Bulk Add Menu Items
 

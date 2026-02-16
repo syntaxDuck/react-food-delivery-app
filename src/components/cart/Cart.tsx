@@ -28,7 +28,7 @@ const cartItemVariants: Variants = {
 
 const Cart: React.FC = () => {
   const { user, isAuthenticated, signInAnonymous } = useAuth();
-  const { state: cartState, updateCart, clearCart, toggleCart } = useCart();
+  const { state: cartState, updateCart, clearCart, toggleCart, removeItem } = useCart();
   const [error, setError] = React.useState<string | null>(null);
   const [successMessage, setSuccessMessage] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
@@ -80,9 +80,9 @@ const Cart: React.FC = () => {
     updateCart([updatedItem]);
   }, [updateCart]);
 
-  const handleToggleCart = useCallback((): void => {
-    toggleCart();
-  }, [toggleCart]);
+  // const handleToggleCart = useCallback((): void => {
+  //   toggleCart();
+  // }, [toggleCart]);
 
   const clearCartHandler = (): void => {
     clearCart();
@@ -213,7 +213,7 @@ const Cart: React.FC = () => {
                   item={item}
                   onUpdateAmount={handleUpdateAmount}
                   onRemove={(itemId) => {
-                    crtCtx.removeItem(itemId);
+                    removeItem(itemId);
                   }}
                 />
               </motion.div>
