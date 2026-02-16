@@ -25,7 +25,7 @@ describe("CartItem", () => {
     expect(screen.getByText("Sushi")).toBeInTheDocument();
     expect(screen.getByText("$10.00")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: /delete/i }));
+    await user.click(screen.getByRole("button", { name: /remove sushi from cart/i }));
     expect(onRemove).toHaveBeenCalledWith("item-1");
 
     await user.click(screen.getByRole("button", { name: /increase quantity/i }));

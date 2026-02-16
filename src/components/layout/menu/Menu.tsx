@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-import { compoundClasses } from "../../../utils/compoundClasses";
 import { useMenuData } from "../../../hooks/useMenuData";
+import { compoundClasses } from "../../../utils/compoundClasses";
 import Section from "../Section";
 import { usePreCart } from "./hooks/usePreCart";
 import MenuDisplay from "./MenuDisplay";

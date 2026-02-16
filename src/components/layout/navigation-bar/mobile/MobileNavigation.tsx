@@ -152,7 +152,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 loginStatus={loginStatus}
                 variant="mobile"
                 className="w-full"
-                onAuthAction={() => setMobileMenuOpen(false)}
+                onAuthAction={() => { setMobileMenuOpen(false); }}
               />
             </div>
           </div>

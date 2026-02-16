@@ -15,6 +15,7 @@ export interface CartState {
 export interface CartContextValue {
   state: CartState;
   updateCart: (items: CartItemType[]) => void;
+  removeItem: (itemId: string) => void;
   toggleCart: () => void;
   clearCart: () => void;
 }
@@ -69,16 +70,23 @@ export const ClearCartAction = () => ({
   type: "CLEAR_CART" as const
 });
 
+export const RemoveItemAction = (itemId: string) => ({
+  type: "REMOVE_ITEM" as const,
+  itemId
+});
+
 export const CartActions = {
   Update: "UPDATE_CART",
   Toggle: "TOGGLE_CART",
-  Clear: "CLEAR_CART"
+  Clear: "CLEAR_CART",
+  Remove: "REMOVE_ITEM"
 } as const;
 
 
 export type CartActionUnion =
   | ReturnType<typeof UpdateCartAction>
   | ReturnType<typeof ToggleCartAction>
-  | ReturnType<typeof ClearCartAction>;
+  | ReturnType<typeof ClearCartAction>
+  | ReturnType<typeof RemoveItemAction>;
 
 export type CartReducerFunction = (state: CartState, action: CartActionUnion) => CartState;
