@@ -12,3 +12,8 @@
 **Vulnerability:** Wide-open Firestore rules (`allow read, write: if true;`) allowed unauthorized access and tampering with all database collections.
 **Learning:** Default Firestore rules are often set to "allow all" during early development, which is a critical security risk if left unchanged. It's essential to implement the Principle of Least Privilege by restricting access to specific collections based on user authentication and document ownership.
 **Prevention:** Always replace "allow all" rules with collection-specific rules. Use `request.auth` to verify user identity and `resource.data` to check document ownership. Prohibit update/delete operations on sensitive collections like `Orders` once submitted.
+
+## 2025-05-15 - [Error Leakage and Inconsistent Password Policy]
+**Vulnerability:** Technical error messages (Firebase codes, HTTP status) were leaked to the UI, and the password length requirement was inconsistent between registration (8 chars) and settings (6 chars).
+**Learning:** `err.message` often contains implementation details that facilitate account enumeration or reveal infrastructure. Inconsistent validation allows for "weakest link" exploits where users can bypass strict policies through alternative account management flows.
+**Prevention:** Centralize error sanitization using dedicated utilities. Audit all account management entry points to ensure security policies (like password complexity) are applied uniformly across the entire application.
