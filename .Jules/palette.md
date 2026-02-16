@@ -13,3 +13,7 @@
 ## 2026-02-14 - [Form Accessibility and Cart Interaction]
 **Learning:** Found a common pattern where form validation errors were visually present but not programmatically linked to inputs. Also discovered that interactive cart buttons were incorrectly tied to global UI visibility toggles instead of state mutations.
 **Action:** Standardize form accessibility by adding required indicators (*) to labels and linking validation error messages to inputs using `aria-describedby` with `aria-live="polite"`. Ensure item removal actions in the cart are decoupled from UI visibility logic to prevent accidental cart closure.
+
+## 2026-02-15 - [Immediate Interaction Feedback]
+**Learning:** Users can feel uncertain about whether an item was successfully added to the cart if the only feedback is a small increment in a distant badge. Providing immediate, local feedback on the button itself (state change, icon swap) confirms the action success without requiring the user to shift their focus.
+**Action:** Use a "Success Feedback Loop" on primary action buttons: Change button text (e.g., "Added!"), swap to a success icon (e.g., checkmark), and update ARIA labels to reflect the new state. Revert to the original state after a short delay (e.g., 2 seconds) to keep the UI clean.

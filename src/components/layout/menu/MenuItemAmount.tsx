@@ -1,5 +1,5 @@
 import { motion, type Variants } from "framer-motion";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 // Move static objects outside component to prevent recreation
 const buttonVariants: Variants = {
@@ -15,11 +15,13 @@ const stepButton = `w-10 h-10 bg-bg-light/40 text-text rounded-full flex items-c
 const counter = `w-16 h-12 bg-bg-light/40 rounded-lg flex items-center justify-center font-bold 
   text-text text-lg border border-border/60 min-w-[4rem]`;
 
-const cartButton = (isDisabled: boolean) => `
-  px-4 py-2 rounded-full font-medium cursor-pointer
-  ${!isDisabled
-    ? 'bg-bg-light/50 text-text hover:bg-primary/90 shadow-lg'
-    : 'bg-bg-light/25 text-text/50 border border-border/50'
+const cartButton = (isDisabled: boolean, isAdded: boolean) => `
+  px-4 py-2 rounded-full font-medium cursor-pointer flex items-center justify-center min-w-[100px] transition-colors
+  ${isAdded
+    ? 'bg-success text-white'
+    : !isDisabled
+      ? 'bg-bg-light/50 text-text hover:bg-primary/90 shadow-lg'
+      : 'bg-bg-light/25 text-text/50 border border-border/50'
   }`;
 
 interface MenuItemAmountProps {
@@ -33,6 +35,20 @@ const MenuItemAmount: React.FC<MenuItemAmountProps> = React.memo(({
   onChangeAmount,
   onAddToCart
 }) => {
+  const [isAdded, setIsAdded] = useState(false);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    if (isAdded) {
+      timeout = setTimeout(() => {
+        setIsAdded(false);
+      }, 2000);
+    }
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [isAdded]);
+
   const incrementCountHandler = useCallback(() => {
     if (amount >= 99) return;
     onChangeAmount(amount + 1);
@@ -45,10 +61,11 @@ const MenuItemAmount: React.FC<MenuItemAmountProps> = React.memo(({
 
   const handleAddToCart = useCallback(() => {
     onAddToCart(amount);
+    setIsAdded(true);
   }, [amount, onAddToCart]);
 
   // Memoize dynamic styles
-  const currentCartButton = useMemo(() => cartButton(false), []);
+  const currentCartButton = useMemo(() => cartButton(false, isAdded), [isAdded]);
 
   return (
     <div className="flex items-center justify-between space-x-3">
@@ -94,13 +111,18 @@ const MenuItemAmount: React.FC<MenuItemAmountProps> = React.memo(({
         className={currentCartButton}
         type="button"
         onClick={handleAddToCart}
-        aria-label="Add to cart"
+        disabled={isAdded}
+        aria-label={isAdded ? "Item added" : "Add to cart"}
         variants={buttonVariants}
-        whileHover="hover"
-        whileTap="tap"
+        whileHover={!isAdded ? "hover" : undefined}
+        whileTap={!isAdded ? "tap" : undefined}
+        initial={false}
+        animate={isAdded ? { scale: [1, 1.05, 1] } : {}}
       >
-        <span className="material-icons md-18 mr-2">shopping_cart</span>
-        Add
+        <span className="material-icons md-18 mr-2">
+          {isAdded ? "check" : "shopping_cart"}
+        </span>
+        {isAdded ? "Added!" : "Add"}
       </motion.button>
     </div>
   );
