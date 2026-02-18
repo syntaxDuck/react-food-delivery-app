@@ -212,9 +212,12 @@ const Cart: React.FC = () => {
                 <CartItem
                   item={item}
                   onUpdateAmount={handleUpdateAmount}
-                  onRemove={(itemId) => {
-                    removeItem(itemId);
-                  }}
+                  /*
+                     ⚡ Bolt: Pass stable reference instead of anonymous function to
+                     prevent unnecessary re-renders of memoized CartItem components
+                     when the parent Cart component re-renders.
+                  */
+                  onRemove={removeItem}
                 />
               </motion.div>
             ))}
