@@ -25,53 +25,64 @@ const MenuPagination: React.FC<MenuPaginationProps> = ({
   const pages = Array.from({ length: end - start + 1 }, (_, index) => start + index);
 
   return (
-    <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-      <AnimatedButton
-        type="button"
-        variant="outline"
-        size="sm"
-        disabled={currentPage === 1}
-        onClick={() => {
-          onPageChange(Math.max(1, currentPage - 1));
-        }}
-      >
-        <span className="material-icons md-18 mr-2">chevron_left</span>
-        Prev
-      </AnimatedButton>
+    <nav className="mt-8" aria-label="Menu pagination">
+      <ul className="flex flex-wrap items-center justify-center gap-3 list-none p-0">
+        <li>
+          <AnimatedButton
+            type="button"
+            variant="outline"
+            size="sm"
+            disabled={currentPage === 1}
+            onClick={() => {
+              onPageChange(Math.max(1, currentPage - 1));
+            }}
+            aria-label="Go to previous page"
+          >
+            <span className="material-icons md-18 mr-2">chevron_left</span>
+            Prev
+          </AnimatedButton>
+        </li>
 
-      {pages.map((page) => (
-        <motion.button
-          key={page}
-          type="button"
-          onClick={() => {
-            onPageChange(page);
-          }}
-          className={
-            `min-w-[44px] px-4 py-2 rounded-full text-sm font-semibold border transition-all ` +
-            (page === currentPage
-              ? "bg-primary text-text border-primary shadow-lg"
-              : "bg-bg-light/20 text-text/80 border-border/50 hover:bg-bg-light/30")
-          }
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          {page}
-        </motion.button>
-      ))}
+        {pages.map((page) => (
+          <li key={page}>
+            <motion.button
+              type="button"
+              onClick={() => {
+                onPageChange(page);
+              }}
+              className={
+                `min-w-[44px] px-4 py-2 rounded-full text-sm font-semibold border transition-all ` +
+                (page === currentPage
+                  ? "bg-primary text-text border-primary shadow-lg"
+                  : "bg-bg-light/20 text-text/80 border-border/50 hover:bg-bg-light/30")
+              }
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={`Go to page ${String(page)}`}
+              aria-current={page === currentPage ? "page" : undefined}
+            >
+              {page}
+            </motion.button>
+          </li>
+        ))}
 
-      <AnimatedButton
-        type="button"
-        variant="outline"
-        size="sm"
-        disabled={currentPage === totalPages}
-        onClick={() => {
-          onPageChange(Math.min(totalPages, currentPage + 1));
-        }}
-      >
-        Next
-        <span className="material-icons md-18 ml-2">chevron_right</span>
-      </AnimatedButton>
-    </div>
+        <li>
+          <AnimatedButton
+            type="button"
+            variant="outline"
+            size="sm"
+            disabled={currentPage === totalPages}
+            onClick={() => {
+              onPageChange(Math.min(totalPages, currentPage + 1));
+            }}
+            aria-label="Go to next page"
+          >
+            Next
+            <span className="material-icons md-18 ml-2">chevron_right</span>
+          </AnimatedButton>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

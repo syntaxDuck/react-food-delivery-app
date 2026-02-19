@@ -17,13 +17,13 @@ describe("MenuPagination", () => {
       />
     );
 
-    await user.click(screen.getByRole("button", { name: /prev/i }));
+    await user.click(screen.getByRole("button", { name: /go to previous page/i }));
     expect(onPageChange).toHaveBeenCalledWith(1);
 
-    await user.click(screen.getByRole("button", { name: /next/i }));
+    await user.click(screen.getByRole("button", { name: /go to next page/i }));
     expect(onPageChange).toHaveBeenCalledWith(3);
 
-    await user.click(screen.getByRole("button", { name: "4" }));
+    await user.click(screen.getByRole("button", { name: /go to page 4/i }));
     expect(onPageChange).toHaveBeenCalledWith(4);
   });
 });

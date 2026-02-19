@@ -13,3 +13,7 @@
 ## 2026-02-14 - [Form Accessibility and Cart Interaction]
 **Learning:** Found a common pattern where form validation errors were visually present but not programmatically linked to inputs. Also discovered that interactive cart buttons were incorrectly tied to global UI visibility toggles instead of state mutations.
 **Action:** Standardize form accessibility by adding required indicators (*) to labels and linking validation error messages to inputs using `aria-describedby` with `aria-live="polite"`. Ensure item removal actions in the cart are decoupled from UI visibility logic to prevent accidental cart closure.
+
+## 2026-02-15 - [Accessible Navigation and Pagination Patterns]
+**Learning:** Generic list-based components like pagination often default to non-semantic `div` structures, which are invisible to screen readers as navigation landmarks.
+**Action:** Always wrap pagination components in a semantic `<nav>` with a descriptive `aria-label`. Use `<ul>` and `<li>` for page items, and explicitly set `aria-current="page"` on the active element to provide clear spatial context to assistive technologies.

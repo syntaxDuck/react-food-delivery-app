@@ -50,6 +50,8 @@ interface AnimatedButtonProps {
   variant?: VariantClassTypes;
   size?: SizeClassTypes;
   children?: ReactNode;
+  "aria-label"?: string;
+  "aria-current"?: "page" | "step" | "location" | "date" | "time" | boolean;
 }
 
 const AnimatedButton = ({
@@ -61,7 +63,9 @@ const AnimatedButton = ({
   type = "button",
   variant = "default",
   size = "md",
-  children
+  children,
+  "aria-label": ariaLabel,
+  "aria-current": ariaCurrent
 }: AnimatedButtonProps) => {
   const baseClasses = "inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-gray";
 
@@ -87,6 +91,8 @@ const AnimatedButton = ({
         variants={buttonVariants}
         whileHover="hover"
         whileTap="tap"
+        aria-label={ariaLabel}
+        aria-current={ariaCurrent}
       >
         {children ?? buttonContent}
       </motion.a>
@@ -103,6 +109,8 @@ const AnimatedButton = ({
       whileHover={!disabled ? "hover" : undefined}
       whileTap={!disabled ? "tap" : undefined}
       animate={disabled ? "disabled" : "enabled"}
+      aria-label={ariaLabel}
+      aria-current={ariaCurrent}
     >
       {children ?? buttonContent}
     </motion.button>
