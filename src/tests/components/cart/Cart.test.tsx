@@ -13,7 +13,10 @@ vi.mock("../../../firebase/config", () => ({
 vi.mock("firebase/auth", () => ({
   getAuth: vi.fn(),
   signInAnonymously: vi.fn(() => Promise.resolve()),
-  onAuthStateChanged: vi.fn(() => () => {}),
+  onAuthStateChanged: vi.fn((_auth, callback) => {
+    callback({ uid: 'test-user', isAnonymous: false });
+    return () => {};
+  }),
 }));
 
 vi.mock("firebase/firestore", () => ({
@@ -70,6 +73,9 @@ describe("Cart", () => {
   });
 
   test("shows error message when submission fails", async () => {
+    const { addDoc } = await import("firebase/firestore");
+    vi.mocked(addDoc).mockRejectedValueOnce(new Error("Firebase error"));
+
     const user = userEvent.setup();
     
     render(
@@ -80,7 +86,7 @@ describe("Cart", () => {
     await user.click(screen.getByRole("button", { name: /submit order/i }));
 
     expect(
-      await screen.findByText(/http error/i)
+      await screen.findByText(/a server error occurred/i)
     ).toBeInTheDocument();
   });
 

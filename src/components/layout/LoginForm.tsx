@@ -4,6 +4,7 @@ import React from "react";
 
 //Styles imports
 import type { LoginFormProps, ValidationResult } from "../../types/auth";
+import { validatePassword } from "../../utils/security";
 import AnimatedButton from "../ui/AnimatedButton";
 //Component imports
 import AnimatedCard from "../ui/AnimatedCard";
@@ -60,22 +61,9 @@ const LoginForm = (props: LoginFormProps) => {
   };
 
   const checkPassword = (password: string): ValidationResult => {
-    // Enhanced password requirements: min 8 chars, uppercase, lowercase, number, special character
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumber = /[0-9]/.test(password);
-    const hasSpecialChar = /[!@#$%^&*()\-_=+]/.test(password);
-    const isLongEnough = password.length >= 8;
-
-    if (isLongEnough && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar) {
-      setPasswordValid(true);
-      return { isValid: true, errors: [] };
-    }
-    setPasswordValid(false);
-    return {
-      isValid: false,
-      errors: ["Password must be at least 8 characters with uppercase, lowercase, number and special character"],
-    };
+    const result = validatePassword(password);
+    setPasswordValid(result.isValid);
+    return result;
   };
 
   const checkConfirmPassword = (password: string, confirmPassword: string): ValidationResult => {

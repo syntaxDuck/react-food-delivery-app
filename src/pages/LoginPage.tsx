@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import LoginForm from "../components/layout/LoginForm";
 import { useAuth } from "../contexts/AuthContext";
 import type { UserAction } from "../types/auth";
+import { getSanitizedAuthError } from "../utils/security";
 
 const LoginPage = () => {
   const { signInWithEmail, signUpWithEmail, signOut, isAuthenticated, isAnonymous } = useAuth();
@@ -61,8 +62,7 @@ const LoginPage = () => {
       }
       void navigate("/index");
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Authentication failed";
-      setError(errorMessage);
+      setError(getSanitizedAuthError(err));
     }
   };
 

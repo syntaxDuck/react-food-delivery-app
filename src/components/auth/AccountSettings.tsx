@@ -2,6 +2,7 @@ import { motion, type Variants } from 'framer-motion';
 import { useState } from 'react';
 
 import { useAuth } from '../../contexts/AuthContext';
+import { getSanitizedAuthError, validatePassword } from '../../utils/security';
 import AnimatedButton from '../ui/AnimatedButton';
 import AnimatedModal from '../ui/AnimatedModal';
 
@@ -31,7 +32,7 @@ export default function AccountSettings({ isOpen, onClose }: AccountSettingsProp
       await signInWithGoogle();
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to sign in with Google');
+      setError(getSanitizedAuthError(err));
     } finally {
       setLoading(false);
     }
@@ -44,7 +45,7 @@ export default function AccountSettings({ isOpen, onClose }: AccountSettingsProp
       await linkWithGoogle();
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to link Google account');
+      setError(getSanitizedAuthError(err));
     } finally {
       setLoading(false);
     }
@@ -55,8 +56,10 @@ export default function AccountSettings({ isOpen, onClose }: AccountSettingsProp
       setError('Passwords do not match');
       return;
     }
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+
+    const passwordValidation = validatePassword(password);
+    if (!passwordValidation.isValid) {
+      setError(passwordValidation.errors[0]);
       return;
     }
 
@@ -66,7 +69,7 @@ export default function AccountSettings({ isOpen, onClose }: AccountSettingsProp
       await linkWithEmail(email, password);
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create account');
+      setError(getSanitizedAuthError(err));
     } finally {
       setLoading(false);
     }
@@ -79,7 +82,7 @@ export default function AccountSettings({ isOpen, onClose }: AccountSettingsProp
       await signOut();
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to sign out');
+      setError(getSanitizedAuthError(err));
     } finally {
       setLoading(false);
     }
@@ -173,7 +176,7 @@ export default function AccountSettings({ isOpen, onClose }: AccountSettingsProp
                 value={password}
                 onChange={(e) => { setPassword(e.target.value); }}
                 className="w-full px-3 py-2 bg-bg border border-border rounded-none focus:outline-none focus:border-primary text-text"
-                placeholder="At least 6 characters"
+                placeholder="At least 8 characters"
               />
             </div>
             <div>

@@ -4,6 +4,7 @@ import React, { useCallback } from "react";
 
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase/config";
+import { getSanitizedApiError } from "../../utils/security";
 import AnimatedButton from "../ui/AnimatedButton";
 import AnimatedModal from "../ui/AnimatedModal";
 import { useCart } from "./cart-context/CartContext";
@@ -68,8 +69,7 @@ const Cart: React.FC = () => {
       setSuccessMessage("Order submitted successfully! We'll get your delivery on the way.");
 
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-      setError(errorMessage);
+      setError(getSanitizedApiError(err));
       setSuccessMessage(null);
     } finally {
       setIsSubmitting(false);
